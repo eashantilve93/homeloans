@@ -1,0 +1,51 @@
+<div class="container-fluid">
+	<div class="progress">
+		<div id="prog" class="progress-bar progress-bar-success" role="progressbar"
+			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<br> <br> <br> 
+	<div id="consolidateDebt" >
+		<br>
+		<h3>What is the total amount of debt you want to consolidate into
+			your home loan?</h3>
+		<p class="paraText">Your best guess is OK</p>
+		<br>
+
+		<div class="col-md-12">
+			<div class="col-md-4"></div>
+			<div class="input-group col-md-4">
+				<span class="input-group-addon">$</span> <input type="text"
+					pattern="^(\d+|\d{1,3}(,\d{3})*)(\.\d+)?$"
+					class="form-control input-lg" data-ng-model="consolidateDebtAmount"
+					onkeyup="this.value=add_commas(this.value);" /> <br> <br>
+			</div>
+			<p id="error1" style="color: red; visibility: hidden;" >Please enter a valid amount.</p>
+		</div>
+		<br>
+	</div>
+	<div id="cashOut" >
+		<br>
+		<h3>How much cash out do you think you will need?</h3>
+		<p class="paraText">Your best guess is OK</p>
+		<br>
+		<div class="col-md-12">
+			<div class="col-md-4"></div>
+			<div class="input-group col-md-4">
+				<span class="input-group-addon">$</span> <input type="text"
+					pattern="^(\d+|\d{1,3}(,\d{3})*)(\.\d+)?$"
+					class="form-control input-lg" data-ng-model="cashOutAmount"
+					onkeyup="this.value=add_commas(this.value);" /> <br> <br>
+			</div>
+			<p id="error2" style="color: red; visibility: hidden;" >Please enter a valid amount.</p>
+		</div>
+
+	</div>
+	
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<button class="button_small" data-ng-click="passOn()"> Next </button>
+		<button class="backButton">	<a class="back" data-ng-click="back()"> Back </a> </button>
+	</div>
+
+
+</div>

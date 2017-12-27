@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://localhost:8888/Toby/index.html#!/refinance/0/0/NA/consolidateDebt/NA/NA -->
+<html class="fa-events-icons-ready"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<title>HomeLoans</title>
+   	<link rel="stylesheet" href="./HomeLoans_files/bootstrap.min.css">
+ 	<script src="./HomeLoans_files/jquery.min.js"></script>
+  	<script src="./HomeLoans_files/bootstrap.min.js"></script>
+  		<script src="./HomeLoans_files/angular.min.js"></script>
+	<script src="./HomeLoans_files/angular-route.js"></script>
+	<script src="./HomeLoans_files/jquery.min.js"></script>
+  	<script type="text/javascript" src="./HomeLoans_files/hmac-sha256.js"></script>
+ 	<script type="text/javascript" src="./HomeLoans_files/tripledes.js"></script>
+  	<script src="./HomeLoans_files/bd42e35c2d.js"></script><link href="./HomeLoans_files/bd42e35c2d.css" media="all" rel="stylesheet">
+  	<link rel="stylesheet" href="./HomeLoans_files/index.css">
+
+
+</head>
+
+<body data-ng-app="demoApp" class="ng-scope">
+	<br>
+
+	<div style="text-align: center">
+		<!-- Placeholder for views -->
+		<!-- ngView: --><div data-ng-view="" class="ng-scope"><div class="container ng-scope">
+	
+	<div id="consolidateDebt" style="visibility: visible;">
+		<br>
+			<h1>What is the total amount of debt you want to consolidate into your home loan?</h1>
+			<h3>Your best guess is OK</h3>
+		<br>
+	<input type="number" data-ng-model="consolidateDebtAmount" class="ng-pristine ng-untouched ng-valid ng-not-empty"> 
+	<br>
+	</div>
+	<div id="cashOut" style="visibility: hidden;">
+	<br>
+			<h1>How much cash out do you think you will need?</h1>
+			<h3>Your best guess is OK</h3>
+		<br>
+	<input type="number" data-ng-model="cashOutAmount" class="ng-pristine ng-untouched ng-valid">
+	</div>
+<input type="button" data-ng-click="passOn()" value="Next"><br>
+<input type="button" data-ng-click="back()" value="Back">
+</div></div>
+	</div>
+
+
+	<script>
+		var demoApp = angular.module('demoApp', ['ngRoute']);
+		demoApp.config(['$routeProvider', function ($routeProvider) {
+			$routeProvider
+				.when('/mainView',
+					{
+			//			controller: 'SimpleController',
+						templateUrl: 'partials/mainView.html'
+					})
+				.when('/homeLoan',
+					{
+						controller: 'PurchasePriceController',
+						templateUrl: 'partials/purchasePrice.html'
+					})
+				.when('/homeLoan/:purchasePrice',
+					{
+						controller: 'DepositController',
+						templateUrl: 'partials/deposit.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit',
+					{
+						controller: 'BuyingSituationController',
+						templateUrl: 'partials/buyingSituation.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation',
+					{
+						controller: 'PreApprovedController',
+						templateUrl: 'partials/preapproved.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove',
+					{
+						controller: 'ExchangedContractsController',
+						templateUrl: 'partials/exchangeContracts.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts',
+					{
+						controller: 'ExpectedSettlementController',
+						templateUrl: 'partials/expectedSettlement.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate',
+					{
+						controller: 'PropertyUseController',
+						templateUrl: 'partials/propertyUse.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse',
+					{
+						controller: 'RepayController',
+						templateUrl: 'partials/repay.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay',
+					{
+						controller: 'CreditHistoryController',
+						templateUrl: 'partials/creditHistory.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory',
+					{
+						controller: 'EmploymentTypeController',
+						templateUrl: 'partials/employmentType.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory/:employmentType',
+					{
+						controller: 'TaxReturnsController',
+						templateUrl: 'partials/taxReturns.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns',
+					{
+						controller: 'LenderChoiceController',
+						templateUrl: 'partials/lenderChoice.html'
+					})
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:mobileA',
+					{
+						controller: 'SearchResultsController',
+						templateUrl: 'partials/searchResults.html'
+					})
+				.when('/refinance',
+					{
+						controller: 'CurrentLoanController',
+						templateUrl: 'partials/currentLoan.html'
+					})
+				.when('/refinance/:currentLoan',
+					{
+						controller: 'PropertyWorthController',
+						templateUrl: 'partials/propertyWorth.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth',
+					{
+						controller: 'WhyRefinanceController',
+						templateUrl: 'partials/whyRefinance.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff',
+					{
+						controller: 'WhyRefinanceAmountController',
+						templateUrl: 'partials/whyRefinanceAmount.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount',
+					{
+						controller: 'PropertyUseRefinanceController',
+						templateUrl: 'partials/propertyUse.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse',
+					{
+						controller: 'RepayRefinanceController',
+						templateUrl: 'partials/repay.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay',
+					{
+						controller: 'CreditHistoryRefinanceController',
+						templateUrl: 'partials/creditHistory.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory',
+					{
+						controller: 'EmploymentTypeRefinanceController',
+						templateUrl: 'partials/employmentType.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory/:employmentType',
+					{
+						controller: 'TaxReturnsRefinanceController',
+						templateUrl: 'partials/taxReturns.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns',
+					{
+						controller: 'LenderChoiceRefinanceController',
+						templateUrl: 'partials/lenderChoice.html'
+					})
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:mobileA',
+					{
+						controller: 'SearchResultsRefinanceController',
+						templateUrl: 'partials/searchResults.html'
+					})
+				.otherwise({redirectTo:'/mainView'});
+		}]);
+
+		//PURCHASE PRICE CONTROLLER
+		demoApp.controller('PurchasePriceController',['$scope','$location', '$interpolate', function ($scope,$location, $interpolate) {
+			$scope.purchasePrice = 0;
+			$scope.passOn = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}')($scope);
+				$location.path(url);
+			}
+			$scope.back = function (){
+				var url = $interpolate('/mainView')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//DEPOSIT CONTROLLER
+		demoApp.controller('DepositController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = 0;
+			$scope.passOn = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
+				$location.path(url);
+			}
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//BUYING SITUATION CONTROLLER
+		demoApp.controller('BuyingSituationController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+	
+			$scope.passOn1 = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/1')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOn2 = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/2/NA/NA/NA')($scope);
+				$location.path(url);
+			}
+			$scope.passOn3 = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/3/NA/NA/NA')($scope);
+				$location.path(url);
+			}
+			$scope.passOn4 = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/4/NA/NA/NA')($scope);
+				$location.path(url);
+			}
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}')($scope);
+				$location.path(url);
+			}
+			
+		}]);
+		
+		//PREAPPROVED CONTROLLER
+		demoApp.controller('PreApprovedController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.passOnYes = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/yes')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnNo = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/no/NA/NA')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//EXCHANGE CONTRACTS CONTROLLER
+		demoApp.controller('ExchangedContractsController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.passOnYes = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/yes')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnNo = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/no/NA')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//EXPECTED SETTLEMENT CONTROLLER
+		demoApp.controller('ExpectedSettlementController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = undefined; 
+			$scope.passOn = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//PROPERTY USE CONTROLLER
+		demoApp.controller('PropertyUseController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.passOnLive = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/Live')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnInvestment = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/Investment')($scope);
+				$location.path(url);
+			}
+			
+			
+			$scope.back = function (){
+				var url;
+				if($scope.exchangeContracts == 'yes')
+					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}')($scope);
+				else if($scope.preapprove == 'yes')
+					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}')($scope);
+				else if($scope.preapprove == 'no') 
+					url =  $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}')($scope);
+				else url =  $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
+
+				$location.path(url);
+			}
+		}]);
+		
+		//REPAY CONTROLLER
+		demoApp.controller('RepayController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.passOnPandI = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/PandI')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnI = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/I')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnUndecided = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/Undecided')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//CREDIT HISTORY CONTROLLER
+		demoApp.controller('CreditHistoryController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.repay = $routeParams.repay;
+			$scope.passOnExcellent = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Excellent')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnAverage = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Average')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnFair = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Fair')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnPoor = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Poor')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//EMPLOYMENT TYPE CONTROLLER
+		demoApp.controller('EmploymentTypeController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.repay = $routeParams.repay;
+			$scope.creditHistory = $routeParams.creditHistory;
+			$scope.passOnEmployee = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Employee/NA')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnSelf = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Self')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnOther = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Other/NA')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//TAX RETURNS CONTROLLER
+		demoApp.controller('TaxReturnsController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.repay = $routeParams.repay;
+			$scope.creditHistory = $routeParams.creditHistory;
+			$scope.employmentType = $routeParams.employmentType;
+			$scope.passOnYes = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/yes')($scope);
+				$location.path(url);
+			}
+			
+			$scope.passOnNo = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/no')($scope);
+				$location.path(url);
+			}
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//LENDER CHOICE CONTROLLER
+		demoApp.controller('LenderChoiceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.repay = $routeParams.repay;
+			$scope.creditHistory = $routeParams.creditHistory;
+			$scope.employmentType = $routeParams.employmentType;
+			$scope.taxReturns = $routeParams.taxReturns;
+			
+			var offset = false;
+			var redraw = false;
+			var majorL = false;
+			var mobileA = false; 
+			$scope.selectUnselectOffset = function (){
+				offset = (!offset);
+				if(offset)
+					document.getElementById("b1").style.background = "#0dd1ac";
+				else 
+					document.getElementById("b1").style.background = "white";
+
+					
+				if(offset||redraw||majorL||mobileA)
+					document.getElementById("lenderOption").value = "Continue with Selection"; 
+				else
+					document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+			}
+			
+			$scope.selectUnselectRedraw = function (){
+				redraw = (!redraw);
+				
+				if(redraw)
+					document.getElementById("b2").style.background = "#0dd1ac";
+				else 
+					document.getElementById("b2").style.background = "white";
+				
+				if(offset||redraw||majorL||mobileA)
+					document.getElementById("lenderOption").value = "Continue with Selection"; 
+				else
+					document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+			}
+			
+			$scope.selectUnselectMajorLender = function (){
+				majorL = (!majorL);
+				
+				if(majorL)
+					document.getElementById("b3").style.background = "#0dd1ac";
+				else 
+					document.getElementById("b3").style.background = "white";
+				if(offset||redraw||majorL||mobileA)
+					document.getElementById("lenderOption").value = "Continue with Selection"; 
+				else
+					document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+			}
+			
+			$scope.selectUnselectMobileApp = function (){
+				mobileA = (!mobileA);
+				
+				if(mobileA)
+					document.getElementById("b4").style.background = "#0dd1ac";
+				else 
+					document.getElementById("b4").style.background = "white";
+				if(offset||redraw||majorL||mobileA)
+					document.getElementById("lenderOption").value = "Continue with Selection"; 
+				else
+					document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+			}
+			
+			$scope.passOn = function (){
+				var url;
+				var lenders = "";
+				if(offset) lenders = lenders + "offset/"; else lenders = lenders + "NA/";
+				if(redraw) lenders = lenders + "redraw/"; else lenders = lenders + "NA/";
+				if(majorL) lenders = lenders + "majorL/"; else lenders = lenders + "NA/";
+				if(mobileA) lenders = lenders + "mobileA"; else lenders = lenders + "NA";
+				$scope.lenderChoices = lenders;
+				url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}/{{lenderChoices}}')($scope);
+				$location.path(url);
+			}
+			$scope.back = function (){
+				var url;
+				if($scope.employmentType == 'Self')
+					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}')($scope);
+				else  url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+		//SEARCH RESULTS CONTROLLER
+		demoApp.controller('SearchResultsController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+			$scope.purchasePrice = $routeParams.purchasePrice;
+			$scope.deposit = $routeParams.deposit;
+			$scope.buyingSituation = $routeParams.buyingSituation;
+			$scope.preapprove = $routeParams.preapprove;
+			$scope.exchangeContracts = $routeParams.exchangeContracts;
+			$scope.settlementDate = $routeParams.settlementDate; 
+			$scope.propertyUse = $routeParams.propertyUse; 
+			$scope.repay = $routeParams.repay;
+			$scope.creditHistory = $routeParams.creditHistory;
+			$scope.employmentType = $routeParams.employmentType;
+			$scope.taxReturns = $routeParams.taxReturns;
+			$scope.offset = $routeParams.offset;
+			$scope.redraw = $routeParams.redraw;
+			$scope.majorL = $routeParams.majorL;
+			$scope.mobileA = $routeParams.mobileA;
+			
+			$scope.back = function (){
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}')($scope);
+				$location.path(url);
+			}
+		}]);
+		
+ <!-- REFINANCING --> 
+ 
+		//PURCHASE PRICE CONTROLLER
+			demoApp.controller('CurrentLoanController',['$scope','$location', '$interpolate', function ($scope,$location, $interpolate) {
+				$scope.currentLoan = 0;
+				$scope.passOn = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}')($scope);
+					$location.path(url);
+				}
+				$scope.back = function (){
+					var url = $interpolate('/mainView')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//PROPERTY WORTH CONTROLLER
+			demoApp.controller('PropertyWorthController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = 0;
+				$scope.passOn = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
+					$location.path(url);
+				}
+				$scope.back = function (){
+					var url = $interpolate('/refinance')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//WHY REFINANCE CONTROLLER
+			demoApp.controller('WhyRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				
+				var decreaseLoan = false;
+				var consolidateDebt = false;
+				var getCash = false;
+				var payOff = false; 
+				$scope.selectUnselectDecreaseLoan = function (){
+					decreaseLoan = (!decreaseLoan);
+					if(decreaseLoan)
+						document.getElementById("b1").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b1").style.background = "white";
+ 
+				}
+				
+				$scope.selectUnselectConsolidateDebt = function (){
+					consolidateDebt = (!consolidateDebt);
+					
+					if(consolidateDebt)
+						document.getElementById("b2").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b2").style.background = "white";
+				}
+				
+				$scope.selectUnselectGetCash = function (){
+					getCash = (!getCash);
+					
+					if(getCash)
+						document.getElementById("b3").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b3").style.background = "white";
+				}
+				
+				$scope.selectUnselectPayOff = function (){
+					payOff = (!payOff);
+					
+					if(payOff)
+						document.getElementById("b4").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b4").style.background = "white";
+				}
+				
+				$scope.passOn = function (){
+					var url;
+					var whyRef = "";
+					if(decreaseLoan) whyRef = whyRef + "decreaseLoan/"; else whyRef = whyRef + "NA/";
+					if(consolidateDebt) whyRef = whyRef + "consolidateDebt/"; else whyRef = whyRef + "NA/";
+					if(getCash) whyRef = whyRef + "getCash/"; else whyRef = whyRef + "NA/";
+					if(payOff) whyRef = whyRef + "payOff"; else whyRef = whyRef + "NA";
+					$scope.whyRefinance = whyRef;
+					url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{whyRefinance}}')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//WHY REFINANCE AMOUNT CONTROLLER
+			demoApp.controller('WhyRefinanceAmountController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = 0;
+				$scope.cashOutAmount = 0;
+				if($scope.consolidateDebt == 'NA') 
+					{
+						document.getElementById("consolidateDebt").style.visibility = "hidden";
+						$scope.consolidateDebtAmount = 'NA';
+					}
+				else 
+					document.getElementById("consolidateDebt").style.visibility = "visible";
+				
+				if($scope.cashOut == 'NA') 
+					{
+						document.getElementById("cashOut").style.visibility = "hidden";
+						$scope.cashOutAmount = 'NA';
+					}
+				else 
+					document.getElementById("cashOut").style.visibility = "visible";
+				
+				if($scope.cashOut == 'NA' && $scope.consolidateDebt == 'NA')
+					{
+						var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}')($scope);
+						$location.path(url);
+					}
+				
+				$scope.passOn = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
+					$location.path(url);
+				}
+			}]);
+			
+		//PROPERTY USE REFINANCE CONTROLLER
+			demoApp.controller('PropertyUseRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.passOnLive = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/Live')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnInvestment = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/Investment')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url;
+					if($scope.consolidateDebt == 'NA' && $scope.cashOut == 'NA')
+						url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
+					else url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//REPAY REFINANCE CONTROLLER
+			demoApp.controller('RepayRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.passOnPandI = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/PandI')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnI = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/I')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnUndecided = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/Undecided')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//CREDIT HISTORY REFINANCE CONTROLLER
+			demoApp.controller('CreditHistoryRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.repay = $routeParams.repay;
+				$scope.passOnExcellent = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Excellent')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnAverage = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Average')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnFair = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Fair')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnPoor = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Poor')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+		//EMPLOYMENT TYPE REFINANCE CONTROLLER
+			demoApp.controller('EmploymentTypeRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.repay = $routeParams.repay;
+				$scope.creditHistory = $routeParams.creditHistory;
+				$scope.passOnEmployee = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Employee/NA')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnSelf = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Self')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnOther = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Other/NA')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}')($scope);
+					$location.path(url);
+				}
+			}]);
+		
+			//TAX RETURNS CONTROLLER
+			demoApp.controller('TaxReturnsRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.repay = $routeParams.repay;
+				$scope.creditHistory = $routeParams.creditHistory;
+				$scope.employmentType = $routeParams.employmentType;
+				$scope.passOnYes = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/yes')($scope);
+					$location.path(url);
+				}
+				
+				$scope.passOnNo = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/no')($scope);
+					$location.path(url);
+				}
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
+					$location.path(url);
+				}
+			}]);
+			
+			//LENDER CHOICE CONTROLLER
+			demoApp.controller('LenderChoiceRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.repay = $routeParams.repay;
+				$scope.creditHistory = $routeParams.creditHistory;
+				$scope.employmentType = $routeParams.employmentType;
+				$scope.taxReturns = $routeParams.taxReturns;
+				
+				var offset = false;
+				var redraw = false;
+				var majorL = false;
+				var mobileA = false; 
+				$scope.selectUnselectOffset = function (){
+					offset = (!offset);
+					if(offset)
+						document.getElementById("b1").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b1").style.background = "white";
+
+						
+					if(offset||redraw||majorL||mobileA)
+						document.getElementById("lenderOption").value = "Continue with Selection"; 
+					else
+						document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+				}
+				
+				$scope.selectUnselectRedraw = function (){
+					redraw = (!redraw);
+					
+					if(redraw)
+						document.getElementById("b2").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b2").style.background = "white";
+					
+					if(offset||redraw||majorL||mobileA)
+						document.getElementById("lenderOption").value = "Continue with Selection"; 
+					else
+						document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+				}
+				
+				$scope.selectUnselectMajorLender = function (){
+					majorL = (!majorL);
+					
+					if(majorL)
+						document.getElementById("b3").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b3").style.background = "white";
+					if(offset||redraw||majorL||mobileA)
+						document.getElementById("lenderOption").value = "Continue with Selection"; 
+					else
+						document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+				}
+				
+				$scope.selectUnselectMobileApp = function (){
+					mobileA = (!mobileA);
+					
+					if(mobileA)
+						document.getElementById("b4").style.background = "#0dd1ac";
+					else 
+						document.getElementById("b4").style.background = "white";
+					if(offset||redraw||majorL||mobileA)
+						document.getElementById("lenderOption").value = "Continue with Selection"; 
+					else
+						document.getElementById("lenderOption").value = "No thanks, show me my options"; 
+				}
+				
+				$scope.passOn = function (){
+					var url;
+					var lenders = "";
+					if(offset) lenders = lenders + "offset/"; else lenders = lenders + "NA/";
+					if(redraw) lenders = lenders + "redraw/"; else lenders = lenders + "NA/";
+					if(majorL) lenders = lenders + "majorL/"; else lenders = lenders + "NA/";
+					if(mobileA) lenders = lenders + "mobileA"; else lenders = lenders + "NA";
+					$scope.lenderChoices = lenders;
+					url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}/{{lenderChoices}}')($scope);
+					$location.path(url);
+				}
+				$scope.back = function (){
+					var url;
+					if($scope.employmentType == 'Self')
+						url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}')($scope);
+					else  url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
+					$location.path(url);
+				}
+			}]);
+			
+			//SEARCH RESULTS REFINANCE CONTROLLER
+			demoApp.controller('SearchResultsRefinanceController',[ '$scope','$routeParams','$location', '$interpolate', function ($scope,$routeParams,$location, $interpolate) {
+				$scope.currentLoan = $routeParams.currentLoan;
+				$scope.propertyWorth = $routeParams.propertyWorth;
+				$scope.decreaseLoan = $routeParams.decreaseLoan;
+				$scope.consolidateDebt = $routeParams.consolidateDebt;
+				$scope.cashOut = $routeParams.cashOut;
+				$scope.payOff = $routeParams.payOff;
+				$scope.consolidateDebtAmount = $routeParams.consolidateDebtAmount;
+				$scope.cashOutAmount = $routeParams.cashOutAmount;
+				$scope.propertyUse = $routeParams.propertyUse;
+				$scope.repay = $routeParams.repay;
+				$scope.creditHistory = $routeParams.creditHistory;
+				$scope.employmentType = $routeParams.employmentType;
+				$scope.taxReturns = $routeParams.taxReturns;
+				$scope.offset = $routeParams.offset;
+				$scope.redraw = $routeParams.redraw;
+				$scope.majorL = $routeParams.majorL;
+				$scope.mobileA = $routeParams.mobileA;
+				
+				$scope.back = function (){
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}')($scope);
+					$location.path(url);
+				}
+			}]);
+	</script>
+
+</body></html>

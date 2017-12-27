@@ -1,0 +1,64 @@
+.button {
+	background: #0dd1ac;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    width: 300px;
+    height: 64px;
+    padding: 20px;   
+}
+.selButton {
+    background: #F0F0F0;
+    color: #000;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    width: 300px;
+    height: 64px;
+    padding: 20px;   
+}
+
+ h1{
+	font-size: 42px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+h3 {
+	font-size: 20px;
+    text-align: center;
+    color: hsla(0,0%,0%,.75);
+    margin: 0 0 47px;
+}
+a {
+	text-decoration: none;
+}
+/* unvisited link */
+a:link {
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    text-decoration: none;
+    color: #FFF;
+}
+
+/* selected link */
+a:active {
+    text-decoration: none;
+}
+
