@@ -28,10 +28,10 @@ CREATE TABLE product (
     bank_id VARCHAR(10),
     product_name VARCHAR(100) NOT NULL,
     product_description VARCHAR(500),
-    Setup_costs REAL NOT NULL,
-    Ongoing_costs REAL NOT NULL,
-    Comparison_rate REAL NOT NULL,
-    Advertised_rate REAL NOT NULL,
+    setup_costs REAL NOT NULL,
+    ongoing_costs REAL NOT NULL,
+    comparison_rate REAL NOT NULL,
+    advertised_rate REAL NOT NULL,
     PRIMARY KEY (product_id),
     FOREIGN KEY (bank_id)
         REFERENCES bank (bank_id)
@@ -77,3 +77,18 @@ INSERT INTO bank values('ANZ', 'Australia and New Zealand Bank' );
 INSERT INTO product values('1', 'CBA','Standard Home Loan', 'Standard Home Loan','500','500','4.5','4.4');
 
 INSERT INTO loan_options values('1', '1','30', '0','50000000','2','1','1','1','1','3','1');
+
+SELECT 
+    bank_name,
+    product_name,
+    setup_costs,
+    ongoing_costs,
+    comparison_rate,
+    advertised_rate
+FROM
+    loan_options
+        NATURAL JOIN
+    product
+        NATURAL JOIN
+    bank where loan_offset = '1' AND loan_redraw = '1';
+
