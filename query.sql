@@ -31,3 +31,4 @@ FROM
 WHERE
     loan_offset = '1';
 
+select * from loan_options;
