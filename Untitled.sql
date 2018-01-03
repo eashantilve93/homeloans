@@ -1,18 +1,24 @@
+DROP table if exists loan_options;
+DROP table if exists product;
+DROP table if exists bank;
+DROP table if exists doc_type;
+DROP table if exists interest_type;
+DROP table if exists cus_type;
 
 CREATE TABLE cus_type (
-    cus_type_id INT(2),
+    cus_type_id INT(2) AUTO_INCREMENT,
     cus_type VARCHAR(10) NOT NULL,
     PRIMARY KEY (cus_type_id)
 );
 
 CREATE TABLE interest_type (
-    interest_type_id INT(2),
+    interest_type_id INT(2) AUTO_INCREMENT,
     interest_type VARCHAR(10) NOT NULL,
     PRIMARY KEY (interest_type_id)
 );
 
 CREATE TABLE doc_type (
-    doc_type_id INT(2),
+    doc_type_id INT(2) AUTO_INCREMENT,
     doc_type VARCHAR(10) NOT NULL,
     PRIMARY KEY (doc_type_id)
 );
@@ -24,7 +30,7 @@ CREATE TABLE bank (
 );
 
 CREATE TABLE product (
-    product_id INT(5),
+    product_id INT(5) AUTO_INCREMENT,
     bank_id VARCHAR(10),
     product_name VARCHAR(100) NOT NULL,
     product_description VARCHAR(500),
@@ -38,7 +44,7 @@ CREATE TABLE product (
 );
 
 CREATE TABLE loan_options (
-    id INT(5),
+    id INT(5) AUTO_INCREMENT,
     cus_type_id INT(2),
     max_lvr REAL NOT NULL,
     min_loan REAL,
@@ -61,34 +67,55 @@ CREATE TABLE loan_options (
         REFERENCES product (product_id)
 );
 
-INSERT INTO cus_type values('1', 'INVESTOR' );
-INSERT INTO cus_type values('2', 'OWNER' );
+INSERT INTO cus_type(cus_type) values('INVESTOR' );
+INSERT INTO cus_type(cus_type) values('OWNER' );
 
-INSERT INTO interest_type values('1', 'FIXED' );
-INSERT INTO interest_type values('2', 'VARIABLE' );
+INSERT INTO interest_type(interest_type) values('FIXED' );
+INSERT INTO interest_type(interest_type) values('VARIABLE' );
 
-INSERT INTO doc_type values('1', 'NO' );
-INSERT INTO doc_type values('2', 'LOW' );
-INSERT INTO doc_type values('3', 'FULL' );
+INSERT INTO doc_type(doc_type) values('NO' );
+INSERT INTO doc_type(doc_type) values('LOW' );
+INSERT INTO doc_type(doc_type) values('FULL' );
 
 INSERT INTO bank values('CBA', 'Commonwealth Bank' );
 INSERT INTO bank values('ANZ', 'Australia and New Zealand Bank' );
 
-INSERT INTO product values('1', 'CBA','Standard Home Loan', 'Standard Home Loan','500','500','4.5','4.4');
-
-INSERT INTO loan_options values('1', '1','30', '0','50000000','2','1','1','1','1','3','1');
-
-SELECT 
-    bank_name,
+INSERT INTO product(bank_id,
     product_name,
+    product_description,
     setup_costs,
     ongoing_costs,
     comparison_rate,
-    advertised_rate
-FROM
-    loan_options
-        NATURAL JOIN
-    product
-        NATURAL JOIN
-    bank where loan_offset = '1' AND loan_redraw = '1';
+    advertised_rate) values( 'CBA','Standard Home Loan', 'Standard Home Loan','500','500','4.5','4.4');
+    
+INSERT INTO product(bank_id,
+    product_name,
+    product_description,
+    setup_costs,
+    ongoing_costs,
+    comparison_rate,
+    advertised_rate) values('ANZ','Some Loan', 'Some Loan','5030','5030','4.2','4.1');
 
+INSERT INTO loan_options(cus_type_id,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type_id,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type_id,
+    product_id ) values( '1','30', '0','50000000','2','1','1','1','1','3','1');
+    
+INSERT INTO loan_options(cus_type_id,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type_id,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type_id,
+    product_id ) values( '1','30', '0','50000000','2','1','1','1','1','3','2');
