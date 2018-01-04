@@ -67,6 +67,7 @@ echo "<br>";
 echo "the query: " . $sql;
 echo "<br>";
     foreach ($pdo->query($sql) as $row) {
+		print $row['id'] . "\t";
 		print $row['rowCount'] . "\t";
         print $row['bank_name'] . "\t";
         print $row['product_name'] . "\t";
@@ -107,7 +108,7 @@ echo "<br>";
 					<div class="lenderColumn">
 						<span class="lenderLogo"><img width="40" src="https://cdn.unohomeloans.com.au/lenders/logo/CBA.svg" onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
 						<div class="bestMatchLabel">BEST MATCH</div>
-						<div class="productName"><span><strong><?php print $row['bank_name']?></strong></span><span> - Extra Variable Rate</span><span> - Variable Rate</span>
+						<div class="productName"><span><strong><?php print $row['bank_name'];?></strong></span><span> - Extra Variable Rate</span><span> - Variable Rate</span>
 					<div class="productFeatureContainer">
 						<p class="featureFalse"><i class="icon-cross"></i><span>Offset</span></p>
 						<p class="featureTrue"><i class="icon-tick"></i><span>Redraw</span></p>
@@ -123,10 +124,10 @@ echo "<br>";
 				</div>
 			</div>
 			<div class="interestRateColumn">
-				<h3><?php print $row['advertised_rate']?>%</h3>
+				<h3><?php print $row['advertised_rate'];?>%</h3>
 				<div class="productDiscount">-0.46% included</div>
 			</div>
-			<h3 class="comparisonRateColumn"><?php print $row['comparison_rate']?>%</h3>
+			<h3 class="comparisonRateColumn"><?php print $row['comparison_rate'];?>%</h3>
 			<h3 class="paymentsColumn">NULL</h3>
 			<div class="borrowingPowerColumn">
 				<div class="borrowingPowerIndicator">
@@ -138,7 +139,7 @@ echo "<br>";
 				</div>
 			</div>
 			<div class="ctaColumn">
-				<a class="button" href="javascript:;"><span>View details</span></a>
+				<a class="button" href="./product.php?id=<?php echo $row['id']; ?>" ><span>View details</span></a>
 				<span class="iconField" style="cursor: pointer;"><img src="//cdn.unohomeloans.com.au/icons/icon-star-off.svg"></span>
 			</div>
 		</div>

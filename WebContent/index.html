@@ -1628,15 +1628,12 @@
 					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FOR PRINCIPAL and INTEREST
 					}
 
-				var query = "SELECT bank_name,product_name,setup_costs,ongoing_costs,comparison_rate,advertised_rate FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
+				var query = "SELECT id,bank_name,product_name,setup_costs,ongoing_costs,comparison_rate,advertised_rate FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 				var count = "SELECT count(1) as rowCount FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 				// Now we are going to send it using AJAX to our PHP script...
 				localStorage.setItem("query",query);
 				localStorage.setItem("count",count);
 				window.location="../search.html";
-				 
-				 
-				
 			}]);
 			
 			
