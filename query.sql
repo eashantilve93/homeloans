@@ -31,4 +31,4 @@ FROM
 WHERE
     loan_offset = '1';
 
-select * from loan_options;
+SELECT bank_name,21,312,product_name,setup_costs,ongoing_costs,comparison_rate,advertised_rate FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE loan_offset = '1'
