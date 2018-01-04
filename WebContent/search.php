@@ -14,9 +14,60 @@ $password = $_SERVER['RDS_PASSWORD'];
 $pdo = new PDO($dsn, $username, $password);
 
 $sql = $_POST["query"];
+$loan = $_POST["loan"];
+$sqlCount = $_POST["count"];
+echo "the query: " . $sqlCount;
+echo "<br>";
+ foreach ($pdo->query($sqlCount) as $row) {
+?>
+<div class="modifySearch">
+     			<span>We found <?php print $row['rowCount'];?> matching home loans. </span>   <a> Modify your search</a>
+     			<span class="compareButton">Compare <small>3</small></span>
+     		</div>
+     		<div class="container"><div class="row row-inline titleBar"><div class="mainSection col-xs-12"><div><span class="breadCrumb"><a class="anchor" href="javascript:;">Dashboard</a><span>/</span><span>Search results</span></span><h2>We found <?php print $row['rowCount'];?> matching home loans</h2></div></div></div></div>
+
+     	<div class="searchBar">
+     		<div class="container">
+     		<div class="menu">
+     			<div class="sTitle"><span>I WANT TO</span>
+     			<span class="iconField"><i class="fa fa fa-angle-down"></i></span>
+     			</div>
+     			<div class="sDesc"><span>Refinance my home</span></div>
+     		</div>
+     		<div class="menu">
+     			<div class="sTitle">
+     				<span>BORROW</span>
+     				<span class="iconField"><i class="fa fa fa-angle-down"></i></span>
+     			</div>
+     			<div class="sDesc"><span>$422,529</span></div>
+     		</div>
+     		<div class="menu">
+     			<div class="sTitle">
+     				<span>REPAYING</span>
+     				<span class="iconField"><i class="fa fa fa-angle-down"></i></span></div>
+     				<div class="sDesc"><span>Principal and interest, Yearly, 2 years</span>
+     			</div>
+     		</div>
+     		<div class="menu">
+     			<div class="sTitle">
+     				<span>INTEREST RATE &amp; FEATURES</span>
+     				<span class="iconField"><i class="fa fa fa-angle-down"></i></span>
+     			</div>
+     			<div class="sDesc"><span>Variable</span></div>
+     		</div>
+     		<div class="menu">
+     			<div class="sTitle"><span>SHOW</span><span class="iconField"><i class="fa fa fa-angle-down"></i></span></div>
+     			<div class="sDesc"><span>All lenders</span></div>
+     		</div>
+     		<div class="menu"><div class="sTitle"><span>BORROWING POWER</span><span class="iconField"><i class="fa fa fa-calculator"></i></span></div><div class="sDesc"><span>$84,942,916</span></div></div></div></div>
+
+<?php
+
+}
 echo "the query: " . $sql;
 echo "<br>";
     foreach ($pdo->query($sql) as $row) {
+		print $row['rowCount'] . "\t";
         print $row['bank_name'] . "\t";
         print $row['product_name'] . "\t";
         print $row['setup_costs'] . "\t";
@@ -26,6 +77,8 @@ echo "<br>";
 		echo "<br>";
 
 ?>
+
+<!-- Table starts here-->
 <div class="wrapper">
 			<div class="productTable container">
 				<div class="productRow productTableHeader collectionCard odd">
@@ -65,16 +118,16 @@ echo "<br>";
 			</div>
 
 			<div class="loanAmountColumn">
-				<h3>$20,230</h3>
+				<h3><?php echo $loan;?>$</h3>
 				<div class="lmiInfo">
 				</div>
 			</div>
 			<div class="interestRateColumn">
-				<h3>3.99%</h3>
+				<h3><?php print $row['advertised_rate']?>%</h3>
 				<div class="productDiscount">-0.46% included</div>
 			</div>
 			<h3 class="comparisonRateColumn"><?php print $row['comparison_rate']?>%</h3>
-			<h3 class="paymentsColumn">$246</h3>
+			<h3 class="paymentsColumn">NULL</h3>
 			<div class="borrowingPowerColumn">
 				<div class="borrowingPowerIndicator">
 					<div class="levelBar">

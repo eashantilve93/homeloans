@@ -1,4 +1,4 @@
-
+use ebdb;
 DROP table if exists loan_options;
 DROP table if exists product;
 DROP table if exists bank;
@@ -51,10 +51,10 @@ CREATE TABLE loan_options (
     min_loan REAL,
     max_loan REAL,
     interest_type_id INT(2),
-    loan_offset BIT,
-    loan_redraw BIT,
-    loan_extra_repay BIT,
-    loan_interest_only BIT,
+    loan_offset INT(1),
+    loan_redraw INT(1),
+    loan_extra_repay INT(1),
+    loan_interest_only INT(1),
     doc_type_id INT(2),
     product_id INT(5),
     PRIMARY KEY (id),
@@ -121,3 +121,39 @@ INSERT INTO loan_options(cus_type_id,
     loan_interest_only,
     doc_type_id,
     product_id ) values( '1','30', '0','50000000','2','1','1','1','1','3','2');
+
+INSERT INTO loan_options(cus_type_id,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type_id,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type_id,
+    product_id ) values( '2','50', '0','50000000','2','1','1','1','1','3','1');
+    
+INSERT INTO loan_options(cus_type_id,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type_id,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type_id,
+    product_id ) values( '2','80', '0','50000000','2','0','0','0','0','3','2');
+    
+    INSERT INTO loan_options(cus_type_id,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type_id,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type_id,
+    product_id ) values( '2','80', '0','50000000','2','1','1','0','0','3','2');
