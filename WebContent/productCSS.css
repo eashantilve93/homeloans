@@ -151,7 +151,7 @@
 {
     margin: 0 auto;
     color: #243036;
-    padding: 66px 0 30px;
+    padding: 15px 0 30px;
 }
 .navContent {
      position: relative; 
@@ -1606,6 +1606,359 @@ a.simpleButton i, a.simpleButton span {
 .modifySearch {
     display: none;
 }
+.page .logPanel div {
+    width: 300px;
+    height: 250px;
+    overflow: scroll;
+    border: solid 1px #d1efec;
+    font-family: monospace;
+    font-size: 12px;
+}
+.searchMenuContent {
+    background-color: #fff;
+    min-width: 300px;
+    max-width: 340px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    padding: 5px;
+}
+.simple-form-default {
+    background: #fff;
+    transition-duration: .25s;
+}
+.simpleForm {
+    display: block;
+}
+.searchMenuContent .simple-form-default .simpleFormSection {
+    margin-top: 10px;
+}
+.simple-form-default div.simpleForm .simpleFormSection>span.simpleFormSectionTitle {
+    color: #274053;
+    margin-left: 0;
+}
+
+.simpleFormSection>.simpleFormSectionTitle {
+    display: block;
+    padding-left: 0;
+    padding-bottom: 10px;
+    clear: both;
+}
+.simple-form-default .simpleFormSection>.simpleFormRow {
+    display: block;
+    color: #274053;
+}
+
+.searchMenuContent .simple-form-default .simpleFormRow {
+    margin-bottom: 10px;
+}
+.page .simpleFormSectionTitle {
+    font-family: 'avenir-medium';
+    font-size: 14px;
+}
+.searchMenuContent .simple-form-default .simpleFormRowSubTitle {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+
+.simple-form-default .simpleFormRow.vertical>.simpleFormRowField {
+    width: 100%;
+    overflow: hidden;
+}
+
+.simpleFormRow.vertical>.simpleFormRowField {
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.simple-form-default .simpleFormRow .simpleFormRowField {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #274053;
+    background-color: #f9fafa;
+    border: 1px solid #e9ebed;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -webkit-box-shadow: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-appearance: none;
+}
+
+.page .simpleFormRowField {
+    font-family: 'avenir-medium';
+    font-size: 20px;
+}
+
+.simple-form-default .simpleFormRow .simpleFormRowField .comboBox, .simple-form-default .simpleFormRow .simpleFormRowField .simpleFormAmountFieldPeriodUnit {
+    height: auto;
+    font-size: 16px;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.simple-form-default .simpleFormRow .simpleFormRowField input.simpleFormAmountFieldNumber, .simple-form-default .simpleFormRow .simpleFormRowField select {
+    padding: 0;
+    background: transparent;
+    color: #274053;
+    font-size: 16px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+}
+.page .simpleForm .comboBox, .page .simpleForm .textField {
+    font-family: 'avenir-medium';
+    font-size: 16px;
+    border: none;
+    float: none;
+    -webkit-appearance: none;
+}
+
+.simpleForm .simpleFormSelection>select {
+    width: 100%;
+}
+.simple-form-default input.textField, .simple-form-default select {
+    border: none;
+}
+
+.comboBox {
+    width: 200px;
+    height: 42px;
+    border-color: #14b4a1;
+}
+.simple-form-default .simpleForm .simpleFormSection i.fa {
+    font-size: 25px;
+}
+
+.simple-form-default .simpleForm .fa.fa-angle-down {
+    color: #243036;
+}
+
+.simpleForm .simpleFormSelection>i {
+    font-size: 1.5em;
+    vertical-align: middle;
+    position: relative;
+    pointer-events: none;
+    float: right;
+    margin-top: -33px;
+}
+
+.app i.fa {
+    font-family: 'FontAwesome'!important;
+}
+
+.simple-form-default .fa {
+    color: #fff;
+    padding-top: 7px;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.simple-form-default .simpleFormRow .simpleFormRowField.simpleFormPlaceHolderRow, .simple-form-default .simpleFormRow .simpleFormRowField.radioBoxes {
+    background: transparent;
+    border: none;
+}
+
+.simpleFormRow.vertical>.simpleFormRowField {
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+
+
+.page .simpleFormRowField {
+    font-family: 'avenir-medium';
+    font-size: 20px;
+}
+
+.radioBoxes {
+    display: inline-block;
+    vertical-align: middle;
+}
+.simple-form-default .simpleFormRow .simpleFormRowField.radioBoxes.vertical>* {
+    display: block;
+}
+
+.radioBox.flat {
+    display: inline-block;
+    padding-right: 1em;
+    cursor: pointer;
+}
+
+.radioBoxes.vertical>* {
+    display: block;
+}
+
+.radioBoxes>* {
+    padding: 4px 0;
+}
+.radioBox.flat input {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    margin: 0;
+}
+
+input, textarea, keygen, select, button {
+    font-size: 1em;
+    background-color: #fff;
+}
+
+input, select {
+}
+.radioBox.flat input:checked+label {
+    border: 3px solid #26a69a;
+}
+
+.radioBox.flat label:nth-of-type(1) {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    border: 2px solid #14b4a1;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.simple-form-default .simpleForm .radioBox label {
+    font-size: 18px;
+    color: #243036;
+    font-family: "avenir-medium",sans-serif;
+}
+
+.radioBox.flat label {
+    vertical-align: middle;
+    cursor: pointer;
+}
+body, button, input, textarea, select, .btn {
+    -webkit-font-smoothing: antialiased;
+}
+.radioBox.flat input:checked+label span {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+.radioBox.flat label:nth-of-type(1) span {
+    -webkit-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+    width: 12px;
+    height: 12px;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    display: block;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #26a69a;
+    opacity: 0;
+}
+
+.searchMenuContent .searchMenuContentButtonContainer {
+    text-align: center;
+    width: 100%;
+    margin: 10px 0;
+}
+.searchMenuContent a.button.searchMenuContentButton {
+    padding: 8px 16px;
+    color: #fff!important;
+    background-color: #14b2a1!important;
+    border: 0;
+    font-family: 'avenir-medium';
+}
+
+.page a.button.push {
+    padding: 6px 10px;
+    min-width: 80px;
+    border: 2px solid #fff;
+    margin: 0 5px;
+    color: #14b4a1;
+    border-radius: 20px;
+}
+
+.page a.button {
+    font-family: 'avenir-medium';
+    font-size: 16px;
+}
+.button.push {
+    padding: 6px 10px;
+    min-width: 80px;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    color: #333;
+    border-radius: 4px;
+}
+.searchMenuContent .rowWithLeadingWidget .leadingWidget span {
+    color: #939fa9;
+    font-size: 20px;
+}
+
+.page .simpleFormRowTitle, .page .simpleFormPlaceHolderRow>* {
+    font-family: 'avenir-book';
+    font-size: 16px;
+}
+
+.simple-form-default .simpleFormRow.vertical>.simpleFormRowField {
+    width: 100%;
+    overflow: hidden;
+}
+
+.simple-form-default .simpleFormRow .simpleFormRowField.simpleFormPlaceHolderRow, .simple-form-default .simpleFormRow .simpleFormRowField.radioBoxes {
+    background: transparent;
+    border: none;
+}
+
+.simpleFormRow.vertical>.simpleFormRowField {
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.simple-form-default .simpleForm .simpleFormPlaceHolderRow {
+    padding-top: 0;
+}
+
+.page .simpleFormRowField {
+    font-family: 'avenir-medium';
+    font-size: 20px;
+}
+.simpleFormRowField.simpleFormMultiButtonsField {
+    background: transparent!important;
+}
+.simple-form-default .simpleFormButtonSwitch {
+    background-color: #e9ebed!important;
+    color: #526675!important;
+    border-radius: 5px;
+}
+
+.simpleFormButtonSwitch {
+    border-radius: 20px;
+    background-color: #1b7e76!important;
+    color: white!important;
+    padding: 5px;
+    min-width: 60px;
+    border: none;
+    margin: 5px 5px 0 0;
+    font-size: .8em;
+    opacity: .5;
+}
+
 @media (max-width: 768px)
 {
     .container-fluid {

@@ -282,7 +282,6 @@
 			var consolidateDebtAmount="consolidateDebtAmount";
 			var cashOutAmount="cashOutAmount";
 			var prog="prog";
-			var query="query";
 			localStorage.removeItem(purchasePrice);
 			localStorage.removeItem(deposit);
 			localStorage.removeItem(currentLoan);
@@ -290,8 +289,6 @@
 			localStorage.removeItem(consolidateDebtAmount);
 			localStorage.removeItem(cashOutAmount);
 			localStorage.removeItem(prog);
-			localStorage.removeItem(query);
-			localStorage.removeItem(count);
 		}]);
 		
 		//PURCHASE PRICE CONTROLLER
@@ -908,11 +905,62 @@
 			$scope.redraw = $routeParams.redraw;
 			$scope.majorL = $routeParams.majorL;
 			$scope.mobileA = $routeParams.mobileA;
+			var offsetCondition;
+			var redrawCondition;
+			var loanSizeCondition;
+			var maxLVRCondition;
+			var propertyUseCondition;
+			var interestOnlyCondition;
+			var documentCondition;
+			var currentL = parseFloat(($scope.purchasePrice).replace(/,/g,"")) - parseFloat(($scope.deposit).replace(/,/g,""));
+			var propertyW = ($scope.purchasePrice).replace(/,/g,"");
+			var LVR = String((parseFloat(currentL)*100)/parseFloat(propertyW));
+			//SET OFFSET CONDITION
+			if($scope.offset == 'offset'){ 
+				offsetCondition = "loan_offset = '1'";
+				}
+			else {
+				offsetCondition = "loan_offset = '0'";
+				}
 			
-			$scope.back = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}')($scope);
-				$location.path(url);
-			}
+			//SET REDRAW CONDITION
+			if($scope.redraw == 'redraw'){ 
+				redrawCondition = "loan_redraw = '1'";
+				}
+			else {
+				redrawCondition = "loan_redraw = '0'";
+				}
+			
+			//SET LOAN SIZE CONDITION
+				loanSizeCondition = currentL + ">=min_loan AND "+currentL +"<=max_loan";
+		
+			//SET LOAN SIZE CONDITION
+				maxLVRCondition = LVR +"<=max_lvr";
+			//SET PROPERTY USE CONDITION
+				if($scope.propertyUse == 'Live'){ 
+					propertyUseCondition = "cus_type_id = '2'"; //FOR INVESTOR
+					}
+				else {
+					propertyUseCondition = "cus_type_id = '1'"; //FOR OWNER
+					}
+			//SET REPAY CONDITION
+				if($scope.repay == 'I'){ 
+					interestOnlyCondition = "loan_interest_only = '1'"; //FOR INTEREST ONLY
+					}
+				else {
+					interestOnlyCondition = "loan_interest_only = '0'"; //FOR PRINCIPAL and INTEREST
+					}
+			//SET DOC CONDITION Employee Self yes Other
+			if($scope.employmentType == 'Other' || ($scope.employmentType =='Self' && $scope.taxReturns == 'no' )){ 
+				documentCondition = "(doc_type_id = '1' OR doc_type_id = '2')"; //FOR INTEREST ONLY
+				}
+			else {
+				documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FOR PRINCIPAL and INTEREST
+				}
+
+			var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
+			// Now we are going to send it using AJAX to our PHP script...
+			window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan;
 		}]);
 		
  <!-- REFINANCING --> 
@@ -1628,12 +1676,9 @@
 					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FOR PRINCIPAL and INTEREST
 					}
 
-				var query = "SELECT id,bank_name,product_name,setup_costs,ongoing_costs,comparison_rate,advertised_rate FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
-				var count = "SELECT count(1) as rowCount FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
+				var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 				// Now we are going to send it using AJAX to our PHP script...
-				localStorage.setItem("query",query);
-				localStorage.setItem("count",count);
-				window.location="../search.html";
+				window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan;
 			}]);
 			
 			
