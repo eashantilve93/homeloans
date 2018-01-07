@@ -313,16 +313,20 @@
 			if($scope.purchasePrice === "undefined") 
 				{
 					$scope.purchasePrice = "";
-					document.getElementById("error").style.visibility = "visible";
+					document.getElementById("error").style.display = "block";
 				}
 			else {
-				document.getElementById("error").style.visibility = "hidden";
+				document.getElementById("error").style.display = "none";
 			}
 			
 			$scope.passOn = function (){
-				localStorage.setItem(purchasePrice, $scope.purchasePrice);
-				var url = $interpolate('/homeLoan/{{purchasePrice}}')($scope);
-				$location.path(url);
+				if($scope.purchasePrice == "")
+					document.getElementById("error").style.display = "block";
+				else {
+					localStorage.setItem(purchasePrice, $scope.purchasePrice);
+					var url = $interpolate('/homeLoan/{{purchasePrice}}')($scope);
+					$location.path(url);
+				}
 			}
 			$scope.back = function (){
 				var url = $interpolate('/mainView')($scope);
@@ -353,15 +357,22 @@
 			if($scope.deposit === "undefined") 
 				{
 					$scope.deposit = "";
-					document.getElementById("error").style.visibility = "visible";
+					document.getElementById("error").style.display = "block";
 				}
 			else {
-				document.getElementById("error").style.visibility = "hidden";
+				document.getElementById("error").style.display = "none";
 			}
 			$scope.passOn = function (){
-				localStorage.setItem(deposit, $scope.deposit);
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
-				$location.path(url);
+				if($scope.deposit == "")
+					document.getElementById("error").style.display = "block";
+				else if(parseFloat(($scope.deposit).replace(/,/g,"")) > parseFloat(($scope.purchasePrice).replace(/,/g,""))) {
+					document.getElementById("error2").style.display = "block";
+				}
+				else {
+					localStorage.setItem(deposit, $scope.deposit);
+					var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
+					$location.path(url);
+				}
 			}
 			$scope.back = function (){
 				var url = $interpolate('/homeLoan')($scope);
@@ -987,15 +998,19 @@
 				if($scope.currentLoan === "undefined") 
 					{
 						$scope.currentLoan = "";
-						document.getElementById("error").style.visibility = "visible";
+						document.getElementById("error").style.display = "block";
 					}
 				else {
-					document.getElementById("error").style.visibility = "hidden";
+					document.getElementById("error").style.display = "none";
 				}
 				$scope.passOn = function (){
-					localStorage.setItem(currentLoan, $scope.currentLoan);
-					var url = $interpolate('/refinance/{{currentLoan}}')($scope);
-					$location.path(url);
+					if($scope.currentLoan == "")
+						document.getElementById("error").style.display = "block";
+					else {
+						localStorage.setItem(currentLoan, $scope.currentLoan);
+						var url = $interpolate('/refinance/{{currentLoan}}')($scope);
+						$location.path(url);
+					}
 				}
 				$scope.back = function (){
 					var url = $interpolate('/mainView')($scope);
@@ -1026,15 +1041,19 @@
 				if($scope.propertyWorth === "undefined") 
 					{
 						$scope.propertyWorth = "";
-						document.getElementById("error").style.visibility = "visible";
+						document.getElementById("error").style.display = "block";
 					}
 				else {
-					document.getElementById("error").style.visibility = "hidden";
+					document.getElementById("error").style.display = "none";
 				}
 				$scope.passOn = function (){
-					localStorage.setItem(propertyWorth, $scope.propertyWorth);
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
-					$location.path(url);
+					if($scope.propertyWorth == "")
+						document.getElementById("error").style.display = "block";
+					else {
+						localStorage.setItem(propertyWorth, $scope.propertyWorth);
+						var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
+						$location.path(url);
+					}
 				}
 				$scope.back = function (){
 					var url = $interpolate('/refinance')($scope);
@@ -1164,10 +1183,10 @@
 				if($scope.consolidateDebtAmount === "undefined") 
 					{
 						$scope.consolidateDebtAmount = "";
-						document.getElementById("error").style.visibility = "visible";
+						document.getElementById("error1").style.display = "block";
 					}
 				else {
-					document.getElementById("error1").style.visibility = "hidden";
+					document.getElementById("error1").style.display = "none";
 				}
 				if($scope.cashOutAmount === null) 
 				{
@@ -1176,26 +1195,26 @@
 				if($scope.cashOutAmount === "undefined") 
 					{
 						$scope.cashOutAmount = "";
-						document.getElementById("error").style.visibility = "visible";
+						document.getElementById("error2").style.display = "block";
 					}
 				else {
-					document.getElementById("error2").style.visibility = "hidden";
+					document.getElementById("error2").style.display = "none";
 				}
 				if($scope.consolidateDebt == 'NA') 
 					{
-						document.getElementById("consolidateDebt").style.display = "none";
+						document.getElementById("consolidateDebt").style.visibility = "hidden";
 						$scope.consolidateDebtAmount = 0;
 					}
 				else 
-					document.getElementById("consolidateDebt").style.display = "block";
+					document.getElementById("consolidateDebt").style.visibility = "visible";
 				
 				if($scope.cashOut == 'NA') 
 					{
-						document.getElementById("cashOut").style.display = "none";
+						document.getElementById("cashOut").style.visibility = "hidden";
 						$scope.cashOutAmount = 0;
 					}
 				else 
-					document.getElementById("cashOut").style.display = "block";
+					document.getElementById("cashOut").style.visibility = "visible";
 				
 				if($scope.cashOut == 'NA' && $scope.consolidateDebt == 'NA')
 					{
@@ -1204,10 +1223,16 @@
 					}
 				
 				$scope.passOn = function (){
-					localStorage.setItem(cashOutAmount, $scope.cashOutAmount);
-					localStorage.setItem(consolidateDebtAmount, $scope.consolidateDebtAmount);
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}')($scope);
-					$location.path(url);
+					if($scope.cashOutAmount == "" )
+						document.getElementById("error2").style.display = "block";
+					else if($scope.consolidateDebtAmount == "" )
+						document.getElementById("error1").style.display = "block";
+					else {
+						localStorage.setItem(cashOutAmount, $scope.cashOutAmount);
+						localStorage.setItem(consolidateDebtAmount, $scope.consolidateDebtAmount);
+						var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}')($scope);
+						$location.path(url);
+					}
 				}
 				
 				$scope.back = function (){
