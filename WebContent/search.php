@@ -113,6 +113,7 @@
 						<?php
 $halfQuery = $_GET["halfQuery"];
 $loan = $_GET["loan"];
+$loanType = $_GET["loanType"];
 
 $dbhost = $_SERVER['RDS_HOSTNAME'];
 $dbport = $_SERVER['RDS_PORT'];
@@ -132,8 +133,11 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 						<div>
 							<div></div>
 							<div class="modifySearch">
-								<span>We found <?php print $row['rowCount'];?> matching home loans. </span> <a> Modify
-									your search</a> <span class="compareButton">Compare <small>3</small></span>
+								<span>We found <?php print $row['rowCount'];?> matching
+									home loans.
+								</span> <a> Modify your search</a> <span class="compareButton">Compare
+									<small>3</small>
+								</span>
 							</div>
 							<div class="container">
 								<div class="row row-inline titleBar">
@@ -142,7 +146,11 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 											<span class="breadCrumb"><a class="anchor"
 												href="javascript:;">Dashboard</a><span>/</span><span>Search
 													results</span></span>
-											<h2>We found <?php print $row['rowCount'];?> matching home loans</h2>
+											<h2>
+												We found
+												<?php print $row['rowCount'];?>
+												matching home loans
+											</h2>
 										</div>
 									</div>
 								</div>
@@ -156,7 +164,9 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 												class="fa fa fa-angle-down"></i></span>
 										</div>
 										<div class="sDesc">
-											<span>Refinance my home</span>
+											<span id="menu1content">
+												<?php echo $loanType; ?>
+											</span>
 										</div>
 									</div>
 									<div class="menu" id="menu2">
@@ -165,7 +175,8 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 												class="fa fa fa-angle-down"></i></span>
 										</div>
 										<div class="sDesc">
-											<span><?php print $loan ?></span>
+											<span> <?php print $loan ?>
+											</span>
 										</div>
 									</div>
 									<div class="menu" id="menu3">
@@ -174,7 +185,7 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 												class="fa fa fa-angle-down"></i></span>
 										</div>
 										<div class="sDesc">
-											<span>Principal and interest, Yearly, 2 years</span>
+											<span id="menu3content"></span>
 										</div>
 									</div>
 									<div class="menu" id="menu4">
@@ -283,10 +294,16 @@ echo "<br>";
 													src="https://cdn.unohomeloans.com.au/lenders/logo/HLL.svg"
 													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
 												<div class="interestRateColumn">
-													<h3><?php print $row['advertised_rate']; ?>%</h3>
+													<h3>
+														<?php print $row['advertised_rate']; ?>
+														%
+													</h3>
 													<div class="productDiscount"></div>
 												</div>
-												<h3 class="comparisonRateColumn"><?php print $row['comparison_rate']; ?>%</h3>
+												<h3 class="comparisonRateColumn">
+													<?php print $row['comparison_rate']; ?>
+													%
+												</h3>
 												<h3 class="paymentsColumn">NULL</h3>
 												<span class="iconField" style="cursor: pointer;"><img
 													src="//cdn.unohomeloans.com.au/icons/icon-star-off.svg"></span>
@@ -301,10 +318,12 @@ echo "<br>";
 											</div>
 											<div class="productSummary">
 												<div class="productName">
-													<span><strong><?php print $row['product_name'];?></strong></span><span> -
-														<?php print $row['product_name'];?></span><span> - Variable Rate</span>
+													<span><strong> <?php print $row['product_name'];?>
+													</strong></span><span> - <?php print $row['product_name'];?></span><span>
+														- Variable Rate</span>
 												</div>
-												<a class="button" href="./product.php?id=<?php echo $row['id']; ?>"><span>View
+												<a class="button"
+													href="./product.php?id=<?php echo $row['id']; ?>"><span>View
 														details</span></a>
 											</div>
 										</div>
@@ -317,8 +336,9 @@ echo "<br>";
 													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
 												<div class="bestMatchLabel">BEST MATCH</div>
 												<div class="productName">
-													<span><strong><?php print $row['bank_name'];?></strong></span><span>
-														- Extra Variable Rate</span><span> - Variable Rate</span>
+													<span><strong> <?php print $row['bank_name'];?>
+													</strong></span><span> - Extra Variable Rate</span><span> - Variable
+														Rate</span>
 													<div class="productFeatureContainer">
 														<p class="featureFalse">
 															<i class="icon-cross"></i><span>Offset</span>
@@ -337,14 +357,22 @@ echo "<br>";
 											</div>
 
 											<div class="loanAmountColumn">
-												<h3><?php print $loan;?></h3>
+												<h3>
+													<?php print $loan;?>
+												</h3>
 												<div class="lmiInfo"></div>
 											</div>
 											<div class="interestRateColumn">
-												<h3><?php print $row['advertised_rate']; ?>%</h3>
+												<h3>
+													<?php print $row['advertised_rate']; ?>
+													%
+												</h3>
 												<div class="productDiscount">-0.46% included</div>
 											</div>
-											<h3 class="comparisonRateColumn"><?php print $row['comparison_rate']; ?>%</h3>
+											<h3 class="comparisonRateColumn">
+												<?php print $row['comparison_rate']; ?>
+												%
+											</h3>
 											<h3 class="paymentsColumn">NULL</h3>
 											<div class="borrowingPowerColumn">
 												<div class="borrowingPowerIndicator">
@@ -357,7 +385,8 @@ echo "<br>";
 												</div>
 											</div>
 											<div class="ctaColumn">
-												<a class="button" href="./product.php?id=<?php echo $row['id']; ?>"><span>View
+												<a class="button"
+													href="./product.php?id=<?php echo $row['id']; ?>"><span>View
 														details</span></a> <span class="iconField" style="cursor: pointer;"><img
 													src="//cdn.unohomeloans.com.au/icons/icon-star-off.svg"></span>
 											</div>
@@ -396,7 +425,8 @@ echo "testing";
 								<pre></pre>
 							</div>
 						</div>
-						<div class="popup searchMenuContentPopup" id="firstBox">
+						<div class="popup searchMenuContentPopup" id="firstBox"
+							style="position: absolute; left: 152px; top: 160px; margin-top: 0px; opacity: 1; display: none;">
 							<div class="searchMenuContent">
 								<div class="container-fluid">
 									<div class="simple-form-default">
@@ -410,11 +440,11 @@ echo "testing";
 													<span class="simpleFormRowTitle"><span>I want
 															to</span><span class="simpleFormRowSubTitle"></span></span><span
 														class="simpleFormSelection simpleFormRowField"
-														tabindex="0"><select class="gwt-ListBox comboBox"><option
-																value=""></option>
+														tabindex="0"><select class="gwt-ListBox comboBox"
+														id="loanType">
 															<option value="Purchase">Buy a property</option>
-															<option value="Refinance">Refinance my home loan</option></select><i
-														class="fa fa-angle-down"></i></span>
+															<option value="Refinance">Refinance my home loan</option>
+													</select><i class="fa fa-angle-down"></i></span>
 												</div>
 												<div class="simpleFormRow vertical">
 													<span class="simpleFormRowTitle"><span>Purpose
@@ -426,9 +456,9 @@ echo "testing";
 															<label for="gwt-uid-2"><span></span></label> <label
 															for="gwt-uid-2">To live in</label>
 														</span> <span class="radioBox flat"> <input type="radio"
-															name="gwt-uid-1" value="on" id="gwt-uid-3" tabindex="0"
-															checked=""> <label for="gwt-uid-3"> <span></span></label>
-															<label for="gwt-uid-3">Investment</label>
+															name="gwt-uid-1" value="on" id="gwt-uid-3" tabindex="0">
+															<label for="gwt-uid-3"> <span></span></label> <label
+															for="gwt-uid-3">Investment</label>
 														</span>
 													</div>
 												</div>
@@ -479,7 +509,7 @@ echo "testing";
 										</div>
 										<div class="searchMenuContentButtonContainer">
 											<a class="button push searchMenuContentButton"
-												href="javascript:;"><span>Update search</span></a>
+												onclick="update1()"><span>Update search</span></a>
 										</div>
 									</div>
 								</div>
@@ -488,7 +518,7 @@ echo "testing";
 
 
 						<div class="popup searchMenuContentPopup" id="secondBox"
-							style="position: absolute; left: 314px; top: 160px; margin-top: 0px; opacity: 1;">
+							style="position: absolute; left: 314px; top: 160px; margin-top: 0px; opacity: 1; display: none;">
 							<div class="searchMenuContent">
 								<div class="container-fluid">
 									<div class="simple-form-default">
@@ -673,7 +703,7 @@ echo "testing";
 
 
 						<div class="popup searchMenuContentPopup" id="thirdBox"
-							style="position: absolute; left: 433px; top: 160px; margin-top: 0px; opacity: 1;">
+							style="position: absolute; left: 433px; top: 160px; margin-top: 0px; opacity: 1; display: none;">
 							<div class="searchMenuContent">
 								<div class="container-fluid">
 									<div class="simple-form-default">
@@ -689,8 +719,8 @@ echo "testing";
 													<div class="radioBoxes vertical simpleFormRowField"
 														tabindex="0">
 														<span class="radioBox flat"><input type="radio"
-															name="gwt-uid-7" value="on" id="gwt-uid-8" tabindex="0"
-															checked=""><label for="gwt-uid-8"><span></span></label><label
+															name="gwt-uid-7" value="on" id="gwt-uid-8" tabindex="0"><label
+															for="gwt-uid-8"><span></span></label><label
 															for="gwt-uid-8">Principal &amp; interest</label></span><span
 															class="radioBox flat"><input type="radio"
 															name="gwt-uid-7" value="on" id="gwt-uid-9" tabindex="0"><label
@@ -723,7 +753,7 @@ echo "testing";
 										</div>
 										<div class="searchMenuContentButtonContainer">
 											<a class="button push searchMenuContentButton"
-												href="javascript:;"><span>Update search</span></a>
+												onclick="update3()"><span>Update search</span></a>
 										</div>
 									</div>
 								</div>
@@ -732,7 +762,7 @@ echo "testing";
 
 
 						<div class="popup searchMenuContentPopup" id="fourthBox"
-							style="position: absolute; left: 706px; top: 160px; margin-top: 0px; opacity: 1;">
+							style="position: absolute; left: 600px; top: 160px; margin-top: 0px; opacity: 1; display: none;">
 							<div class="searchMenuContent">
 								<div class="container-fluid">
 									<div class="simple-form-default">
@@ -748,8 +778,8 @@ echo "testing";
 													<div class="radioBoxes vertical simpleFormRowField"
 														tabindex="0">
 														<span class="radioBox flat"><input type="radio"
-															name="gwt-uid-10" value="on" id="gwt-uid-11" tabindex="0"
-															checked=""><label for="gwt-uid-11"><span></span></label><label
+															name="gwt-uid-10" value="on" id="gwt-uid-11" tabindex="0"><label
+															for="gwt-uid-11"><span></span></label><label
 															for="gwt-uid-11">Variable</label></span><span
 															class="radioBox flat"><input type="radio"
 															name="gwt-uid-10" value="on" id="gwt-uid-12" tabindex="0"><label
@@ -767,14 +797,15 @@ echo "testing";
 															target="_blank">Unsure about features?</a></span></span>
 													<div class="simpleFormMultiButtonsField simpleFormRowField"
 														tabindex="0">
-														<a class="button simpleFormButtonSwitch"
-															href="javascript:;"><span>Offset</span></a><a
-															class="button simpleFormButtonSwitch" href="javascript:;"><span>Extra
+														<a class="button simpleFormButtonSwitch" id="offset"
+															onclick="offsetToggle()"><span>Offset</span></a><a
+															class="button simpleFormButtonSwitch" id="extra_repay"
+															onclick="extra_repayToggle()"><span>Extra
 																repayment</span></a><a class="button simpleFormButtonSwitch"
 															href="javascript:;"><span>$0 ongoing fees</span></a><a
 															class="button simpleFormButtonSwitch" href="javascript:;"><span>$0
 																upfront fees</span></a><a class="button simpleFormButtonSwitch"
-															href="javascript:;"><span>Redraw</span></a><a
+															id="redraw" onclick="redrawToggle()"><span>Redraw</span></a><a
 															class="button simpleFormButtonSwitch" href="javascript:;"><span>Package</span></a>
 													</div>
 												</div>
@@ -782,7 +813,7 @@ echo "testing";
 										</div>
 										<div class="searchMenuContentButtonContainer">
 											<a class="button push searchMenuContentButton"
-												href="javascript:;"><span>Update search</span></a>
+												onclick="update4();"><span>Update search</span></a>
 										</div>
 									</div>
 								</div>
@@ -791,7 +822,7 @@ echo "testing";
 
 
 						<div class="popup searchMenuContentPopup" id="fifthBox"
-							style="position: absolute; left: 924px; top: 160px; margin-top: 0px; opacity: 1;">
+							style="position: absolute; left: 800px; top: 160px; margin-top: 0px; opacity: 1; display: none;">
 							<div class="searchMenuContent">
 								<div class="container-fluid">
 									<div class="simple-form-default">
@@ -834,174 +865,162 @@ echo "testing";
 
 
 						<script type="text/javascript">
-	 var $div1 = $('.navDrawer')
-                var $div2 = $('.mobile')
+	            var halfQuery=<?php echo json_encode($halfQuery); ?>;
+				var loan=<?php echo json_encode($loan); ?>;
+				var loanType=<?php echo json_encode($loanType); ?>;
+				var investment = document.getElementById("gwt-uid-3");
+	            var live = document.getElementById("gwt-uid-2");
+	            var pandI = document.getElementById("gwt-uid-8");
+	            var iOnly = document.getElementById("gwt-uid-9");
+	            var ddl = document.getElementById("loanType");
+	            /* var variableI = document.getElementById("gwt-uid-11");
+	            var fixedI = document.getElementById("gwt-uid-12");
+	            var bothI = document.getElementById("gwt-uid-13");
+ 				*/
+ 				if(loanType == "Refinance")
+ 					ddl.selectedIndex = 1;
+ 				else ddl.selectedIndex = 0;
+ 				
+	            if(halfQuery.includes("cus_type_id = '2'"))
+	            	live.checked = true;
+	            else if(halfQuery.includes("cus_type_id = '1'"))
+	            	investment.checked = true;
 
+	            if(halfQuery.includes("loan_interest_only = '0'"))
+	            	pandI.checked = true;
+	            else if(halfQuery.includes("loan_interest_only = '1'"))
+	            	iOnly.checked = true;
+	            
+	            if(halfQuery.includes("loan_interest_only = '0'")) {
+	            	pandI.checked = true;
+	 				document.getElementById("menu3content").innerHTML = "Principal and Interest";
+	            }
+	            else if(halfQuery.includes("loan_interest_only = '1'")) {
+	            	iOnly.checked = true;
+	 				document.getElementById("menu3content").innerHTML = "Interest Only";
+				}
+	            
+	            if(halfQuery.includes("loan_offset = '1'")) offsetToggle();
+	            if(halfQuery.includes("loan_redraw = '1'")) redrawToggle();
 
-                $('#openNavDraw').click(function() {
-    
-                  $('.navDrawer').css('left','0px');
+	             
+				function update1() {
+					
+					var selectedValue = ddl.options[ddl.selectedIndex].value;
+					    if (selectedValue == "Purchase") 
+					    	loanType = "Buy a new home";
+					    else if (selectedValue == "Refinance")
+					    	loanType = "Refinance";
+					if(document.getElementById('gwt-uid-2').checked) {
+						  //To live in radio button is checked
+							halfQuery=halfQuery.replace("cus_type_id = '1'","cus_type_id = '2'");
+							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+						}else if(document.getElementById('gwt-uid-3').checked) {
+						  //Investment radio button is checked
+						  	halfQuery=halfQuery.replace("cus_type_id = '2'","cus_type_id = '1'");
+							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+						}
+					
+				}
+				
+				function update3() {
+					if(document.getElementById('gwt-uid-8').checked) {
+						  //Principal and Interest in radio button is checked
+							halfQuery=halfQuery.replace("loan_interest_only = '1'","loan_interest_only = '0'");
+							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+						}else if(document.getElementById('gwt-uid-9').checked) {
+						  //Interest Only radio button is checked
+						  	halfQuery=halfQuery.replace("loan_interest_only = '0'","loan_interest_only = '1'");
+							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+						}
+				}
+				
+				function update4() {
+					if(document.getElementById("offset").classList.contains('on')){
+						halfQuery=halfQuery.replace("loan_offset = '0'","loan_offset = '1'");
+					}
+					else halfQuery=halfQuery.replace("loan_offset = '1'","loan_offset = '0'");
+					
+					if(document.getElementById("redraw").classList.contains('on')){
+						halfQuery=halfQuery.replace("loan_redraw = '0'","loan_redraw = '1'");
+					}
+					else halfQuery=halfQuery.replace("loan_redraw = '1'","loan_redraw = '0'");
+					
+					window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
 
-                 // $('#removeGlass').remove(); 
-                  $('#glassPart').append(' <div glass="1"  id="removeGlass" class="glass shaded" style="z-index: 109;"></div>');
-                  
-                });
-
-                $('#glassPart').click(function() {
-                 
-                  $($div1).css("left", "-100%");
-           
-                  $('#removeGlass').remove();                
-                });
-      
-
-                 
-
-                 $("#expandAll").click(function(){
-
-                       $('.productDetailSectionBody').attr('style','display: block');
-                       $("#expandAll").attr('style' , 'display:none');
-                       $("#collapse").attr('style' , 'display:block');
-                        
-
-
-                  });
-
-                   $("#collapse").click(function(){
-                     $('.productDetailSectionBody').attr('style','display: none');
-                     $("#expandAll").attr('style' , 'display:block');
-                     $("#collapse").attr('style' , 'display:none');
-               });
-
-
-                $("#firstBox").hide();
-                $("#secondBox").hide();
-                $("#thirdBox").hide();
-                $("#fourthBox").hide();
-                $("#fifthBox").hide();
-
+				}
+				
+				function offsetToggle() {
+					document.getElementById("offset").classList.toggle('on');
+				}
+				function extra_repayToggle() {
+					document.getElementById("extra_repay").classList.toggle('on');
+				}
+				function redrawToggle() {
+					document.getElementById("redraw").classList.toggle('on');
+				}
+				
                  $("#menu1").click(function() {
-                       
-         
-                    $("#firstBox").css({"position": "absolute","left": "152px","top":"160px",
-                            "margin-top":"0px",
-                            "opacity":"1"}).toggle();
-
-                        $("#secondBox").hide();
-                        $("#thirdBox").hide();
-                        $("#fourthBox").hide();
-                        $("#fifthBox").hide();
-                     
-
+	                $("#firstBox").toggle();
                    });
-
+                
                  $("#menu2").click(function() {
-                       
-         
-                    $("#secondBox").css({"position": "absolute","left": "252px","top":"160px",
-                            "margin-top":"0px",
-                            "opacity":"1"}).toggle();
-
-
-                        $("#firstBox").hide();
-                        $("#thirdBox").hide();
-                        $("#fourthBox").hide();
-                        $("#fifthBox").hide();
-
-                     
-
+                    $("#secondBox").toggle();
                    });
-
-                    $("#menu3").click(function() {
-                       
-         
-                    $("#thirdBox").css({"position": "absolute","left": "442px","top":"160px",
-                            "margin-top":"0px",
-                            "opacity":"1"}).toggle();
-
-
-                        $("#firstBox").hide();
-                        $("#secondBox").hide();
-                        $("#fourthBox").hide();
-                        $("#fifthBox").hide();
-
-                     
-
+                
+                $("#menu3").click(function() {
+                    $("#thirdBox").toggle();
                    });
 
 
-                    $("#menu4").click(function() {
-                       
-         
-                    $("#fourthBox").css({"position": "absolute","left": "642px","top":"160px",
-                            "margin-top":"0px",
-                            "opacity":"1"}).toggle();
+                $("#menu4").click(function() {
+                    $("#fourthBox").toggle();
+	               });
 
-
-                        $("#firstBox").hide();
-                        $("#secondBox").hide();
-                        $("#thirdBox").hide();
-                        $("#fifthBox").hide();
-
-                     
-
+                $("#menu5").click(function() {
+                    $("#fifthBox").toggle();
                    });
-
-                       $("#menu5").click(function() {
-                       
-         
-                    $("#fifthBox").css({"position": "absolute","left": "742px","top":"160px",
-                            "margin-top":"0px",
-                            "opacity":"1"}).toggle();
+               
+               $(document).mouseup(function(e) 
+            		   {
+            		       var container = $("#firstBox");
+					   var menu = $("#menu1");
+            		       // if the target of the click isn't the container nor a descendant of the container
+            		       if (!container.is(e.target) && !menu.is(e.target) && menu.has(e.target).length === 0 && container.has(e.target).length === 0) 
+            		       {
+            		           container.hide();
+            		       }
+            		       
+            		       container = $("#secondBox");
+            		       menu = $("#menu2");
+            		       // if the target of the click isn't the container nor a descendant of the container
+            		       if (!container.is(e.target) && !menu.is(e.target) && menu.has(e.target).length === 0 && container.has(e.target).length === 0) 
+            		       {
+            		           container.hide();
+            		       }
+            		       container = $("#thirdBox");
+            		       menu = $("#menu3");
+            		       // if the target of the click isn't the container nor a descendant of the container
+            		       if (!container.is(e.target) && !menu.is(e.target) && menu.has(e.target).length === 0 && container.has(e.target).length === 0) 
+            		       {
+            		           container.hide();
+            		       }
+            		       container = $("#fourthBox");
+            		       menu = $("#menu4");
+            		       // if the target of the click isn't the container nor a descendant of the container
+            		       if (!container.is(e.target) && !menu.is(e.target) && menu.has(e.target).length === 0 && container.has(e.target).length === 0) 
+            		       {
+            		           container.hide();
+            		       }
+            		       container = $("#fifthBox");
+            		       menu = $("#menu5");
+            		       // if the target of the click isn't the container nor a descendant of the container
+            		       if (!container.is(e.target) && !menu.is(e.target) && menu.has(e.target).length === 0 && container.has(e.target).length === 0) 
+            		       {
+            		           container.hide();
+            		       }
+            		   }); 
                      
-
-                            $("#firstBox").hide();
-                            $("#secondBox").hide();
-                            $("#thirdBox").hide();
-                            $("#fourthBox").hide();
-                          
-
-                   });
-                       
-                       $(document).mouseup(function(e) 
-                    		   {
-                    		       var container = $("#firstBox");
-
-                    		       // if the target of the click isn't the container nor a descendant of the container
-                    		       if (!container.is(e.target) && container.has(e.target).length === 0) 
-                    		       {
-                    		           container.hide();
-                    		       }
-                    		       
-                    		       container = $("#secondBox");
-
-                    		       // if the target of the click isn't the container nor a descendant of the container
-                    		       if (!container.is(e.target) && container.has(e.target).length === 0) 
-                    		       {
-                    		           container.hide();
-                    		       }
-                    		       container = $("#thirdBox");
-
-                    		       // if the target of the click isn't the container nor a descendant of the container
-                    		       if (!container.is(e.target) && container.has(e.target).length === 0) 
-                    		       {
-                    		           container.hide();
-                    		       }
-                    		       container = $("#fourthBox");
-
-                    		       // if the target of the click isn't the container nor a descendant of the container
-                    		       if (!container.is(e.target) && container.has(e.target).length === 0) 
-                    		       {
-                    		           container.hide();
-                    		       }
-                    		       container = $("#fifthBox");
-
-                    		       // if the target of the click isn't the container nor a descendant of the container
-                    		       if (!container.is(e.target) && container.has(e.target).length === 0) 
-                    		       {
-                    		           container.hide();
-                    		       }
-                    		   });                       
 </script>
 </body>
 </html>

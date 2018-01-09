@@ -971,7 +971,7 @@
 
 			var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 			// Now we are going to send it using AJAX to our PHP script...
-			window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan;
+			window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Buy a new home";
 		}]);
 		
  <!-- REFINANCING --> 
@@ -1681,10 +1681,10 @@
 					maxLVRCondition = LVR +"<=max_lvr";
 				//SET PROPERTY USE CONDITION
 					if($scope.propertyUse == 'Live'){ 
-						propertyUseCondition = "cus_type_id = '2'"; //FOR INVESTOR
+						propertyUseCondition = "cus_type_id = '2'"; //FOR OWNER
 						}
 					else {
-						propertyUseCondition = "cus_type_id = '1'"; //FOR OWNER
+						propertyUseCondition = "cus_type_id = '1'"; //FOR INVESTOR
 						}
 				//SET REPAY CONDITION
 					if($scope.repay == 'I'){ 
@@ -1695,15 +1695,15 @@
 						}
 				//SET DOC CONDITION Employee Self yes Other
 				if($scope.employmentType == 'Other' || ($scope.employmentType =='Self' && $scope.taxReturns == 'no' )){ 
-					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2')"; //FOR INTEREST ONLY
+					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2')"; //LOW/NO DOC
 					}
 				else {
-					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FOR PRINCIPAL and INTEREST
+					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FULL DOC INCLUDED
 					}
 
 				var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 				// Now we are going to send it using AJAX to our PHP script...
-				window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan;
+				window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
 			}]);
 			
 			

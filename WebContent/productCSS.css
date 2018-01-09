@@ -1889,6 +1889,7 @@ body, button, input, textarea, select, .btn {
     margin: 0 5px;
     color: #14b4a1;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .page a.button {
@@ -1945,6 +1946,7 @@ body, button, input, textarea, select, .btn {
     background-color: #e9ebed!important;
     color: #526675!important;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .simpleFormButtonSwitch {
@@ -1957,6 +1959,12 @@ body, button, input, textarea, select, .btn {
     margin: 5px 5px 0 0;
     font-size: .8em;
     opacity: .5;
+}
+
+.simple-form-default .simpleFormButtonSwitch.on {
+    background-color: #526675!important;
+    border-color: #526675!important;
+    color: #fff!important;
 }
 
 @media (max-width: 768px)

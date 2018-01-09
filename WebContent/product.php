@@ -208,8 +208,7 @@ echo "the query: " . $sql;
 												<div class="col-xs-12 col-md-8">
 													<div class="col-xs-5 col-md-4">
 														<h3 class="productPropertyHeader">
-															<?php print $row['advertised_rate']; ?>
-															%
+															<?php print $row['advertised_rate']; ?>%
 														</h3>
 														<div class="productPropertyInfo">Variable interest
 															rate p.a.</div>
@@ -219,8 +218,8 @@ echo "the query: " . $sql;
 													<div class="productIcon col-xs-2 col-md-4">+</div>
 													<div class="col-xs-5 col-md-4">
 														<h3 class="productPropertyHeader">
-															<?php print $row['ongoing_costs']; ?>
-															$
+															$<?php print $row['ongoing_costs']; ?>
+															
 														</h3>
 														<div class="productPropertyInfo">Ongoing fees per
 															month</div>
@@ -240,8 +239,7 @@ echo "the query: " . $sql;
 												</div>
 												<div class="col-xs-6 col-md-12">
 													<h3 class="productPropertyHeader">
-														<?php print $row['comparison_rate']; ?>
-														%*
+														<?php print $row['comparison_rate']; ?>%*
 													</h3>
 													<div class="productPropertyInfo">Comparison rate:
 														ASIC standard for comparing loans of $150K over 25 years</div>
@@ -648,8 +646,7 @@ echo "the query: " . $sql;
 													<div class="col-xs-12 col-md-12">
 														<div class="col-xs-5 col-md-5">
 															<h3 class="productPropertyHeader">
-																<?php print $row['advertised_rate']; ?>
-																%
+																<?php print $row['advertised_rate']; ?>%
 															</h3>
 															<div class="productPropertyInfo">Variable interest
 																rate p.a.</div>
@@ -658,7 +655,7 @@ echo "the query: " . $sql;
 														</div>
 														<div class="productIcon col-xs-2 col-md-2">+</div>
 														<div class="col-xs-5 col-md-5">
-															<h3 class="productPropertyHeader"><?php print $row['ongoing_costs']; ?>$</h3>
+															<h3 class="productPropertyHeader">$<?php print $row['ongoing_costs']; ?></h3>
 															<div class="productPropertyInfo">Ongoing fees per
 																month</div>
 														</div>
@@ -668,8 +665,7 @@ echo "the query: " . $sql;
 													<span></span>
 													<div class="col-xs-6 col-md-12">
 														<h3 class="productPropertyHeader">
-															<?php print $row['comparison_rate']; ?>
-															%
+															<?php print $row['comparison_rate']; ?>%
 														</h3>
 														<div class="productPropertyInfo">Comparison rate:
 															ASIC standard for comparing loans of $150K over 25 years</div>

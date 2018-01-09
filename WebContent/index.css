@@ -1135,6 +1135,12 @@ and
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
+
+}
+
+.type2 {
+	position: absolute;
+	left: 55%;
 }
 
 .button {
@@ -1241,17 +1247,21 @@ h3 {
 
 .button_small {
 	margin:none;
-	margin-top:20px;
+/*	margin-top:20px; */
 	width: auto;
 }
 
 .col-md-3 {
-	padding-left:70px;
+/*	padding-left:70px; 
 	padding-top:20px;
-	width:300px;
+	width:300px; */
+	position: absolute;
+	left: 40%;
+	width: 15%;
 }
 .input-group .form-control {
-
+	padding: 8px;
+	height: 43px;
     width: 100%;
 }
 }

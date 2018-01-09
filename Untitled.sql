@@ -27,6 +27,7 @@ CREATE TABLE doc_type (
 CREATE TABLE bank (
     bank_id VARCHAR(10),
     bank_name VARCHAR(100) NOT NULL,
+    bank_description VARCHAR(10000) NOT NULL,
     PRIMARY KEY (bank_id)
 );
 
@@ -78,8 +79,8 @@ INSERT INTO doc_type(doc_type) values('NO' );
 INSERT INTO doc_type(doc_type) values('LOW' );
 INSERT INTO doc_type(doc_type) values('FULL' );
 
-INSERT INTO bank values('CBA', 'Commonwealth Bank' );
-INSERT INTO bank values('ANZ', 'Australia and New Zealand Bank' );
+INSERT INTO bank values('CBA', 'Commonwealth Bank', 'Commonwealth Bank Decription');
+INSERT INTO bank values('ANZ', 'Australia and New Zealand Bank' ,'Australia and New Zealand Bank Decription');
 
 
 INSERT INTO product(bank_id,
@@ -156,4 +157,4 @@ INSERT INTO loan_options(cus_type_id,
     loan_extra_repay,
     loan_interest_only,
     doc_type_id,
-    product_id ) values( '2','80', '0','50000000','2','1','1','0','0','3','2');
+    product_id ) values( '2','80', '0','50000000','2','0','0','0','0','3','2');
