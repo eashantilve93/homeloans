@@ -1,6 +1,3 @@
-
-<link rel="stylesheet" href="./productCSS.css">
-
 <?php
 $id = $_GET["id"];
 $dbhost = $_SERVER['RDS_HOSTNAME'];
@@ -19,6 +16,9 @@ echo "the query: " . $sql;
  foreach ($pdo->query($sql) as $row) {
         print $row['comparison_rate'] . "\t";
         print $row['advertised_rate'];
+		$offset = $row['loan_offset'];
+		$redraw = $row['loan_redraw'];
+		$extra_repay = $row['loan_extra_repay'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,10 +43,6 @@ echo "the query: " . $sql;
 </style>
 </head>
 <body>
-
-
-
-
 	<div class="navLayout app" style="min-height: 600px;">
 		<div class="navDrawer">
 			<div class="navDrawerHeader">
@@ -190,8 +186,7 @@ echo "the query: " . $sql;
 												src="https://cdn.unohomeloans.com.au/lenders/logo/CBA.svg"
 												onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"
 												class="productDetailLogo"> &nbsp;&nbsp;&nbsp;&nbsp;
-												<h2
-													style="display: inline-flex; margin-top: 10px; position: absolute; top: 5px;">
+												<h2 style="display: inline-flex; margin-top: 10px; position: absolute; top: 5px;">
 													<?php print $row['product_name']; ?>
 												</h2>
 										</span>
@@ -208,7 +203,7 @@ echo "the query: " . $sql;
 												<div class="col-xs-12 col-md-8">
 													<div class="col-xs-5 col-md-4">
 														<h3 class="productPropertyHeader">
-															<?php print $row['advertised_rate']; ?>%
+															<?php print $row['advertised_rate'] . "%"; ?>
 														</h3>
 														<div class="productPropertyInfo">Variable interest
 															rate p.a.</div>
@@ -218,7 +213,7 @@ echo "the query: " . $sql;
 													<div class="productIcon col-xs-2 col-md-4">+</div>
 													<div class="col-xs-5 col-md-4">
 														<h3 class="productPropertyHeader">
-															$<?php print $row['ongoing_costs']; ?>
+															<?php print "$" . $row['ongoing_costs']; ?>
 															
 														</h3>
 														<div class="productPropertyInfo">Ongoing fees per
@@ -227,7 +222,7 @@ echo "the query: " . $sql;
 												</div>
 												<div class="productIcon col-xs-5 col-md-1">=</div>
 												<div class="col-xs-5 col-md-3">
-													<h3 class="productPropertyHeader">$517</h3>
+													<h3 class="productPropertyHeader">NULL</h3>
 													<div class="productPropertyInfo">Payment per month</div>
 												</div>
 											</div>
@@ -239,7 +234,7 @@ echo "the query: " . $sql;
 												</div>
 												<div class="col-xs-6 col-md-12">
 													<h3 class="productPropertyHeader">
-														<?php print $row['comparison_rate']; ?>%*
+														<?php print $row['comparison_rate'] . "%*"; ?>
 													</h3>
 													<div class="productPropertyInfo">Comparison rate:
 														ASIC standard for comparing loans of $150K over 25 years</div>
@@ -297,7 +292,6 @@ echo "the query: " . $sql;
 
 
 												<div class="productDetailSectionHeaderName">Features</div>
-												<div class="productDetailSectionHeaderDesc">5 of 11</div>
 
 											</div>
 										</button>
@@ -312,8 +306,8 @@ echo "the query: " . $sql;
 											<div>
 												<div
 													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon checked">
-														<i class="fa fa-check"></i>
+													<div class="productDetailPropertyIcon unchecked" id="extra_repay">
+														<i class="fa fa-times" id="extra_repay_icon"></i>
 													</div>
 													<div class="productDetailPropertyName checked">Extra
 														Repayment</div>
@@ -321,88 +315,19 @@ echo "the query: " . $sql;
 												</div>
 												<div
 													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard even">
-													<div class="productDetailPropertyIcon checked">
-														<i class="fa fa-check"></i>
-													</div>
-													<div class="productDetailPropertyName checked">Loan
-														Increase</div>
-													<div class="productDetailPropertyDesc checked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
-													</div>
-													<div class="productDetailPropertyName unchecked">Locked
-														Rate</div>
-													<div class="productDetailPropertyDesc unchecked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard even">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
+													<div class="productDetailPropertyIcon unchecked" id="offset">
+														<i class="fa fa-times" id="offset_icon"></i>
 													</div>
 													<div class="productDetailPropertyName unchecked">Offset</div>
 													<div class="productDetailPropertyDesc unchecked"></div>
 												</div>
 												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
-													</div>
-													<div class="productDetailPropertyName unchecked">Partial
-														Offset</div>
-													<div class="productDetailPropertyDesc unchecked"></div>
-												</div>
-												<div
 													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard even">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
-													</div>
-													<div class="productDetailPropertyName unchecked">Package</div>
-													<div class="productDetailPropertyDesc unchecked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon checked">
-														<i class="fa fa-check"></i>
-													</div>
-													<div class="productDetailPropertyName checked">Portability</div>
-													<div class="productDetailPropertyDesc checked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard even">
-													<div class="productDetailPropertyIcon checked">
-														<i class="fa fa-check"></i>
+													<div class="productDetailPropertyIcon unchecked" id="redraw">
+														<i class="fa fa-times" id="redraw_icon"></i>
 													</div>
 													<div class="productDetailPropertyName checked">Redraw</div>
 													<div class="productDetailPropertyDesc checked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon checked">
-														<i class="fa fa-check"></i>
-													</div>
-													<div class="productDetailPropertyName checked">Repayment
-														Holiday</div>
-													<div class="productDetailPropertyDesc checked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard even">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
-													</div>
-													<div class="productDetailPropertyName unchecked">Splitting</div>
-													<div class="productDetailPropertyDesc unchecked"></div>
-												</div>
-												<div
-													class="productDetailPropertyCard col-xs-12 col-sm-6 col-md-4 collectionCard odd">
-													<div class="productDetailPropertyIcon unchecked">
-														<i class="fa fa-times"></i>
-													</div>
-													<div class="productDetailPropertyName unchecked">Interest
-														In Advance</div>
-													<div class="productDetailPropertyDesc unchecked"></div>
 												</div>
 											</div>
 										</div>
@@ -811,15 +736,43 @@ echo "the query: " . $sql;
 										not affect your credit score</span>
 								</div>
 
-
-
 								<div id="glassPart"></div>
-
-
-
-
-
 								<script>
+								var offset=<?php echo json_encode($offset); ?>;
+								var redraw=<?php echo json_encode($redraw); ?>;
+								var extra_repay=<?php echo json_encode($extra_repay); ?>;
+								
+								if(offset == 1)
+									{
+										offsetToggle();
+									}
+							    if(redraw == 1)
+									{
+										redrawToggle();
+									}
+							    if(extra_repay == 1)
+									{
+							    			extra_repayToggle();
+									}
+								
+								function offsetToggle() {
+									document.getElementById("offset").classList.remove('unchecked');
+									document.getElementById("offset").classList.add('checked');
+									document.getElementById("offset_icon").classList.remove('fa-times');
+									document.getElementById("offset_icon").classList.add('fa-check');
+								}
+								function extra_repayToggle() {
+									document.getElementById("extra_repay").classList.remove('unchecked');
+									document.getElementById("extra_repay").classList.add('checked');
+									document.getElementById("extra_repay_icon").classList.remove('fa-times');
+									document.getElementById("extra_repay_icon").classList.add('fa-check');
+								}
+								function redrawToggle() {
+									document.getElementById("redraw").classList.remove('unchecked');
+									document.getElementById("redraw").classList.add('checked');	
+									document.getElementById("redraw_icon").classList.remove('fa-times');
+									document.getElementById("redraw_icon").classList.add('fa-check');
+ 								}
 									$(document).ready(function() {
 										$(".answer").hide();
 										$("#button1").click(function() {
@@ -906,6 +859,7 @@ echo "the query: " . $sql;
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 </body>
 </html>

@@ -7,6 +7,30 @@
 		format('woff2');
 }
 
+#customerDetails {
+	font-family: helvetica neue, helvetica, arial, sans-serif;
+}
+
+.customerTextBox {
+    width: 25%;
+    height: 40px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #ccc;
+    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+}
+
+#viewResultsButton {
+	border-radius: 5px;
+    background: #28d3a7;
+    color: white;
+    height: 40px;
+    width: 15%;
+    font-size: 17px;
+}
+
 .progress {
 	height: 5px;
 }

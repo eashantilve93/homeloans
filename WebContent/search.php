@@ -129,6 +129,7 @@ $sql = "SELECT id,bank_name,product_name,comparison_rate,advertised_rate " . $ha
 $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 
  foreach ($pdo->query($sqlCount) as $row) {
+$count = $row['rowCount'];
 ?>
 						<div>
 							<div></div>
@@ -164,8 +165,7 @@ $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 												class="fa fa fa-angle-down"></i></span>
 										</div>
 										<div class="sDesc">
-											<span id="menu1content">
-												<?php echo $loanType; ?>
+											<span id="menu1content"> <?php echo $loanType; ?>
 											</span>
 										</div>
 									</div>
@@ -295,14 +295,12 @@ echo "<br>";
 													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
 												<div class="interestRateColumn">
 													<h3>
-														<?php print $row['advertised_rate']; ?>
-														%
+														<?php print $row['advertised_rate'] . "%"; ?>
 													</h3>
 													<div class="productDiscount"></div>
 												</div>
 												<h3 class="comparisonRateColumn">
-													<?php print $row['comparison_rate']; ?>
-													%
+													<?php print $row['comparison_rate'] . "%"; ?>
 												</h3>
 												<h3 class="paymentsColumn">NULL</h3>
 												<span class="iconField" style="cursor: pointer;"><img
@@ -340,17 +338,15 @@ echo "<br>";
 													</strong></span><span> - Extra Variable Rate</span><span> - Variable
 														Rate</span>
 													<div class="productFeatureContainer">
-														<p class="featureFalse">
-															<i class="icon-cross"></i><span>Offset</span>
+														<p class="featureFalse offsetFeature" >
+															<i class="icon-cross offsetFeatureTick"></i><span>Offset</span>
 														</p>
-														<p class="featureTrue">
-															<i class="icon-tick"></i><span>Redraw</span>
+														<p class="featureFalse redrawFeature">
+															<i class="icon-cross redrawFeatureTick"></i><span>Redraw</span>
 														</p>
-														<p class="featureTrue">
-															<i class="icon-tick"></i><span>Extra Repayment</span>
-														</p>
-														<p class="featureFalse">
-															<i class="icon-cross"></i><span>Package</span>
+														<p class="featureFalse extra_repayFeature">
+															<i class="icon-cross extra_repayFeatureTick"></i><span>Extra
+																Repayment</span>
 														</p>
 													</div>
 												</div>
@@ -358,20 +354,18 @@ echo "<br>";
 
 											<div class="loanAmountColumn">
 												<h3>
-													<?php print $loan;?>
+													<?php print "$" . $loan ;?>
 												</h3>
 												<div class="lmiInfo"></div>
 											</div>
 											<div class="interestRateColumn">
 												<h3>
-													<?php print $row['advertised_rate']; ?>
-													%
+													<?php print $row['advertised_rate'] . "%"; ?>
 												</h3>
 												<div class="productDiscount">-0.46% included</div>
 											</div>
 											<h3 class="comparisonRateColumn">
-												<?php print $row['comparison_rate']; ?>
-												%
+												<?php print $row['comparison_rate'] . "%"; ?>
 											</h3>
 											<h3 class="paymentsColumn">NULL</h3>
 											<div class="borrowingPowerColumn">
@@ -868,6 +862,7 @@ echo "testing";
 	            var halfQuery=<?php echo json_encode($halfQuery); ?>;
 				var loan=<?php echo json_encode($loan); ?>;
 				var loanType=<?php echo json_encode($loanType); ?>;
+				var count = <?php echo json_encode($count); ?>;
 				var investment = document.getElementById("gwt-uid-3");
 	            var live = document.getElementById("gwt-uid-2");
 	            var pandI = document.getElementById("gwt-uid-8");
@@ -900,8 +895,36 @@ echo "testing";
 	 				document.getElementById("menu3content").innerHTML = "Interest Only";
 				}
 	            
-	            if(halfQuery.includes("loan_offset = '1'")) offsetToggle();
-	            if(halfQuery.includes("loan_redraw = '1'")) redrawToggle();
+	            if(halfQuery.includes("loan_offset = '1'")){
+	            	offsetToggle();
+	            	if(count > 0) {
+	            		 var x = document.getElementsByClassName("offsetFeature");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('featureFalse');
+	            		    	x[i].classList.add('featureTrue');
+	            		    }
+	            		    x = document.getElementsByClassName("offsetFeatureTick");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('icon-cross');
+	            		    	x[i].classList.add('icon-tick');
+	            		    }
+	            	}
+	            }
+	            if(halfQuery.includes("loan_redraw = '1'")){
+	            	redrawToggle();
+	            	if(count > 0) {
+	            		 var x = document.getElementsByClassName("redrawFeature");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('featureFalse');
+	            		    	x[i].classList.add('featureTrue');
+	            		    }
+	            		    x = document.getElementsByClassName("redrawFeatureTick");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('icon-cross');
+	            		    	x[i].classList.add('icon-tick');
+	            		    }
+	            	}
+	            }
 
 	             
 				function update1() {

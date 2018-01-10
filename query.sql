@@ -28,3 +28,6 @@ FROM
     loan_options;
     
     SELECT * FROM cus_type;
+
+show tables;
+

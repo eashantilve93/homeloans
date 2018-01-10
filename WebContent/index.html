@@ -1702,8 +1702,23 @@
 					}
 
 				var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
-				// Now we are going to send it using AJAX to our PHP script...
-				window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
+				
+				
+				$scope.passOn = function (){
+					if($scope.name) {
+						if($scope.email) {
+							if($scope.phone)		{					
+							 var phoneNumber = String($scope.phone);
+							 var phonePattern = /^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/;
+							 if (!phoneNumber.match(phonePattern))
+							   {
+								 document.getElementById("error3").style.display = "block";
+							   } else window.location="./search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
+							} else window.location="./search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
+						} else document.getElementById("error2").style.display = "block";
+					} else document.getElementById("error1").style.display = "block";
+					
+				}
 			}]);
 			
 			
