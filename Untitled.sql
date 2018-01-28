@@ -171,9 +171,9 @@ CREATE TABLE cus_details (
         REFERENCES exchanged_contracts (exchanged_contracts),
     FOREIGN KEY (cus_type)
         REFERENCES cus_type (cus_type),
-        FOREIGN KEY (credit_history)
+    FOREIGN KEY (credit_history)
         REFERENCES credit_history (credit_history),
-        FOREIGN KEY (employment_type)
+    FOREIGN KEY (employment_type)
         REFERENCES employment_type (employment_type),
     FOREIGN KEY (loan_interest_only)
         REFERENCES loan_interest_only (loan_interest_only),
@@ -270,3 +270,40 @@ INSERT INTO loan_options(cus_type,
     doc_type,
     product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','1');
     
+INSERT INTO cus_details(cus_name,
+    cus_email ,
+    cus_phone ,
+    loan_type ,
+    purchase_price,
+    deposit ,
+    buying_situation ,
+    preapproved ,
+    exchanged_contracts ,
+    expected_settlement_date ,
+    cus_type ,
+    credit_history ,
+    employment_type ,
+    loan_offset ,
+    loan_redraw ,
+    loan_extra_repay ,
+    loan_interest_only) VALUES(
+     'Eashan',
+    'eashantilve93@gmail.com',
+    '451146447',
+    'Buy',
+    '1000000',
+    '100',
+    'READY',
+    'YES',
+    'YES',
+    STR_TO_DATE('1-01-2019', '%d-%m-%Y'),
+    'INVESTOR',
+    'EXT',
+    'EMPLOYEE',
+    'YES',
+    'YES',
+    'YES',
+    'YES'
+    
+);
+
