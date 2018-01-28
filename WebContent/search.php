@@ -111,9 +111,8 @@
 				<div class="fitPanel pageDisplay">
 					<div class="page container-fluid productPage">
 						<?php
-$halfQuery = $_GET["halfQuery"];
+$email = $_GET["email"];
 $loan = $_GET["loan"];
-$loanType = $_GET["loanType"];
 
 $dbhost = $_SERVER['RDS_HOSTNAME'];
 $dbport = $_SERVER['RDS_PORT'];
@@ -125,16 +124,67 @@ $username = $_SERVER['RDS_USERNAME'];
 $password = $_SERVER['RDS_PASSWORD'];
 $pdo = new PDO($dsn, $username, $password);
 
-$sql = "SELECT id,bank_name,product_name,comparison_rate,advertised_rate " . $halfQuery;
+
+$halfQuery = " FROM
+    (SELECT 
+        *
+    FROM
+        loan_options
+    NATURAL JOIN product
+    NATURAL JOIN bank) AS a
+        JOIN
+    cus_details AS b
+WHERE
+    a.loan_offset = b.loan_offset
+		AND b.cus_email =  '" . $email . "'
+        AND a.loan_redraw = b.loan_redraw
+        AND (b.purchase_price - b.deposit) >= min_loan
+        AND (b.purchase_price - b.deposit) <= max_loan
+        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
+        AND a.cus_type = b.cus_type
+        AND a.loan_interest_only = b.loan_interest_only
+        AND ((a.doc_type = 'LOW' OR a.doc_type = 'NO'
+        OR a.doc_type = 'FULL')
+        AND (b.employment_type = 'EMPLOYEE'
+        OR (b.employment_type = 'SELF'
+        AND b.tax_returns = 'YES'))
+        OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'))";
+
+$sql = "SELECT 
+    a.id,
+    bank_name,
+    product_name,
+    comparison_rate,
+    advertised_rate " . $halfQuery;
+
 $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 
  foreach ($pdo->query($sqlCount) as $row) {
 $count = $row['rowCount'];
+}
+
+$sqlCusDetails = "SELECT * FROM cus_details WHERE cus_email='" . $email . "'";
+echo $sqlCusDetails;
+foreach ($pdo->query($sqlCusDetails) as $row) {
+ $loanType = $row['loan_type'];
+ $purchasePrice = $row['purchase_price'];
+ $deposit = $row['deposit'];
+ $cusType = $row['cus_type']; 
+ $employmentType = $row['employment_type'] ;
+ $loanOffset = $row['loan_offset'] ;
+ $loanRedraw = $row['loan_redraw'] ;
+ $loanExtraRepay = $row['loan_extra_repay'];
+ $loanInterestOnly = $row['loan_interest_only'];
+}
+echo "loan type" . $loanType ;
+$loan = (float)$purchasePrice - (float)$deposit;
+echo "loan" . $loan;
+for ($x = 0; $x < $count; $x++) {
 ?>
 						<div>
 							<div></div>
 							<div class="modifySearch">
-								<span>We found <?php print $row['rowCount'];?> matching
+								<span>We found <?php print $count;?> matching
 									home loans.
 								</span> <a> Modify your search</a> <span class="compareButton">Compare
 									<small>3</small>
@@ -149,7 +199,7 @@ $count = $row['rowCount'];
 													results</span></span>
 											<h2>
 												We found
-												<?php print $row['rowCount'];?>
+												<?php print $count;?>
 												matching home loans
 											</h2>
 										</div>
@@ -175,7 +225,7 @@ $count = $row['rowCount'];
 												class="fa fa fa-angle-down"></i></span>
 										</div>
 										<div class="sDesc">
-											<span> <?php print $loan ?>
+											<span> <?php echo $loan; ?>
 											</span>
 										</div>
 									</div>
@@ -859,10 +909,14 @@ echo "testing";
 
 
 						<script type="text/javascript">
-	            var halfQuery=<?php echo json_encode($halfQuery); ?>;
+				var email=<?php echo json_encode($email); ?>;
 				var loan=<?php echo json_encode($loan); ?>;
 				var loanType=<?php echo json_encode($loanType); ?>;
 				var count = <?php echo json_encode($count); ?>;
+				var cusType = <?php echo json_encode($cusType); ?>;
+				var loanInterestOnly = <?php echo json_encode($loanInterestOnly); ?>;
+				var loanOffset = <?php echo json_encode($loanOffset); ?>;
+				var loanRedraw = <?php echo json_encode($loanRedraw); ?>;
 				var investment = document.getElementById("gwt-uid-3");
 	            var live = document.getElementById("gwt-uid-2");
 	            var pandI = document.getElementById("gwt-uid-8");
@@ -872,31 +926,26 @@ echo "testing";
 	            var fixedI = document.getElementById("gwt-uid-12");
 	            var bothI = document.getElementById("gwt-uid-13");
  				*/
- 				if(loanType == "Refinance")
+ 				if(loanType == "REFINANCE")
  					ddl.selectedIndex = 1;
  				else ddl.selectedIndex = 0;
  				
-	            if(halfQuery.includes("cus_type_id = '2'"))
+	            if(cusType == "OWNER")
 	            	live.checked = true;
-	            else if(halfQuery.includes("cus_type_id = '1'"))
+	            else if(cusType == "INVESTOR")
 	            	investment.checked = true;
 
-	            if(halfQuery.includes("loan_interest_only = '0'"))
-	            	pandI.checked = true;
-	            else if(halfQuery.includes("loan_interest_only = '1'"))
-	            	iOnly.checked = true;
-	            
-	            if(halfQuery.includes("loan_interest_only = '0'")) {
-	            	pandI.checked = true;
-	 				document.getElementById("menu3content").innerHTML = "Principal and Interest";
+	            if(loanInterestOnly == "NO") {
+	           	 	pandI.checked = true;
+ 					document.getElementById("menu3content").innerHTML = "Principal and Interest";
+ 				}
+	            else if(loanInterestOnly == "YES") {
+	           	 	iOnly.checked = true;
+ 					document.getElementById("menu3content").innerHTML = "Interest Only";
 	            }
-	            else if(halfQuery.includes("loan_interest_only = '1'")) {
-	            	iOnly.checked = true;
-	 				document.getElementById("menu3content").innerHTML = "Interest Only";
-				}
 	            
-	            if(halfQuery.includes("loan_offset = '1'")){
-	            	offsetToggle();
+	            if(loanOffset == "YES"){
+	           	 	offsetToggle();
 	            	if(count > 0) {
 	            		 var x = document.getElementsByClassName("offsetFeature");
 	            		    for (var i = 0; i < x.length; i++) {
@@ -910,7 +959,7 @@ echo "testing";
 	            		    }
 	            	}
 	            }
-	            if(halfQuery.includes("loan_redraw = '1'")){
+	            if(loanRedraw == "YES"){
 	            	redrawToggle();
 	            	if(count > 0) {
 	            		 var x = document.getElementsByClassName("redrawFeature");
@@ -929,19 +978,13 @@ echo "testing";
 	             
 				function update1() {
 					
-					var selectedValue = ddl.options[ddl.selectedIndex].value;
-					    if (selectedValue == "Purchase") 
-					    	loanType = "Buy a new home";
-					    else if (selectedValue == "Refinance")
-					    	loanType = "Refinance";
-					if(document.getElementById('gwt-uid-2').checked) {
+						if(document.getElementById('gwt-uid-2').checked) {
 						  //To live in radio button is checked
-							halfQuery=halfQuery.replace("cus_type_id = '1'","cus_type_id = '2'");
-							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET cus_type='OWNER'";
 						}else if(document.getElementById('gwt-uid-3').checked) {
 						  //Investment radio button is checked
-						  	halfQuery=halfQuery.replace("cus_type_id = '2'","cus_type_id = '1'");
-							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET cus_type='INVESTOR'";
+
 						}
 					
 				}
@@ -949,27 +992,30 @@ echo "testing";
 				function update3() {
 					if(document.getElementById('gwt-uid-8').checked) {
 						  //Principal and Interest in radio button is checked
-							halfQuery=halfQuery.replace("loan_interest_only = '1'","loan_interest_only = '0'");
-							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
-						}else if(document.getElementById('gwt-uid-9').checked) {
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'NO'";
+						}else if(document.getElementById('gwt-uid-9').checked) {""
 						  //Interest Only radio button is checked
-						  	halfQuery=halfQuery.replace("loan_interest_only = '0'","loan_interest_only = '1'");
-							window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'YES'";
 						}
 				}
 				
 				function update4() {
+					var offset = "NO";
+					var redraw = "NO";
+					var extraRepay = "NO";
 					if(document.getElementById("offset").classList.contains('on')){
-						halfQuery=halfQuery.replace("loan_offset = '0'","loan_offset = '1'");
+						offset = "YES";
 					}
-					else halfQuery=halfQuery.replace("loan_offset = '1'","loan_offset = '0'");
 					
 					if(document.getElementById("redraw").classList.contains('on')){
-						halfQuery=halfQuery.replace("loan_redraw = '0'","loan_redraw = '1'");
+						redraw = "YES";
 					}
-					else halfQuery=halfQuery.replace("loan_redraw = '1'","loan_redraw = '0'");
 					
-					window.location="../search.php?halfQuery="+halfQuery+"&loan="+loan+"&loanType="+loanType;
+					if(document.getElementById("extra_repay").classList.contains('on')){
+						extraRepay = "YES";
+					}
+					
+					window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_offset = "+offset+ ", loan_redraw = "+redraw+", loan_extra_repay = " + extraRepay;
 
 				}
 				

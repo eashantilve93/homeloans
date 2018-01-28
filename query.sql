@@ -31,3 +31,70 @@ FROM
 
 show tables;
 
+select * from cus_details;
+
+use ebdb;
+
+SELECT 
+    a.id,
+    bank_name,
+    product_name,
+    comparison_rate,
+    advertised_rate
+FROM
+    (SELECT 
+        *
+    FROM
+        loan_options
+    NATURAL JOIN product
+    NATURAL JOIN bank) AS a
+        JOIN
+    cus_details AS b
+WHERE
+    a.loan_offset = b.loan_offset
+		AND b.cus_email =  'eashantilve93@gmail.com'
+        AND a.loan_redraw = b.loan_redraw
+        AND (b.purchase_price - b.deposit) >= min_loan
+        AND (b.purchase_price - b.deposit) <= max_loan
+        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
+        AND a.cus_type = b.cus_type
+        AND a.loan_interest_only = b.loan_interest_only
+        AND ((a.doc_type = 'LOW' OR a.doc_type = 'NO'
+        OR a.doc_type = 'FULL')
+        AND (b.employment_type = 'EMPLOYEE'
+        OR (b.employment_type = 'SELF'
+        AND b.tax_returns = 'YES'))
+        OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'));
+        
+        select * from cus_details;
+   
+SELECT 
+    a.id,
+    bank_name,
+    product_name,
+    comparison_rate,
+    advertised_rate
+FROM
+    (SELECT 
+        *
+    FROM
+        loan_options
+    NATURAL JOIN product
+    NATURAL JOIN bank) AS a
+        JOIN
+    cus_details AS b
+WHERE
+    a.loan_offset = b.loan_offset
+        AND b.cus_email = 'some@gmail.com'
+        AND a.loan_redraw = b.loan_redraw
+        AND (b.purchase_price - b.deposit) >= min_loan
+        AND (b.purchase_price - b.deposit) <= max_loan
+        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
+        AND a.cus_type = b.cus_type
+        AND a.loan_interest_only = b.loan_interest_only
+        AND ((a.doc_type = 'LOW' OR a.doc_type = 'NO'
+        OR a.doc_type = 'FULL')
+        AND (b.employment_type = 'EMPLOYEE'
+        OR (b.employment_type = 'SELF'
+        AND b.tax_returns = 'YES'))
+        OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'));

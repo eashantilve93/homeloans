@@ -210,7 +210,7 @@
 						controller: 'LenderChoiceController',
 						templateUrl: 'partials/lenderChoice.html'
 					})
-				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:mobileA',
+				.when('/homeLoan/:purchasePrice/:deposit/:buyingSituation/:preapprove/:exchangeContracts/:settlementDate/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:extraR',
 					{
 						controller: 'SearchResultsController',
 						templateUrl: 'search.php'
@@ -265,7 +265,7 @@
 						controller: 'LenderChoiceRefinanceController',
 						templateUrl: 'partials/lenderChoice.html'
 					})
-				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:mobileA',
+				.when('/refinance/:currentLoan/:propertyWorth/:decreaseLoan/:consolidateDebt/:cashOut/:payOff/:consolidateDebtAmount/:cashOutAmount/:propertyUse/:repay/:creditHistory/:employmentType/:taxReturns/:offset/:redraw/:majorL/:extraR',
 					{
 						controller: 'SearchResultsRefinanceController',
 						templateUrl: 'partials/searchResults.html'
@@ -621,22 +621,22 @@
 			}
 			localStorage.setItem("prog", prog);
 			$scope.passOnExcellent = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Excellent')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/EXT')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnAverage = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Average')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/AVG')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnFair = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Fair')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/FAIR')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnPoor = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/Poor')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/POOR')($scope);
 				$location.path(url);
 			}
 			
@@ -713,12 +713,12 @@
 			}
 			localStorage.setItem("prog", prog);
 			$scope.passOnYes = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/yes')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/YES')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnNo = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/no')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/NO')($scope);
 				$location.path(url);
 			}
 			
@@ -892,7 +892,7 @@
 			}
 			$scope.back = function (){
 				var url;
-				if($scope.employmentType == 'Self')
+				if($scope.employmentType == 'SELF')
 					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}')($scope);
 				else  url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
 				$location.path(url);
@@ -915,7 +915,7 @@
 			$scope.offset = $routeParams.offset;
 			$scope.redraw = $routeParams.redraw;
 			$scope.majorL = $routeParams.majorL;
-			$scope.mobileA = $routeParams.mobileA;
+			$scope.extraR = $routeParams.mobileA;
 			var offsetCondition;
 			var redrawCondition;
 			var loanSizeCondition;
@@ -928,18 +928,18 @@
 			var LVR = String((parseFloat(currentL)*100)/parseFloat(propertyW));
 			//SET OFFSET CONDITION
 			if($scope.offset == 'offset'){ 
-				offsetCondition = "loan_offset = '1'";
+				offsetCondition = "loan_offset = 'YES'";
 				}
 			else {
-				offsetCondition = "loan_offset = '0'";
+				offsetCondition = "loan_offset = 'NO'";
 				}
 			
 			//SET REDRAW CONDITION
 			if($scope.redraw == 'redraw'){ 
-				redrawCondition = "loan_redraw = '1'";
+				redrawCondition = "loan_redraw = 'YES'";
 				}
 			else {
-				redrawCondition = "loan_redraw = '0'";
+				redrawCondition = "loan_redraw = 'NO'";
 				}
 			
 			//SET LOAN SIZE CONDITION
@@ -949,29 +949,29 @@
 				maxLVRCondition = LVR +"<=max_lvr";
 			//SET PROPERTY USE CONDITION
 				if($scope.propertyUse == 'Live'){ 
-					propertyUseCondition = "cus_type_id = '2'"; //FOR INVESTOR
+					propertyUseCondition = "cus_type = 'INVESTOR'"; //FOR INVESTOR
 					}
 				else {
-					propertyUseCondition = "cus_type_id = '1'"; //FOR OWNER
+					propertyUseCondition = "cus_type = 'OWNER'"; //FOR OWNER
 					}
 			//SET REPAY CONDITION
 				if($scope.repay == 'I'){ 
-					interestOnlyCondition = "loan_interest_only = '1'"; //FOR INTEREST ONLY
+					interestOnlyCondition = "loan_interest_only = 'YES'"; //FOR INTEREST ONLY
 					}
 				else {
-					interestOnlyCondition = "loan_interest_only = '0'"; //FOR PRINCIPAL and INTEREST
+					interestOnlyCondition = "loan_interest_only = 'NO'"; //FOR PRINCIPAL and INTEREST
 					}
 			//SET DOC CONDITION Employee Self yes Other
 			if($scope.employmentType == 'Other' || ($scope.employmentType =='Self' && $scope.taxReturns == 'no' )){ 
-				documentCondition = "(doc_type_id = '1' OR doc_type_id = '2')"; //FOR INTEREST ONLY
+				documentCondition = "(doc_type = 'NO' OR doc_type = 'LOW')"; //FOR INTEREST ONLY
 				}
 			else {
-				documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FOR PRINCIPAL and INTEREST
+				documentCondition = "(doc_type = 'NO' OR doc_type = 'LOW' OR doc_type = 'FULL')"; //FOR PRINCIPAL and INTEREST
 				}
 
 			var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 			// Now we are going to send it using AJAX to our PHP script...
-			window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Buy a new home";
+			window.location="../search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan;
 		}]);
 		
  <!-- REFINANCING --> 
@@ -1263,12 +1263,12 @@
 				}
 				localStorage.setItem("prog", prog);
 				$scope.passOnLive = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/Live')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/OWNER')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnInvestment = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/Investment')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/INVESTOR')($scope);
 					$location.path(url);
 				}
 				
@@ -1348,22 +1348,22 @@
 				}
 				localStorage.setItem("prog", prog);
 				$scope.passOnExcellent = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Excellent')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/EXT')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnAverage = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Average')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/AVG')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnFair = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Fair')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/FAIR')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnPoor = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/Poor')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/POOR')($scope);
 					$location.path(url);
 				}
 				
@@ -1398,17 +1398,17 @@
 				}
 				localStorage.setItem("prog", prog);
 				$scope.passOnEmployee = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Employee/NA')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/EMPLOYEE/NA')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnSelf = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Self')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/SELF')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnOther = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/Other/NA')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/OTHER/NA')($scope);
 					$location.path(url);
 				}
 				
@@ -1444,12 +1444,12 @@
 				}
 				localStorage.setItem("prog", prog);
 				$scope.passOnYes = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/yes')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/YES')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnNo = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/no')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/NO')($scope);
 					$location.path(url);
 				}
 				
@@ -1488,7 +1488,7 @@
 				var offset = false;
 				var redraw = false;
 				var majorL = false;
-				var mobileA = false; 
+				var extraR = false; 
 				document.getElementById("OffsetTick").style.visibility = "hidden";
 				document.getElementById("RedrawTick").style.visibility = "hidden";
 				document.getElementById("MajorLenderTick").style.visibility = "hidden";
@@ -1582,9 +1582,9 @@
 				}
 				
 				$scope.selectUnselectMobileApp = function (){
-					mobileA = (!mobileA);
+					extraR = (!extraR);
 					
-					if(mobileA){
+					if(extraR){
 						document.getElementById("b4").style.background = "#0dd1ac";
 					// New line added for css
 					document.getElementById("b4").style.color = "white"; 
@@ -1604,7 +1604,7 @@
 						document.getElementById("MobileAppTick").style.visibility = "hidden";
 
 					}
-					if(offset||redraw||majorL||mobileA)
+					if(offset||redraw||majorL||extraR)
 						document.getElementById("lenderOption").value = "Continue with Selection"; 
 					else
 						document.getElementById("lenderOption").value = "No thanks, show me my options"; 
@@ -1612,17 +1612,17 @@
 				
 				$scope.passOn = function (){
 					var lenders = "";
-					if(offset) lenders = lenders + "offset/"; else lenders = lenders + "NA/";
-					if(redraw) lenders = lenders + "redraw/"; else lenders = lenders + "NA/";
-					if(majorL) lenders = lenders + "majorL/"; else lenders = lenders + "NA/";
-					if(mobileA) lenders = lenders + "mobileA"; else lenders = lenders + "NA";
+					if(offset) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
+					if(redraw) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
+					if(majorL) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
+					if(extraR) lenders = lenders + "YES"; else lenders = lenders + "NO";
 					$scope.lenderChoices = lenders;
 					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}/{{lenderChoices}}')($scope);
 					$location.path(url);
 				}
 				$scope.back = function (){
 					var url;
-					if($scope.employmentType == 'Self')
+					if($scope.employmentType == 'SELF')
 						url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}')($scope);
 					else  url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}')($scope);
 					$location.path(url);
@@ -1647,74 +1647,43 @@
 				$scope.offset = $routeParams.offset;
 				$scope.redraw = $routeParams.redraw;
 				$scope.majorL = $routeParams.majorL;
-				$scope.mobileA = $routeParams.mobileA;
-				var offsetCondition;
-				var redrawCondition;
-				var loanSizeCondition;
-				var maxLVRCondition;
-				var propertyUseCondition;
-				var interestOnlyCondition;
-				var documentCondition;
+				$scope.extraR = $routeParams.extraR;
+				var interestOnly;
 				var currentL = ($scope.currentLoan).replace(/,/g,"");
 				var propertyW = ($scope.propertyWorth).replace(/,/g,"");
-				var LVR = String((parseFloat(currentL)*100)/parseFloat(propertyW));
-				//SET OFFSET CONDITION
-				if($scope.offset == 'offset'){ 
-					offsetCondition = "loan_offset = '1'";
-					}
-				else {
-					offsetCondition = "loan_offset = '0'";
-					}
-				
-				//SET REDRAW CONDITION
-				if($scope.redraw == 'redraw'){ 
-					redrawCondition = "loan_redraw = '1'";
-					}
-				else {
-					redrawCondition = "loan_redraw = '0'";
-					}
-				
-				//SET LOAN SIZE CONDITION
-					loanSizeCondition = currentL + ">=min_loan AND "+currentL +"<=max_loan";
-			
-				//SET LOAN SIZE CONDITION
-					maxLVRCondition = LVR +"<=max_lvr";
-				//SET PROPERTY USE CONDITION
-					if($scope.propertyUse == 'Live'){ 
-						propertyUseCondition = "cus_type_id = '2'"; //FOR OWNER
-						}
-					else {
-						propertyUseCondition = "cus_type_id = '1'"; //FOR INVESTOR
-						}
+				var deposit = String(parseFloat(propertyW) - parseFloat(currentL));
+//				var LVR = String((parseFloat(currentL)*100)/parseFloat(propertyW));
+		
+//				var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
 				//SET REPAY CONDITION
-					if($scope.repay == 'I'){ 
-						interestOnlyCondition = "loan_interest_only = '1'"; //FOR INTEREST ONLY
-						}
-					else {
-						interestOnlyCondition = "loan_interest_only = '0'"; //FOR PRINCIPAL and INTEREST
-						}
-				//SET DOC CONDITION Employee Self yes Other
-				if($scope.employmentType == 'Other' || ($scope.employmentType =='Self' && $scope.taxReturns == 'no' )){ 
-					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2')"; //LOW/NO DOC
+				if($scope.repay == 'I'){ 
+					interestOnly = "YES"; //FOR INTEREST ONLY
 					}
 				else {
-					documentCondition = "(doc_type_id = '1' OR doc_type_id = '2' OR doc_type_id = '3')"; //FULL DOC INCLUDED
+					interestOnly = "NO"; //FOR PRINCIPAL and INTEREST
 					}
-
-				var halfQuery = "FROM loan_options NATURAL JOIN product NATURAL JOIN bank WHERE "+offsetCondition+" AND "+redrawCondition+" AND "+loanSizeCondition+" AND "+maxLVRCondition+" AND "+propertyUseCondition+" AND "+interestOnlyCondition+" AND "+documentCondition;
-				
-				
+			    var insertValues =  "'REFINANCE','"+String(propertyW)+"','"+deposit+"',NULL,NULL,NULL,NULL,'"+String($scope.propertyUse)+"','"+String($scope.creditHistory)+"','"+String($scope.employmentType)+"','"+String($scope.taxReturns)+"','"+String($scope.offset)+"','"+String($scope.redraw)+"','"+String($scope.extraR)+"','"+interestOnly+"'";
+				 
 				$scope.passOn = function (){
 					if($scope.name) {
+						var name = "'"+String($scope.name)+"',";
 						if($scope.email) {
+							var email = "'"+String($scope.email)+"',";
 							if($scope.phone)		{					
-							 var phoneNumber = String($scope.phone);
+							var phoneNumber = String($scope.phone);
 							 var phonePattern = /^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/;
 							 if (!phoneNumber.match(phonePattern))
 							   {
 								 document.getElementById("error3").style.display = "block";
-							   } else window.location="./search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
-							} else window.location="./search.php?halfQuery="+halfQuery+"&loan="+$scope.currentLoan+"&loanType=Refinance";
+							   } else {
+								   phoneNumber = "'"+String($scope.phone)+"',";
+								   window.location="./addNewCustomer.php?insertValues="+name+email+phoneNumber+insertValues+"&email="+String($scope.email);
+							   }
+							} else 
+								{ 
+									var phoneNumber = "NULL,";
+									window.location="./addNewCustomer.php?insertValues="+name+email+phoneNumber+insertValues+"&email="+String($scope.email);
+								}
 						} else document.getElementById("error2").style.display = "block";
 					} else document.getElementById("error1").style.display = "block";
 					

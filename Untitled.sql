@@ -142,13 +142,12 @@ CREATE TABLE loan_options (
 );
 
 CREATE TABLE cus_details (
-    id INT(10) AUTO_INCREMENT,
     cus_name VARCHAR(100) NOT NULL,
-    cus_email VARCHAR(100) NOT NULL,
+    cus_email VARCHAR(100) NOT NULL UNIQUE,
     cus_phone VARCHAR(20),
     loan_type VARCHAR(15),
-    purchase_price INT(15),
-    deposit INT(15),
+    purchase_price INT(20),
+    deposit INT(20),
     buying_situation VARCHAR(10),
     preapproved VARCHAR(3),
     exchanged_contracts VARCHAR(3),
@@ -156,11 +155,12 @@ CREATE TABLE cus_details (
     cus_type VARCHAR(10),
     credit_history VARCHAR(5),
     employment_type VARCHAR(20),
+    tax_returns VARCHAR(3),
     loan_offset VARCHAR(3),
     loan_redraw VARCHAR(3),
     loan_extra_repay VARCHAR(3),
     loan_interest_only VARCHAR(3),
-    PRIMARY KEY (id),
+    PRIMARY KEY (cus_email),
     FOREIGN KEY (loan_type)
         REFERENCES loan_type (loan_type),
     FOREIGN KEY (buying_situation)
@@ -175,6 +175,8 @@ CREATE TABLE cus_details (
         REFERENCES credit_history (credit_history),
     FOREIGN KEY (employment_type)
         REFERENCES employment_type (employment_type),
+	FOREIGN KEY (tax_returns)
+        REFERENCES tax_returns (tax_returns),
     FOREIGN KEY (loan_interest_only)
         REFERENCES loan_interest_only (loan_interest_only),
     FOREIGN KEY (loan_offset)
@@ -270,27 +272,48 @@ INSERT INTO loan_options(cus_type,
     doc_type,
     product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','1');
     
-INSERT INTO cus_details(cus_name,
-    cus_email ,
-    cus_phone ,
-    loan_type ,
-    purchase_price,
-    deposit ,
-    buying_situation ,
-    preapproved ,
-    exchanged_contracts ,
-    expected_settlement_date ,
-    cus_type ,
-    credit_history ,
-    employment_type ,
-    loan_offset ,
-    loan_redraw ,
-    loan_extra_repay ,
-    loan_interest_only) VALUES(
+INSERT INTO loan_options(cus_type,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type,
+    product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
+    
+    INSERT INTO loan_options(cus_type,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type,
+    product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
+    
+    
+    INSERT INTO loan_options(cus_type,
+    max_lvr,
+    min_loan,
+    max_loan,
+    interest_type,
+    loan_offset,
+    loan_redraw,
+    loan_extra_repay,
+    loan_interest_only,
+    doc_type,
+    product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','NO','FULL','2');
+    
+INSERT INTO cus_details VALUES(
      'Eashan',
     'eashantilve93@gmail.com',
     '451146447',
-    'Buy',
+    'BUY',
     '1000000',
     '100',
     'READY',
@@ -300,6 +323,7 @@ INSERT INTO cus_details(cus_name,
     'INVESTOR',
     'EXT',
     'EMPLOYEE',
+    'NA',
     'YES',
     'YES',
     'YES',

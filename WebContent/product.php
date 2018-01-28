@@ -742,15 +742,15 @@ echo "the query: " . $sql;
 								var redraw=<?php echo json_encode($redraw); ?>;
 								var extra_repay=<?php echo json_encode($extra_repay); ?>;
 								
-								if(offset == 1)
+								if(offset == 'YES')
 									{
 										offsetToggle();
 									}
-							    if(redraw == 1)
+							    if(redraw == 'YES')
 									{
 										redrawToggle();
 									}
-							    if(extra_repay == 1)
+							    if(extra_repay == 'YES')
 									{
 							    			extra_repayToggle();
 									}
