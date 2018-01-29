@@ -138,6 +138,7 @@ WHERE
     a.loan_offset = b.loan_offset
 		AND b.cus_email =  '" . $email . "'
         AND a.loan_redraw = b.loan_redraw
+		AND a.loan_extra_repay = b.loan_extra_repay
         AND (b.purchase_price - b.deposit) >= min_loan
         AND (b.purchase_price - b.deposit) <= max_loan
         AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
@@ -179,7 +180,6 @@ foreach ($pdo->query($sqlCusDetails) as $row) {
 echo "loan type" . $loanType ;
 $loan = (float)$purchasePrice - (float)$deposit;
 echo "loan" . $loan;
-for ($x = 0; $x < $count; $x++) {
 ?>
 						<div>
 							<div></div>
@@ -270,7 +270,6 @@ for ($x = 0; $x < $count; $x++) {
 
 							<?php
 
-}
 echo "the query: " . $sql;
 echo "<br>";
     foreach ($pdo->query($sql) as $row) {
@@ -917,6 +916,7 @@ echo "testing";
 				var loanInterestOnly = <?php echo json_encode($loanInterestOnly); ?>;
 				var loanOffset = <?php echo json_encode($loanOffset); ?>;
 				var loanRedraw = <?php echo json_encode($loanRedraw); ?>;
+				var loanExtraRepay = <?php echo json_encode($loanExtraRepay); ?>;
 				var investment = document.getElementById("gwt-uid-3");
 	            var live = document.getElementById("gwt-uid-2");
 	            var pandI = document.getElementById("gwt-uid-8");
@@ -974,7 +974,21 @@ echo "testing";
 	            		    }
 	            	}
 	            }
-
+	            if(loanExtraRepay == "YES"){
+	            	extra_repayToggle();
+	            	if(count > 0) {
+	            		 var x = document.getElementsByClassName("extra_repayFeature");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('featureFalse');
+	            		    	x[i].classList.add('featureTrue');
+	            		    }
+	            		    x = document.getElementsByClassName("extra_repayFeatureTick");
+	            		    for (var i = 0; i < x.length; i++) {
+	            		    	x[i].classList.remove('icon-cross');
+	            		    	x[i].classList.add('icon-tick');
+	            		    }
+	            	}
+	            }
 	             
 				function update1() {
 					
@@ -1000,19 +1014,19 @@ echo "testing";
 				}
 				
 				function update4() {
-					var offset = "NO";
-					var redraw = "NO";
-					var extraRepay = "NO";
+					var offset = "'NO'";
+					var redraw = "'NO'";
+					var extraRepay = "'NO'";
 					if(document.getElementById("offset").classList.contains('on')){
-						offset = "YES";
+						offset = "'YES'";
 					}
 					
 					if(document.getElementById("redraw").classList.contains('on')){
-						redraw = "YES";
+						redraw = "'YES'";
 					}
 					
 					if(document.getElementById("extra_repay").classList.contains('on')){
-						extraRepay = "YES";
+						extraRepay = "'YES'";
 					}
 					
 					window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_offset = "+offset+ ", loan_redraw = "+redraw+", loan_extra_repay = " + extraRepay;

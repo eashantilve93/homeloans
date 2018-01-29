@@ -11,13 +11,15 @@ $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}"
 $username = $_SERVER['RDS_USERNAME'];
 $password = $_SERVER['RDS_PASSWORD'];
 
-$sql = "UPDATE cus_details " . $halfQuery . " WHERE cus_email = " . $email;
+$sql = "UPDATE cus_details " . $halfQuery . " WHERE cus_email = '" . $email . "'";
+
+echo $sql;
 
 try {
 	$pdo = new PDO($dsn, $username, $password);
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
 
     // execute the query
     $stmt->execute();
