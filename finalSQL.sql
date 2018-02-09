@@ -105,7 +105,7 @@ CREATE TABLE product (
     advertised_rate REAL NOT NULL,
     PRIMARY KEY (product_id),
     FOREIGN KEY (bank_name)
-        REFERENCES bank (bank_id)
+        REFERENCES bank (bank_name)
 );
 
 CREATE TABLE loan_options (
@@ -239,94 +239,94 @@ INSERT INTO doc_type(doc_type) values('NO' );
 INSERT INTO doc_type(doc_type) values('LOW' );
 INSERT INTO doc_type(doc_type) values('FULL' );
 
-INSERT INTO bank values('Commonwealth Bank', 'Commonwealth Bank Decription');
-INSERT INTO bank values( 'Australia and New Zealand Bank' ,'Australia and New Zealand Bank Decription');
 
 
-INSERT INTO product(bank_name,
-    product_name,
-    product_description,
-    setup_costs,
-    ongoing_costs,
-    comparison_rate,
-    advertised_rate) values( 'CBA','Standard Home Loan', 'Standard Home Loan','500','500','4.5','4.4');
-    
-INSERT INTO product(bank_id,
-    product_name,
-    product_description,
-    setup_costs,
-    ongoing_costs,
-    comparison_rate,
-    advertised_rate) values('ANZ','Some Loan', 'Some Loan','5030','5030','4.2','4.1');
-
-INSERT INTO loan_options(cus_type,
-    max_lvr,
-    min_loan,
-    max_loan,
-    interest_type,
-    loan_offset,
-    loan_redraw,
-    loan_extra_repay,
-    loan_interest_only,
-    doc_type,
-    product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','1');
-    
-INSERT INTO loan_options(cus_type,
-    max_lvr,
-    min_loan,
-    max_loan,
-    interest_type,
-    loan_offset,
-    loan_redraw,
-    loan_extra_repay,
-    loan_interest_only,
-    doc_type,
-    product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
-    
-    INSERT INTO loan_options(cus_type,
-    max_lvr,
-    min_loan,
-    max_loan,
-    interest_type,
-    loan_offset,
-    loan_redraw,
-    loan_extra_repay,
-    loan_interest_only,
-    doc_type,
-    product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
-    
-    
-    INSERT INTO loan_options(cus_type,
-    max_lvr,
-    min_loan,
-    max_loan,
-    interest_type,
-    loan_offset,
-    loan_redraw,
-    loan_extra_repay,
-    loan_interest_only,
-    doc_type,
-    product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','NO','FULL','2');
-    
-INSERT INTO cus_details VALUES(
-     'Eashan',
-    'eashantilve93@gmail.com',
-    '451146447',
-    'BUY',
-    '1000000',
-    '100',
-    'READY',
-    'YES',
-    'YES',
-    STR_TO_DATE('1-01-2019', '%d-%m-%Y'),
-    'INVESTOR',
-    'EXT',
-    'EMPLOYEE',
-    'NA',
-    'YES',
-    'YES',
-    'YES',
-    'YES'
-    
-);
-
+-- 
+-- 
+-- INSERT INTO product(bank_name,
+--     product_name,
+--     product_description,
+--     setup_costs,
+--     ongoing_costs,
+--     comparison_rate,
+--     advertised_rate) values( 'CBA','Standard Home Loan', 'Standard Home Loan','500','500','4.5','4.4');
+--     
+-- INSERT INTO product(bank_id,
+--     product_name,
+--     product_description,
+--     setup_costs,
+--     ongoing_costs,
+--     comparison_rate,
+--     advertised_rate) values('ANZ','Some Loan', 'Some Loan','5030','5030','4.2','4.1');
+-- 
+-- INSERT INTO loan_options(cus_type,
+--     max_lvr,
+--     min_loan,
+--     max_loan,
+--     interest_type,
+--     loan_offset,
+--     loan_redraw,
+--     loan_extra_repay,
+--     loan_interest_only,
+--     doc_type,
+--     product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','1');
+--     
+-- INSERT INTO loan_options(cus_type,
+--     max_lvr,
+--     min_loan,
+--     max_loan,
+--     interest_type,
+--     loan_offset,
+--     loan_redraw,
+--     loan_extra_repay,
+--     loan_interest_only,
+--     doc_type,
+--     product_id ) values( 'INVESTOR','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
+--     
+--     INSERT INTO loan_options(cus_type,
+--     max_lvr,
+--     min_loan,
+--     max_loan,
+--     interest_type,
+--     loan_offset,
+--     loan_redraw,
+--     loan_extra_repay,
+--     loan_interest_only,
+--     doc_type,
+--     product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','YES','FULL','2');
+--     
+--     
+--     INSERT INTO loan_options(cus_type,
+--     max_lvr,
+--     min_loan,
+--     max_loan,
+--     interest_type,
+--     loan_offset,
+--     loan_redraw,
+--     loan_extra_repay,
+--     loan_interest_only,
+--     doc_type,
+--     product_id ) values( 'OWNER','90', '0','500000000','FIX','YES','YES','YES','NO','FULL','2');
+--     
+-- INSERT INTO cus_details VALUES(
+--      'Eashan',
+--     'eashantilve93@gmail.com',
+--     '451146447',
+--     'BUY',
+--     '1000000',
+--     '100',
+--     'READY',
+--     'YES',
+--     'YES',
+--     STR_TO_DATE('1-01-2019', '%d-%m-%Y'),
+--     'INVESTOR',
+--     'EXT',
+--     'EMPLOYEE',
+--     'NA',
+--     'YES',
+--     'YES',
+--     'YES',
+--     'YES'
+--     
+-- );
+-- 

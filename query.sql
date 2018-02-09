@@ -66,7 +66,7 @@ WHERE
         AND b.tax_returns = 'YES'))
         OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'));
         
-        select * from cus_details;
+        select * from bank;
    
 SELECT 
     a.id,
