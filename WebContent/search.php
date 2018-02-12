@@ -126,33 +126,27 @@ $pdo = new PDO($dsn, $username, $password);
 
 
 $halfQuery = " FROM
-    (SELECT 
-        *
-    FROM
-        loan_options
-    NATURAL JOIN product
-    NATURAL JOIN bank) AS a
+    product AS a
         JOIN
     cus_details AS b
 WHERE
-    a.loan_offset = b.loan_offset
+    a.has_full_offset = b.loan_offset
 		AND b.cus_email =  '" . $email . "'
-        AND a.loan_redraw = b.loan_redraw
-		AND a.loan_extra_repay = b.loan_extra_repay
-        AND (b.purchase_price - b.deposit) >= min_loan
-        AND (b.purchase_price - b.deposit) <= max_loan
-        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
-        AND a.cus_type = b.cus_type
-        AND a.loan_interest_only = b.loan_interest_only
-        AND ((a.doc_type = 'LOW' OR a.doc_type = 'NO'
-        OR a.doc_type = 'FULL')
-        AND (b.employment_type = 'EMPLOYEE'
+        AND a.has_redraw_facility = b.loan_redraw
+		AND a.allows_extra_repay = b.loan_extra_repay
+        AND (b.purchase_price - b.deposit) >= min_borrowing_amount
+        AND (b.purchase_price - b.deposit) <= max_borrowing_amount
+        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_LVR
+        AND ((b.cus_type = 'INVESTOR' AND a.investment_purpose = 'true')
+		OR (b.cus_type = 'OWNER' AND a.owner_occupied = 'true'))
+        AND a.interest_only = b.interest_only
+        AND ((b.employment_type = 'EMPLOYEE'
         OR (b.employment_type = 'SELF'
-        AND b.tax_returns = 'YES'))
-        OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'))";
+        AND b.tax_returns = 'true'))
+        OR (a.allows_low_doc = 'true'))";
 
 $sql = "SELECT 
-    a.id,
+    a.product_name,
     bank_name,
     product_name,
     comparison_rate,
@@ -167,7 +161,7 @@ $count = $row['rowCount'];
 $sqlCusDetails = "SELECT * FROM cus_details WHERE cus_email='" . $email . "'";
 echo $sqlCusDetails;
 foreach ($pdo->query($sqlCusDetails) as $row) {
- $loanType = $row['loan_type'];
+ $refinance = $row['refinance_home'];
  $purchasePrice = $row['purchase_price'];
  $deposit = $row['deposit'];
  $cusType = $row['cus_type']; 
@@ -177,6 +171,8 @@ foreach ($pdo->query($sqlCusDetails) as $row) {
  $loanExtraRepay = $row['loan_extra_repay'];
  $loanInterestOnly = $row['loan_interest_only'];
 }
+$loanType = ('true' == $refinance) ? 'Refinance' : 'Buy a new Home'; 
+
 echo "loan type" . $loanType ;
 $loan = (float)$purchasePrice - (float)$deposit;
 echo "loan" . $loan;
@@ -273,12 +269,9 @@ echo "loan" . $loan;
 echo "the query: " . $sql;
 echo "<br>";
     foreach ($pdo->query($sql) as $row) {
-		print $row['id'] . "\t";
 		print $row['rowCount'] . "\t";
         print $row['bank_name'] . "\t";
         print $row['product_name'] . "\t";
-        print $row['setup_costs'] . "\t";
-        print $row['ongoing_costs'] . "\t";
         print $row['comparison_rate'] . "\t";
         print $row['advertised_rate'];
 		echo "<br>";
@@ -429,7 +422,7 @@ echo "<br>";
 											</div>
 											<div class="ctaColumn">
 												<a class="button"
-													href="./product.php?id=<?php echo $row['id']; ?>"><span>View
+													href="./product.php?product_name=<?php echo $row['product_name']; ?>&bank_name=<?php echo $row['bank_name']; ?>"><span>View
 														details</span></a> <span class="iconField" style="cursor: pointer;"><img
 													src="//cdn.unohomeloans.com.au/icons/icon-star-off.svg"></span>
 											</div>
@@ -926,7 +919,7 @@ echo "testing";
 	            var fixedI = document.getElementById("gwt-uid-12");
 	            var bothI = document.getElementById("gwt-uid-13");
  				*/
- 				if(loanType == "REFINANCE")
+ 				if(loanType == "Refinance")
  					ddl.selectedIndex = 1;
  				else ddl.selectedIndex = 0;
  				
@@ -935,16 +928,16 @@ echo "testing";
 	            else if(cusType == "INVESTOR")
 	            	investment.checked = true;
 
-	            if(loanInterestOnly == "NO") {
+	            if(loanInterestOnly == "false") {
 	           	 	pandI.checked = true;
  					document.getElementById("menu3content").innerHTML = "Principal and Interest";
  				}
-	            else if(loanInterestOnly == "YES") {
+	            else if(loanInterestOnly == "true") {
 	           	 	iOnly.checked = true;
  					document.getElementById("menu3content").innerHTML = "Interest Only";
 	            }
 	            
-	            if(loanOffset == "YES"){
+	            if(loanOffset == "true"){
 	           	 	offsetToggle();
 	            	if(count > 0) {
 	            		 var x = document.getElementsByClassName("offsetFeature");
@@ -959,7 +952,7 @@ echo "testing";
 	            		    }
 	            	}
 	            }
-	            if(loanRedraw == "YES"){
+	            if(loanRedraw == "true"){
 	            	redrawToggle();
 	            	if(count > 0) {
 	            		 var x = document.getElementsByClassName("redrawFeature");
@@ -974,7 +967,7 @@ echo "testing";
 	            		    }
 	            	}
 	            }
-	            if(loanExtraRepay == "YES"){
+	            if(loanExtraRepay == "true"){
 	            	extra_repayToggle();
 	            	if(count > 0) {
 	            		 var x = document.getElementsByClassName("extra_repayFeature");
@@ -1006,27 +999,27 @@ echo "testing";
 				function update3() {
 					if(document.getElementById('gwt-uid-8').checked) {
 						  //Principal and Interest in radio button is checked
-							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'NO'";
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'false'";
 						}else if(document.getElementById('gwt-uid-9').checked) {""
 						  //Interest Only radio button is checked
-							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'YES'";
+							window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_interest_only = 'true'";
 						}
 				}
 				
 				function update4() {
-					var offset = "'NO'";
-					var redraw = "'NO'";
-					var extraRepay = "'NO'";
+					var offset = "'false'";
+					var redraw = "'false'";
+					var extraRepay = "'false'";
 					if(document.getElementById("offset").classList.contains('on')){
-						offset = "'YES'";
+						offset = "'true'";
 					}
 					
 					if(document.getElementById("redraw").classList.contains('on')){
-						redraw = "'YES'";
+						redraw = "'true'";
 					}
 					
 					if(document.getElementById("extra_repay").classList.contains('on')){
-						extraRepay = "'YES'";
+						extraRepay = "'true'";
 					}
 					
 					window.location="../updateCustomer.php?email="+email+"&halfQuery=SET loan_offset = "+offset+ ", loan_redraw = "+redraw+", loan_extra_repay = " + extraRepay;

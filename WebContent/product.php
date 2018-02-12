@@ -1,5 +1,6 @@
 <?php
-$id = $_GET["id"];
+$product_name = $_GET["product_name"];
+$bank_name = $_GET["bank_name"];
 $dbhost = $_SERVER['RDS_HOSTNAME'];
 $dbport = $_SERVER['RDS_PORT'];
 $dbname = $_SERVER['RDS_DB_NAME'];
@@ -10,15 +11,15 @@ $username = $_SERVER['RDS_USERNAME'];
 $password = $_SERVER['RDS_PASSWORD'];
 $pdo = new PDO($dsn, $username, $password);
 
-$sql = "SELECT * FROM loan_options NATURAL JOIN product WHERE id='" . $id . "'";
+$sql = "SELECT * FROM product NATURAL JOIN bank WHERE product.bank_name='" . $bank_name . "' AND product_name='" . $product_name . "'";
 
 echo "the query: " . $sql;
  foreach ($pdo->query($sql) as $row) {
         print $row['comparison_rate'] . "\t";
         print $row['advertised_rate'];
-		$offset = $row['loan_offset'];
-		$redraw = $row['loan_redraw'];
-		$extra_repay = $row['loan_extra_repay'];
+		$offset = $row['has_full_offset'];
+		$redraw = $row['has_redraw_facility'];
+		$extra_repay = $row['allows_extra_repay'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -537,8 +538,8 @@ echo "the query: " . $sql;
 											<div class="productDetailSectionHeader">
 												<span class="iconField productDetailSectionHeaderIcon"><i
 													class="fa fa-angle-down"></i></span>
-												<div class="productDetailSectionHeaderName">About
-													Commonwealth Bank</div>
+												<div class="productDetailSectionHeaderName">About&nbsp;
+													 <?php print $row['bank_name']; ?></div>
 												<div class="productDetailSectionHeaderDesc"></div>
 											</div>
 										</button>
@@ -551,15 +552,7 @@ echo "the query: " . $sql;
 											</div>
 											<div>
 												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyDesc">The
-														Commonwealth Bank is Australia’s leading provider of
-														integrated financial services including retail banking,
-														premium banking, business banking, institutional banking,
-														funds management, superannuation, insurance, investment
-														and share-broking products and services. The Group is one
-														of the largest listed companies on the Australian
-														Securities Exchange and is included in the Morgan Stanley
-														Capital Global Index</div>
+													<div class="productDetailPropertyDesc"> <?php print $row['bank_description']; ?></div>
 												</div>
 											</div>
 										</div>
@@ -742,15 +735,15 @@ echo "the query: " . $sql;
 								var redraw=<?php echo json_encode($redraw); ?>;
 								var extra_repay=<?php echo json_encode($extra_repay); ?>;
 								
-								if(offset == 'YES')
+								if(offset == 'true')
 									{
 										offsetToggle();
 									}
-							    if(redraw == 'YES')
+							    if(redraw == 'true')
 									{
 										redrawToggle();
 									}
-							    if(extra_repay == 'YES')
+							    if(extra_repay == 'true')
 									{
 							    			extra_repayToggle();
 									}

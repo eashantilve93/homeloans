@@ -436,12 +436,12 @@
 			}
 			localStorage.setItem("prog", prog);
 			$scope.passOnYes = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/YES')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/true')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnNo = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/NO/NA/NA')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/false/NA/NA')($scope);
 				$location.path(url);
 			}
 			
@@ -469,12 +469,12 @@
 			}
 			localStorage.setItem("prog", prog);
 			$scope.passOnYes = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/YES')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/true')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnNo = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/NO/NA')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/false/NA')($scope);
 				$location.path(url);
 			}
 			
@@ -546,11 +546,11 @@
 			
 			$scope.back = function (){
 				var url;
-				if($scope.exchangeContracts == 'yes')
+				if($scope.exchangeContracts == 'true')
 					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}')($scope);
-				else if($scope.preapprove == 'yes')
+				else if($scope.preapprove == 'true')
 					url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}')($scope);
-				else if($scope.preapprove == 'no') 
+				else if($scope.preapprove == 'false') 
 					url =  $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}')($scope);
 				else url =  $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}')($scope);
 
@@ -713,12 +713,12 @@
 			}
 			localStorage.setItem("prog", prog);
 			$scope.passOnYes = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/YES')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/true')($scope);
 				$location.path(url);
 			}
 			
 			$scope.passOnNo = function (){
-				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/NO')($scope);
+				var url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/false')($scope);
 				$location.path(url);
 			}
 			
@@ -882,10 +882,10 @@
 			$scope.passOn = function (){
 				var url;
 				var lenders = "";
-				if(offset) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-				if(redraw) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-				if(majorL) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-				if(extraR) lenders = lenders + "YES"; else lenders = lenders + "NO";
+				if(offset) lenders = lenders + "true/"; else lenders = lenders + "false/";
+				if(redraw) lenders = lenders + "true/"; else lenders = lenders + "false/";
+				if(majorL) lenders = lenders + "true/"; else lenders = lenders + "false/";
+				if(extraR) lenders = lenders + "true"; else lenders = lenders + "false";
 				$scope.lenderChoices = lenders;
 				url = $interpolate('/homeLoan/{{purchasePrice}}/{{deposit}}/{{buyingSituation}}/{{preapprove}}/{{exchangeContracts}}/{{settlementDate}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}/{{lenderChoices}}')($scope);
 				$location.path(url);
@@ -924,12 +924,12 @@
 			settlementDate = "STR_TO_DATE('" + settlementDate + "', '%Y-%m-%d')"; 
 			//SET REPAY CONDITION
 			if($scope.repay == 'I'){ 
-				interestOnly = "YES"; //FOR INTEREST ONLY
+				interestOnly = "true"; //FOR INTEREST ONLY
 				}
 			else {
-				interestOnly = "NO"; //FOR PRINCIPAL and INTEREST
+				interestOnly = "false"; //FOR PRINCIPAL and INTEREST
 				}
-		    var insertValues =  "'BUY','"+String(propertyW)+"','"+deposit+"','"+ String($scope.buyingSituation) + "','"+ String($scope.preapprove) + "','" + String($scope.exchangeContracts) + "'," + settlementDate + ",'" +String($scope.propertyUse)+"','"+String($scope.creditHistory)+"','"+String($scope.employmentType)+"','"+String($scope.taxReturns)+"','"+String($scope.offset)+"','"+String($scope.redraw)+"','"+String($scope.extraR)+"','"+interestOnly+"'";
+		    var insertValues =  "'false','"+String(propertyW)+"','"+deposit+"','"+ String($scope.buyingSituation) + "','"+ String($scope.preapprove) + "','" + String($scope.exchangeContracts) + "'," + settlementDate + ",'" +String($scope.propertyUse)+"','"+String($scope.creditHistory)+"','"+String($scope.employmentType)+"','"+String($scope.taxReturns)+"','"+String($scope.offset)+"','"+String($scope.redraw)+"','"+String($scope.extraR)+"','"+interestOnly+"'";
 			$scope.passOn = function (){
 				if($scope.name) {
 					var name = "'"+String($scope.name)+"',";
@@ -1426,12 +1426,12 @@
 				}
 				localStorage.setItem("prog", prog);
 				$scope.passOnYes = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/YES')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/true')($scope);
 					$location.path(url);
 				}
 				
 				$scope.passOnNo = function (){
-					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/NO')($scope);
+					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/false')($scope);
 					$location.path(url);
 				}
 				
@@ -1594,10 +1594,10 @@
 				
 				$scope.passOn = function (){
 					var lenders = "";
-					if(offset) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-					if(redraw) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-					if(majorL) lenders = lenders + "YES/"; else lenders = lenders + "NO/";
-					if(extraR) lenders = lenders + "YES"; else lenders = lenders + "NO";
+					if(offset) lenders = lenders + "true/"; else lenders = lenders + "false/";
+					if(redraw) lenders = lenders + "true/"; else lenders = lenders + "false/";
+					if(majorL) lenders = lenders + "true/"; else lenders = lenders + "false/";
+					if(extraR) lenders = lenders + "true"; else lenders = lenders + "false";
 					$scope.lenderChoices = lenders;
 					var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}/{{decreaseLoan}}/{{consolidateDebt}}/{{cashOut}}/{{payOff}}/{{consolidateDebtAmount}}/{{cashOutAmount}}/{{propertyUse}}/{{repay}}/{{creditHistory}}/{{employmentType}}/{{taxReturns}}/{{lenderChoices}}')($scope);
 					$location.path(url);
@@ -1636,12 +1636,12 @@
 				var deposit = String(parseFloat(propertyW) - parseFloat(currentL));
 				//SET REPAY CONDITION
 				if($scope.repay == 'I'){ 
-					interestOnly = "YES"; //FOR INTEREST ONLY
+					interestOnly = "true"; //FOR INTEREST ONLY
 					}
 				else {
-					interestOnly = "NO"; //FOR PRINCIPAL and INTEREST
+					interestOnly = "false"; //FOR PRINCIPAL and INTEREST
 					}
-			    var insertValues =  "'REFINANCE','"+String(propertyW)+"','"+deposit+"',NULL,NULL,NULL,NULL,'"+String($scope.propertyUse)+"','"+String($scope.creditHistory)+"','"+String($scope.employmentType)+"','"+String($scope.taxReturns)+"','"+String($scope.offset)+"','"+String($scope.redraw)+"','"+String($scope.extraR)+"','"+interestOnly+"'";
+			    var insertValues =  "'true','"+String(propertyW)+"','"+deposit+"',NULL,NULL,NULL,NULL,'"+String($scope.propertyUse)+"','"+String($scope.creditHistory)+"','"+String($scope.employmentType)+"','"+String($scope.taxReturns)+"','"+String($scope.offset)+"','"+String($scope.redraw)+"','"+String($scope.extraR)+"','"+interestOnly+"'";
 				 
 				$scope.passOn = function (){
 					if($scope.name) {
