@@ -159,7 +159,7 @@ CREATE TABLE credit_history (
 );
 
 CREATE TABLE preapproved (
-    preapproved VARCHAR(3),
+    preapproved VARCHAR(5),
     PRIMARY KEY (preapproved)
 );
 
@@ -169,7 +169,7 @@ CREATE TABLE tax_returns (
 );
 
 CREATE TABLE exchanged_contracts (
-    exchanged_contracts VARCHAR(3),
+    exchanged_contracts VARCHAR(5),
     PRIMARY KEY (exchanged_contracts)
 );
 
@@ -281,8 +281,8 @@ CREATE TABLE cus_details (
     purchase_price INT(20),
     deposit INT(20),
     buying_situation VARCHAR(10),
-    preapproved VARCHAR(3),
-    exchanged_contracts VARCHAR(3),
+    preapproved VARCHAR(5),
+    exchanged_contracts VARCHAR(5),
     expected_settlement_date DATE,
     cus_type VARCHAR(10),
     credit_history VARCHAR(5),
@@ -324,8 +324,8 @@ INSERT INTO employment_type(employment_type) values('EMPLOYEE' );
 INSERT INTO employment_type(employment_type) values('SELF' );
 INSERT INTO employment_type(employment_type) values('OTHER' );
 
-INSERT INTO exchanged_contracts values('YES' );
-INSERT INTO exchanged_contracts values('NO' );
+INSERT INTO exchanged_contracts values('true' );
+INSERT INTO exchanged_contracts values('false' );
 INSERT INTO exchanged_contracts values('NA' );
 
 INSERT INTO allows_guarantor values('false' );
@@ -389,12 +389,12 @@ INSERT INTO interest_only values('true' );
 INSERT INTO principal_and_interest values('false' );
 INSERT INTO principal_and_interest values('true' );
 
-INSERT INTO tax_returns values('YES' );
-INSERT INTO tax_returns values('NO' );
+INSERT INTO tax_returns values('true' );
+INSERT INTO tax_returns values('false' );
 INSERT INTO tax_returns values('NA' );
 
-INSERT INTO preapproved values('YES' );
-INSERT INTO preapproved values('NO' );
+INSERT INTO preapproved values('true' );
+INSERT INTO preapproved values('false' );
 INSERT INTO preapproved values('NA' );
 
 INSERT INTO buying_situation values('READY' );
@@ -422,8 +422,8 @@ INSERT INTO cus_details VALUES(
     '1000000',
     '100',
     'READY',
-    'YES',
-    'YES',
+    'true',
+    'true',
     STR_TO_DATE('1-01-2019', '%d-%m-%Y'),
     'INVESTOR',
     'EXT',

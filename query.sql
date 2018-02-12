@@ -36,7 +36,7 @@ select * from cus_details;
 use ebdb;
 
 SELECT 
-    a.id,
+    a.product_name,
     bank_name,
     product_name,
     comparison_rate,
@@ -45,28 +45,29 @@ FROM
     (SELECT 
         *
     FROM
-        loan_options
-    NATURAL JOIN product
+        product
     NATURAL JOIN bank) AS a
         JOIN
     cus_details AS b
 WHERE
-    a.loan_offset = b.loan_offset
-		AND b.cus_email =  'eashantilve93@gmail.com'
-        AND a.loan_redraw = b.loan_redraw
-        AND (b.purchase_price - b.deposit) >= min_loan
-        AND (b.purchase_price - b.deposit) <= max_loan
-        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_lvr
-        AND a.cus_type = b.cus_type
-        AND a.loan_interest_only = b.loan_interest_only
-        AND ((a.doc_type = 'LOW' OR a.doc_type = 'NO'
-        OR a.doc_type = 'FULL')
-        AND (b.employment_type = 'EMPLOYEE'
+    a.has_full_offset = b.loan_offset
+        AND b.cus_email = 'some@gmil.com'
+        AND a.has_redraw_facility = b.loan_redraw
+        AND a.allows_extra_repay = b.loan_extra_repay
+        AND (b.purchase_price - b.deposit) >= min_borrowing_amount
+        AND (b.purchase_price - b.deposit) <= max_borrowing_amount
+        AND (b.purchase_price - b.deposit) / b.purchase_price <= max_LVR
+        AND ((b.cus_type = 'INVESTOR'
+        AND a.investment_purpose = 'true')
+        OR (b.cus_type = 'OWNER'
+        AND a.owner_occupied = 'true'))
+        AND a.interest_only = b.interest_only
+        AND ((b.employment_type = 'EMPLOYEE'
         OR (b.employment_type = 'SELF'
-        AND b.tax_returns = 'YES'))
-        OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'));
-        
-        select * from product;
+        AND b.tax_returns = 'true'))
+        OR (a.allows_low_doc = 'true'));
+
+select * from bank;   
    
 SELECT 
     a.id,
