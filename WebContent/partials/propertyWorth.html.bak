@@ -6,7 +6,7 @@
 	<br><br><br><br>
 	<h3>How much is your property worth?</h3>
 	<br>
-	<p class="paraText">Your best estimate is fine</p>	
+	<p style="margin: 0 0 2rem;">Your best estimate is fine</p>
 
 	<div class="col-md-12">
 		<div class="col-md-4"></div>

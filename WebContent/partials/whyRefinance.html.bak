@@ -14,9 +14,8 @@
 </center>
 
 <div class="alignButtons">
-	
- 	<button class="backButton" ><a class="back" data-ng-click="back()"> Back </a> </button>
 	<button class="button_small" data-ng-click = "passOn()" > Next </button>	
+ 	<button class="backButton" ><a class="back" data-ng-click="back()"> Back </a> </button>
 
 </div>
 

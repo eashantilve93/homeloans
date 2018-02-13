@@ -4,9 +4,9 @@
 			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 	<br><br><br><br>
-	<h3>How much is your property worth?</h3>
+	<h3>How much do you want to refinance?</h3>
 	<br>
-	<p class="paraText">Your best estimate is fine</p>	
+	<p style="margin: 0 0 2rem;">Your best estimate is fine</p>
 
 	<div class="col-md-12">
 		<div class="col-md-4"></div>
@@ -15,23 +15,20 @@
 				<span class="input-group-addon">$</span> <input type="text"
 					pattern="^(\d+|\d{1,3}(,\d{3})*)(\.\d+)?$"
 					onkeyup="this.value=add_commas(this.value);"
-					class="form-control input-lg" data-ng-model="propertyWorth">
+					class="form-control input-lg" data-ng-model="currentLoan">
 			</div>
 			<br>
 			<p id="error" style="color: #ba2d55; display:none;" ><span class="glyphicon glyphicon-exclamation-sign" style="color:#ba2d55;"></span>&nbsp;&nbsp;Please enter a valid amount.</p>
 		</div>
-		<div style="display: table;">
+		<div style="display:table;">
 			<div class="alignButtons type2">
-				<input type="submit" class="button_small" data-ng-click="passOn()"
+				<input type="submit" class="button_small " data-ng-click="passOn()"
 					value="Next" style="display: inline-block;">
 			</div>
 		</div>
+		
 	</div>
-	<div></div>
 	
-		<a class="back" data-ng-click="back()"> Back </a>
-
-	<br>
-
+	<!--input type = "button" class="button" data-ng-click="back()" value="Back" style="display: block;"-->
 
 </div>

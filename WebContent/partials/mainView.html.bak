@@ -8,11 +8,11 @@
 
 	<br><br>
 		<button class="mainButton"  onclick="window.location.href='#!/refinance'" style="padding-right: 10px;"> 
-			<img id ="HomePageButtonImage" src="https://prodassets.lendi.com.au/refinance_icon.png">&nbsp;&nbsp;&nbsp;Refinance existing loan 
+			<img id ="HomePageButtonImage" src="https://prodassets.lendi.com.au/refinance_icon.png">&nbsp;&nbsp;&nbsp;I want to refinance 
 		</button>
 
 		<button class="mainButton"  onclick="window.location.href='#!/homeLoan'"> 
-			<img id ="HomePageButtonImage" src="https://prodassets.lendi.com.au/ownerocc_icon.png">&nbsp;&nbsp;Borrow for new purchase
+			<img id ="HomePageButtonImage" src="https://prodassets.lendi.com.au/ownerocc_icon.png">&nbsp;&nbsp;I want to buy a home
 		</button>
 </div>
 

@@ -36,7 +36,7 @@
 }
 
 .progress-bar-success {
-   	background-color:#dd1021;
+   	background-color:#0dd1ac;
 }
 .container-fluid  {
     padding-bottom: 200px;
@@ -376,7 +376,7 @@ h3 {
 }
 
 .button_small {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -394,7 +394,7 @@ h3 {
 }
 
 .btn-primary:hover {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -435,7 +435,7 @@ button:focus {
 }
 
 .mainButton {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;
@@ -448,7 +448,7 @@ button:focus {
 }
 
 .button {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 18px;
@@ -477,9 +477,9 @@ button:focus {
 .selButton {
 	border-width: 1px;
 	border-style: solid;
-	border-color: #dd1021;
+	border-color: #0dd1ac;
 	background: #FFF;
-	color: #dd1021;
+	color: #0dd1ac;
 	border-radius: 4px;
 	font-size: 1.8rem;
 	line-height: 2rem;
@@ -785,7 +785,7 @@ a:active {
 }
 
 a {
-	color: #dd1021;
+	color: #0dd1ac;
 	background: transparent;
 	text-decoration: none;
 	outline: none;
@@ -1125,7 +1125,7 @@ and
 }
 
 .alignButtons  .button_small {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -1140,9 +1140,9 @@ and
 .selButton {
 	border-width: 1px;
 	border-style: solid;
-	border-color: #dd1021;
+	border-color: #0dd1ac;
 	background: #FFF;
-	color: #dd1021;
+	color: #0dd1ac;
 	border-radius: 4px;
 	font-size: 1.8rem;
 	line-height: 2rem;
@@ -1168,7 +1168,7 @@ and
 }
 
 .button {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;
@@ -1195,7 +1195,7 @@ h3 {
 }
 
 .mainButton {
-	background: #dd1021;
+	background: #0dd1ac;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;
