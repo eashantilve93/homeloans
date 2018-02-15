@@ -5,7 +5,6 @@ DROP table if exists bank;
 DROP table if exists doc_type;
 DROP table if exists cus_type;
 DROP table if exists employment_type;
-DROP table if exists loan_type;
 DROP table if exists buying_situation;
 DROP table if exists preapproved;
 DROP table if exists tax_returns;
@@ -31,6 +30,8 @@ DROP table if exists is_refinance_available;
 DROP table if exists refinance_home;
 DROP table if exists owner_occupied;
 DROP table if exists ongoing_fee_frequency;
+DROP table if exists interest_type;
+DROP table if exists repayment_frequency;
 
 CREATE TABLE cus_type (
     cus_type VARCHAR(10) NOT NULL,
@@ -164,13 +165,23 @@ CREATE TABLE preapproved (
 );
 
 CREATE TABLE tax_returns (
-    tax_returns VARCHAR(3),
+    tax_returns VARCHAR(5),
     PRIMARY KEY (tax_returns)
 );
 
 CREATE TABLE exchanged_contracts (
     exchanged_contracts VARCHAR(5),
     PRIMARY KEY (exchanged_contracts)
+);
+
+CREATE TABLE repayment_frequency (
+    repayment_frequency VARCHAR(20),
+    PRIMARY KEY (repayment_frequency)
+);
+
+CREATE TABLE interest_type (
+    interest_type VARCHAR(10),
+    PRIMARY KEY (interest_type)
 );
 
 CREATE TABLE bank (
@@ -180,6 +191,7 @@ CREATE TABLE bank (
 );
 
 CREATE TABLE product (
+	product_id INT(5) AUTO_INCREMENT,
     product_name VARCHAR(100),
 	bank_name VARCHAR(100),
     advertised_rate REAL,
@@ -228,7 +240,8 @@ CREATE TABLE product (
     revert_rate REAL,
     settlement_fee REAL,
     upfront_fee REAL,
-    PRIMARY KEY (product_name,bank_name),
+    PRIMARY KEY (product_id),
+    UNIQUE(product_name,bank_name),
     FOREIGN KEY (bank_name)
         REFERENCES bank (bank_name),
 	FOREIGN KEY (allows_extra_repay)
@@ -287,11 +300,13 @@ CREATE TABLE cus_details (
     cus_type VARCHAR(10),
     credit_history VARCHAR(5),
     employment_type VARCHAR(20),
-    tax_returns VARCHAR(3),
+    tax_returns VARCHAR(5),
     loan_offset VARCHAR(5),
     loan_redraw VARCHAR(5),
     loan_extra_repay VARCHAR(5),
     interest_only VARCHAR(5),
+	repayment_frequency VARCHAR(20),
+	interest_type VARCHAR(10),
     PRIMARY KEY (cus_email),
     FOREIGN KEY (refinance_home)
         REFERENCES refinance_home (refinance_home),
@@ -316,13 +331,25 @@ CREATE TABLE cus_details (
     FOREIGN KEY (loan_extra_repay)
         REFERENCES allows_extra_repay (allows_extra_repay),
     FOREIGN KEY (interest_only)
-        REFERENCES interest_only (interest_only)
-	
+        REFERENCES interest_only (interest_only),
+	FOREIGN KEY (repayment_frequency)
+        REFERENCES repayment_frequency (repayment_frequency),
+	FOREIGN KEY (interest_type)
+        REFERENCES interest_type (interest_type)
 );
 
 INSERT INTO employment_type(employment_type) values('EMPLOYEE' );
 INSERT INTO employment_type(employment_type) values('SELF' );
 INSERT INTO employment_type(employment_type) values('OTHER' );
+
+INSERT INTO interest_type(interest_type) values('VARIABLE' );
+INSERT INTO interest_type(interest_type) values('FIXED' );
+INSERT INTO interest_type(interest_type) values('ALL' );
+
+INSERT INTO repayment_frequency(repayment_frequency) values('FORTNIGHTLY' );
+INSERT INTO repayment_frequency(repayment_frequency) values('WEEKLY' );
+INSERT INTO repayment_frequency(repayment_frequency) values('MONTHLY' );
+INSERT INTO repayment_frequency(repayment_frequency) values('ALL' );
 
 INSERT INTO exchanged_contracts values('true' );
 INSERT INTO exchanged_contracts values('false' );
@@ -414,25 +441,4 @@ INSERT INTO doc_type(doc_type) values('NO' );
 INSERT INTO doc_type(doc_type) values('LOW' );
 INSERT INTO doc_type(doc_type) values('FULL' );
 
-INSERT INTO cus_details VALUES(
-     'Eashan',
-    'eashantilve93@gmail.com',
-    '451146447',
-    'true',
-    '1000000',
-    '100',
-    'READY',
-    'true',
-    'true',
-    STR_TO_DATE('1-01-2019', '%d-%m-%Y'),
-    'INVESTOR',
-    'EXT',
-    'EMPLOYEE',
-    'NA',
-    'true',
-    'true',
-    'true',
-    'true'
-    
-);
 

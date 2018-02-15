@@ -25,13 +25,13 @@ WHERE
 SELECT 
     *
 FROM
-    loan_options;
+    product;
     
     SELECT * FROM cus_type;
 
 show tables;
 
-select * from cus_details;
+SELECT * FROM product NATURAL JOIN bank ;
 
 use ebdb;
 
@@ -42,18 +42,31 @@ SELECT
     comparison_rate,
     advertised_rate
 FROM
-    (SELECT 
-        *
-    FROM
-        product
-    NATURAL JOIN bank) AS a
+    product AS a
         JOIN
     cus_details AS b
 WHERE
-    a.has_full_offset = b.loan_offset
-        AND b.cus_email = 'some@gmil.com'
-        AND a.has_redraw_facility = b.loan_redraw
-        AND a.allows_extra_repay = b.loan_extra_repay
+    ((a.has_full_offset = b.loan_offset
+        AND b.loan_offset = 'true')
+        OR b.loan_offset = 'false')
+        AND b.cus_email = 'toby@gmail.com'
+        AND ((a.has_redraw_facility = b.loan_redraw
+        AND b.loan_redraw = 'true')
+        OR b.loan_redraw = 'false')
+        AND ((a.allows_extra_repay = b.loan_extra_repay
+        AND b.loan_extra_repay = 'true')
+        OR b.loan_extra_repay = 'false')
+        AND ((b.interest_only = 'true'
+        AND a.interest_only = 'true')
+        OR (b.interest_only = 'false'
+        AND a.principal_and_interest = 'true'))
+        AND (b.repayment_frequency = 'ALL'
+        OR (b.repayment_frequency = 'FORTNIGHTLY'
+        AND a.has_fortnightly_repayments = 'true')
+        OR (b.repayment_frequency = 'MONTHLY'
+        AND a.has_monthly_repayments = 'true')
+        OR (b.repayment_frequency = 'WEEKLY'
+        AND a.has_weekly_repayments = 'true'))
         AND (b.purchase_price - b.deposit) >= min_borrowing_amount
         AND (b.purchase_price - b.deposit) <= max_borrowing_amount
         AND (b.purchase_price - b.deposit) / b.purchase_price <= max_LVR
@@ -67,8 +80,10 @@ WHERE
         AND b.tax_returns = 'true'))
         OR (a.allows_low_doc = 'true'));
 
-select * from bank;   
+SELECT * FROM product NATURAL JOIN bank WHERE product.bank_name='NAB' AND product_name='Choice Package Tailored Home Loan (Principal and Interest) ($750k+)';
    
+SELECT * FROM product NATURAL JOIN bank WHERE product_name='Choice Package Tailored Home Loan (Principal and Interest) ($750k )'; 
+ 
 SELECT 
     a.id,
     bank_name,
@@ -99,3 +114,4 @@ WHERE
         OR (b.employment_type = 'SELF'
         AND b.tax_returns = 'YES'))
         OR (a.doc_type = 'LOW' OR a.doc_type = 'NO'));
+        
