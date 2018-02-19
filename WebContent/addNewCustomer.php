@@ -11,7 +11,7 @@ $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}"
 $username = $_SERVER['RDS_USERNAME'];
 $password = $_SERVER['RDS_PASSWORD'];
 
-$sql = "INSERT INTO cus_details VALUES(" . $insertValues . ")";
+$sql = "INSERT INTO cus_details(  cus_name,cus_email,cus_phone,refinance_home,purchase_price,deposit,cus_type,employment_type,tax_returns,loan_offset,loan_redraw,loan_extra_repay,interest_only,repayment_frequency,interest_type,first_home_buyers) VALUES(" . $insertValues . ")";
 
 try {
 	$pdo = new PDO($dsn, $username, $password);

@@ -4,9 +4,8 @@
 			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 	<br><br><br><br>
-	<h3>How much is your property worth?</h3>
+	<h3>Approximately how much is your property worth?</h3>
 	<br>
-	<p class="paraText">Your best estimate is fine</p>	
 
 	<div class="col-md-12">
 		<div class="col-md-4"></div>
@@ -18,6 +17,7 @@
 					class="form-control input-lg" data-ng-model="propertyWorth">
 			</div>
 			<br>
+			<p id="error" style="color: #ba2d55; display:none;" ><span class="glyphicon glyphicon-exclamation-sign" style="color:#ba2d55;"></span>&nbsp;&nbsp;Please enter a valid amount.</p>
 		</div>
 		<div style="display: table;">
 			<div class="alignButtons type2">
@@ -28,8 +28,7 @@
 	</div>
 	<div></div>
 	
-		<button class="backButtonBelowBox"><a class="back" data-ng-click="back()"> Back </a></button>
-		<p id="error" style="color: #ba2d55; display:none;" ><span class="glyphicon glyphicon-exclamation-sign" style="color:#ba2d55;"></span>&nbsp;&nbsp;Please enter a valid amount.</p>
+		<a class="back" data-ng-click="back()"> Back </a>
 
 	<br>
 

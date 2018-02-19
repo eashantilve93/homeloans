@@ -32,6 +32,7 @@ DROP table if exists owner_occupied;
 DROP table if exists ongoing_fee_frequency;
 DROP table if exists interest_type;
 DROP table if exists repayment_frequency;
+DROP table if exists first_home_buyers;
 
 CREATE TABLE cus_type (
     cus_type VARCHAR(10) NOT NULL,
@@ -114,6 +115,11 @@ CREATE TABLE has_weekly_repayments (
     PRIMARY KEY (has_weekly_repayments)
 );
 
+CREATE TABLE first_home_buyers (
+    first_home_buyers VARCHAR(5),
+    PRIMARY KEY (first_home_buyers)
+);
+
 CREATE TABLE interest_only (
     interest_only VARCHAR(5),
     PRIMARY KEY (interest_only)
@@ -187,6 +193,7 @@ CREATE TABLE interest_type (
 CREATE TABLE bank (
     bank_name VARCHAR(100),
     bank_description VARCHAR(10000) NOT NULL,
+    logo_url VARCHAR(50) NOT NULL,
     PRIMARY KEY (bank_name)
 );
 
@@ -211,6 +218,7 @@ CREATE TABLE product (
     has_repay_holiday VARCHAR(5),
     has_transaction_account VARCHAR(5),
     has_weekly_repayments VARCHAR(5),
+    first_home_buyers VARCHAR(5),
     interest_only VARCHAR(5),
     principal_and_interest VARCHAR(5),
     investment_purpose VARCHAR(5),
@@ -272,6 +280,8 @@ CREATE TABLE product (
         REFERENCES has_transaction_account (has_transaction_account),
 	FOREIGN KEY (has_weekly_repayments)
         REFERENCES has_weekly_repayments (has_weekly_repayments),
+	FOREIGN KEY (first_home_buyers)
+        REFERENCES first_home_buyers (first_home_buyers),
 	FOREIGN KEY (interest_only)
         REFERENCES interest_only (interest_only),
 	FOREIGN KEY (investment_purpose)
@@ -307,6 +317,7 @@ CREATE TABLE cus_details (
     interest_only VARCHAR(5),
 	repayment_frequency VARCHAR(20),
 	interest_type VARCHAR(10),
+    first_home_buyers VARCHAR(5),
     PRIMARY KEY (cus_email),
     FOREIGN KEY (refinance_home)
         REFERENCES refinance_home (refinance_home),
@@ -335,7 +346,9 @@ CREATE TABLE cus_details (
 	FOREIGN KEY (repayment_frequency)
         REFERENCES repayment_frequency (repayment_frequency),
 	FOREIGN KEY (interest_type)
-        REFERENCES interest_type (interest_type)
+        REFERENCES interest_type (interest_type),
+	FOREIGN KEY (first_home_buyers)
+        REFERENCES first_home_buyers (first_home_buyers)
 );
 
 INSERT INTO employment_type(employment_type) values('EMPLOYEE' );
@@ -415,6 +428,9 @@ INSERT INTO interest_only values('true' );
 
 INSERT INTO principal_and_interest values('false' );
 INSERT INTO principal_and_interest values('true' );
+
+INSERT INTO first_home_buyers values('false' );
+INSERT INTO first_home_buyers values('true' );
 
 INSERT INTO tax_returns values('true' );
 INSERT INTO tax_returns values('false' );

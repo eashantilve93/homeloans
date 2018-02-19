@@ -1,6 +1,5 @@
 <?php
-$product_name = $_GET["product_name"];
-$bank_name = $_GET["bank_name"];
+$id = $_GET["id"];
 $dbhost = $_SERVER['RDS_HOSTNAME'];
 $dbport = $_SERVER['RDS_PORT'];
 $dbname = $_SERVER['RDS_DB_NAME'];
@@ -11,15 +10,23 @@ $username = $_SERVER['RDS_USERNAME'];
 $password = $_SERVER['RDS_PASSWORD'];
 $pdo = new PDO($dsn, $username, $password);
 
-$sql = "SELECT * FROM product NATURAL JOIN bank WHERE product.bank_name='" . $bank_name . "' AND product_name='" . $product_name . "'";
+$sql = "SELECT * FROM product NATURAL JOIN bank WHERE product.product_id='" . $id . "'";
 
-echo "the query: " . $sql;
  foreach ($pdo->query($sql) as $row) {
-        print $row['comparison_rate'] . "\t";
-        print $row['advertised_rate'];
 		$offset = $row['has_full_offset'];
 		$redraw = $row['has_redraw_facility'];
 		$extra_repay = $row['allows_extra_repay'];
+		$ongoing_fee = $row['ongoing_fee'];
+		$ongoing_fee_frequency = $row['ongoing_fee_frequency'];
+$logo="logos/" . $row['bank_name'] . ".png";
+
+if ($ongoing_fee_frequency == "Annually") {
+    $monthly_ongoing_fee=floatval($ongoing_fee)/12;
+} elseif ($ongoing_fee_frequency == "Monthly") {
+    $monthly_ongoing_fee=floatval($ongoing_fee);
+} else {
+    $monthly_ongoing_fee=$ongoing_fee;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,51 +52,6 @@ echo "the query: " . $sql;
 </head>
 <body>
 	<div class="navLayout app" style="min-height: 600px;">
-		<div class="navDrawer">
-			<div class="navDrawerHeader">
-				<div>
-					<img src="//cdn.unohomeloans.com.au/images/uno-white.svg"
-						class="gwt-Image"> <span class="label inline">V.3.42.1113</span>
-				</div>
-
-			</div>
-			<div class="navDrawerBody">
-				<div class="drawerUserProfile drawerMenuItem">
-					<i class="i-user" style=""></i><a class="anchor"
-						href="javascript:;" aria-hidden="true" style="display: none;"></a><a
-						class="button push signUpButton" href="javascript:;"><span>Sign
-							up</span></a><a class="button push loginButton" href="javascript:;"><span>Login</span></a>
-				</div>
-				<div>
-					<div class="drawerMenuItem">
-						<i class="i-home" style=""></i> <a class="anchor"
-							href="javascript:;">Dashboard</a>
-					</div>
-					<div class="drawerMenuItem">
-						<i class="i-calculate" style=""></i> <a class="anchor"
-							href="javascript:;">Calculators</a>
-					</div>
-					<div class="drawerMenuItem">
-						<i class="i-search" style=""></i> <a class="anchor"
-							href="javascript:;">Search loans</a>
-					</div>
-					<div class="drawerMenuItem">
-						<i class="i-shortlist" style=""></i> <a class="anchor"
-							href="javascript:;">Compare</a>
-					</div>
-					<div class="drawerMenuItem">
-						<i class="i-apply" style=""></i> <a class="anchor"
-							href="javascript:;">Apply</a>
-					</div>
-				</div>
-			</div>
-			<div class="navDrawerFooter">
-				<a class="drawerMenuItem" href="https://unohomeloans.com.au/learn"
-					target="_blank"> <i class="i-help" style=""></i><span>Help</span></a>
-			</div>
-		</div>
-
-
 		<div class="mobile">
 			<div class="navTopBar">
 				<div class="navTopBarPrimary">
@@ -184,7 +146,7 @@ echo "the query: " . $sql;
 													</div>
 												</div>
 											</div> <span> <img width="64"
-												src="https://cdn.unohomeloans.com.au/lenders/logo/CBA.svg"
+												src="<?php print $logo;?>"
 												onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"
 												class="productDetailLogo"> &nbsp;&nbsp;&nbsp;&nbsp;
 												<h2 style="display: inline-flex; margin-top: 10px; position: absolute; top: 5px;">
@@ -195,6 +157,8 @@ echo "the query: " . $sql;
 									</div>
 								</div>
 							</div>
+							<br>
+							<br>
 							<div class="productDetailContainer container">
 
 								<div class="productDetailSummaryContainer">
@@ -214,7 +178,7 @@ echo "the query: " . $sql;
 													<div class="productIcon col-xs-2 col-md-4">+</div>
 													<div class="col-xs-5 col-md-4">
 														<h3 class="productPropertyHeader">
-															<?php print "$" . $row['ongoing_costs']; ?>
+															<?php print "$" . number_format($monthly_ongoing_fee,2); ?>
 															
 														</h3>
 														<div class="productPropertyInfo">Ongoing fees per
@@ -573,7 +537,8 @@ echo "the query: " . $sql;
 														</div>
 														<div class="productIcon col-xs-2 col-md-2">+</div>
 														<div class="col-xs-5 col-md-5">
-															<h3 class="productPropertyHeader">$<?php print $row['ongoing_costs']; ?></h3>
+															<h3 class="productPropertyHeader"><?php print "$" . number_format($monthly_ongoing_fee,2); ?>
+															</h3>
 															<div class="productPropertyInfo">Ongoing fees per
 																month</div>
 														</div>

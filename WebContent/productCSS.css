@@ -483,33 +483,32 @@ input, textarea, keygen, select, button {
     position: relative;
 }
 .productPage .productRow .lenderColumn {
-    width: 28%;
+    width: 40%;
     padding: 0 10px;
-}
-.productPage .productRow .loanAmountColumn {
-    width: 12%;
-    padding: 0 5px;
-}
-.productPage .productRow .interestRateColumn {
-    width: 11%;
-    padding: 0 5px;
 }
 .productPage .productRow .comparisonRateColumn {
     width: 8%;
     padding: 0 5px;
 }
 .productPage .productRow .paymentsColumn {
-    width: 12%;
+    width: 9%;
+    padding: 0 5px;
+}
+.productPage .productRow .interestRateColumn {
+    width: 8%;
+    padding: 0 5px;
+}
+.productPage .productRow .ongoingFeesColumn {
+    width: 9%;
+    padding: 0 5px;
+}
+.productPage .productRow .upfrontFeesColumn {
+    width: 9%;
     padding: 0 5px;
 }
 
-
-.productPage .productRow .borrowingPowerColumn {
-    width: 12%;
-    padding: 0 2px;
-}
 .productPage .productRow .ctaColumn {
-    width: 15%;
+    width: 9%;
     padding: 0 0 0 12px;
 }
 .productPage .productTable .productTableHeader>* {
@@ -1292,33 +1291,32 @@ a.simpleButton i, a.simpleButton span {
     position: relative;
 }
 .productPage .productRow .lenderColumn {
-    width: 28%;
+    width: 38%;
     padding: 0 10px;
 }
-.productPage .productRow .loanAmountColumn {
-    width: 12%;
-    padding: 0 5px;
-}
-.productPage .productRow .interestRateColumn {
-    width: 11%;
-    padding: 0 5px;
-}
 .productPage .productRow .comparisonRateColumn {
-    width: 8%;
+    width: 9%;
     padding: 0 5px;
 }
 .productPage .productRow .paymentsColumn {
-    width: 12%;
+    width: 10%;
+    padding: 0 5px;
+}
+.productPage .productRow .interestRateColumn {
+    width: 9%;
+    padding: 0 5px;
+}
+.productPage .productRow .ongoingFeesColumn {
+    width: 10%;
+    padding: 0 5px;
+}
+.productPage .productRow .upfrontFeesColumn {
+    width: 10%;
     padding: 0 5px;
 }
 
-
-.productPage .productRow .borrowingPowerColumn {
-    width: 12%;
-    padding: 0 2px;
-}
 .productPage .productRow .ctaColumn {
-    width: 15%;
+    width: 12%;
     padding: 0 0 0 12px;
 }
 .productPage .productTable .productTableHeader>* {
@@ -1423,8 +1421,8 @@ a.simpleButton i, a.simpleButton span {
     float: left;
     overflow: hidden;
     margin: 0 10px 0 0;
-    height: 36px;
-    width: 36px;
+    height: 60px;
+    width: 60px;
     text-align: center;
 }
 .productPage .productRow .loanAmountColumn .lmiInfo {
@@ -1441,13 +1439,10 @@ a.simpleButton i, a.simpleButton span {
     font-family: 'avenir-heavy';
 }
 .productPage .productRow .paymentsColumn {
-    width: 12%;
+    width: 9%;
     padding: 0 5px;
 }
-.productPage .productRow .borrowingPowerColumn {
-    width: 12%;
-    padding: 0 2px;
-}
+
 .borrowingPowerIndicator .levelBar .levelHigh {
     width: 90%;
     background: #66d228;
@@ -1481,10 +1476,7 @@ a.simpleButton i, a.simpleButton span {
     font-size: 16px;
     padding: 20px 10px 40px;
 }
-.productPage .productRow .ctaColumn {
-    width: 15%;
-    padding: 0 0 0 12px;
-}
+
 .productPage .productRow .ctaColumn a.button {
     background: #14b4a1;
     color: #fff;

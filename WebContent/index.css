@@ -42,235 +42,124 @@
     padding-bottom: 200px;
 }
 
-@-webkit-keyframes load9 {
+@-webkit-keyframes load16 {
     0% { width: 0; }
-    100% { width: 9%; }
+    100% { width: 16%; }
 }
 
-@keyframes load9 {
+@keyframes load16 {
     0% { width: 0; }
-    100% { width: 9%; }
+    100% { width: 16%; }
 }
 
-@-webkit-keyframes load18 {
-    0% { width: 9%; }
-    100% { width: 18%; }
+@-webkit-keyframes load32 {
+    0% { width: 16%; }
+    100% { width: 32%; }
 }
 
-@keyframes load18 {
-    0% { width: 9%; }
-    100% { width: 18%; }
+@keyframes load32 {
+    0% { width: 16%; }
+    100% { width: 32%; }
 }
 
-@-webkit-keyframes load27 {
-    0% { width: 18%; }
-    100% { width: 27%; }
+@-webkit-keyframes load48 {
+    0% { width: 32%; }
+    100% { width: 48%; }
 }
 
-@keyframes load27 {
-    0% { width: 18%; }
-    100% { width: 27%; }
+@keyframes load48 {
+    0% { width: 32%; }
+    100% { width: 48%; }
 }
 
-@-webkit-keyframes load36 {
-    0% { width: 27%; }
-    100% { width: 36%; }
+@-webkit-keyframes load64 {
+    0% { width: 48%; }
+    100% { width: 64%; }
 }
 
-@keyframes load36 {
-    0% { width: 27%; }
-    100% { width: 36%; }
+@keyframes load64 {
+    0% { width: 48%; }
+    100% { width: 64%; }
 }
 
-@-webkit-keyframes load45 {
-    0% { width: 36%; }
-    100% { width: 45%; }
+@-webkit-keyframes load80 {
+    0% { width: 64%; }
+    100% { width: 80%; }
 }
 
-@keyframes load45 {
-    0% { width: 36%; }
-    100% { width: 45%; }
+@keyframes load80 {
+    0% { width: 64%; }
+    100% { width: 80%; }
 }
 
-@-webkit-keyframes load54 {
-    0% { width: 45%; }
-    100% { width: 54%; }
+@-webkit-keyframes load96 {
+    0% { width: 80%; }
+    100% { width: 96%; }
 }
 
-@keyframes load54 {
-    0% { width: 45%; }
-    100% { width: 54%; }
+@keyframes load96 {
+    0% { width: 80%; }
+    100% { width: 96%; }
 }
 
-@-webkit-keyframes load63 {
-    0% { width: 54%; }
-    100% { width: 63%; }
+@-webkit-keyframes back16 {
+    0% { width: 32%; }
+    100% { width: 16%; }
 }
 
-@keyframes load63 {
-    0% { width: 54%; }
-    100% { width: 63%; }
+@keyframes back16 {
+    0% { width: 32%; }
+    100% { width: 16%; }
 }
 
-@-webkit-keyframes load72 {
-    0% { width: 63%; }
-    100% { width: 72%; }
+@-webkit-keyframes back32 {
+    0% { width: 48%; }
+    100% { width: 32%; }
 }
 
-@keyframes load72 {
-    0% { width: 63%; }
-    100% { width: 72%; }
+@keyframes back32 {
+    0% { width: 48%; }
+    100% { width: 32%; }
 }
 
-@-webkit-keyframes load81 {
-    0% { width: 72%; }
-    100% { width: 81%; }
+@-webkit-keyframes back48 {
+    0% { width: 64%; }
+    100% { width: 48%; }
 }
 
-@keyframes load81 {
-    0% { width: 72%; }
-    100% { width: 81%; }
+@keyframes back48 {
+    0% { width: 64%; }
+    100% { width: 48%; }
 }
 
-@-webkit-keyframes load90 {
-    0% { width: 81%; }
-    100% { width: 90%; }
+@-webkit-keyframes back64 {
+    0% { width: 80%; }
+    100% { width: 64%; }
 }
 
-@keyframes load90 {
-    0% { width: 81%; }
-    100% { width: 90%; }
+@keyframes back64 {
+    0% { width: 80%; }
+    100% { width: 64%; }
 }
 
-@-webkit-keyframes load95 {
-    0% { width: 90%; }
-    100% { width: 95%; }
+@keyframes back80 {
+    0% { width: 96%; }
+    100% { width: 80%; }
 }
 
-@keyframes load95 {
-    0% { width: 90%; }
-    100% { width: 95%; }
+@-webkit-keyframes back80 {
+    0% { width: 96%; }
+    100% { width: 80%; }
 }
 
-@-webkit-keyframes load99 {
-    0% { width: 95%; }
-    100% { width: 99%; }
+@keyframes back96 {
+    0% { width: 100%; }
+    100% { width: 96%; }
 }
 
-@keyframes load99 {
-    0% { width: 95%; }
-    100% { width: 99%; }
-}
-
-
-@-webkit-keyframes back9 {
-    0% { width: 18%; }
-    100% { width: 9%; }
-}
-
-@keyframes back9 {
-    0% { width: 18%; }
-    100% { width: 9%; }
-}
-
-@-webkit-keyframes back18 {
-    0% { width: 27%; }
-    100% { width: 18%; }
-}
-
-@keyframes back18 {
-    0% { width: 27%; }
-    100% { width: 18%; }
-}
-
-@-webkit-keyframes back27 {
-    0% { width: 36%; }
-    100% { width: 27%; }
-}
-
-@keyframes back27 {
-    0% { width: 36%; }
-    100% { width: 27%; }
-}
-
-@-webkit-keyframes back36 {
-    0% { width: 45%; }
-    100% { width: 36%; }
-}
-
-@keyframes back36 {
-    0% { width: 45%; }
-    100% { width: 36%; }
-}
-
-@-webkit-keyframes back45 {
-    0% { width: 54%; }
-    100% { width: 45%; }
-}
-
-@keyframes back45 {
-    0% { width: 54%; }
-    100% { width: 45%; }
-}
-
-@-webkit-keyframes back54 {
-    0% { width: 63%; }
-    100% { width: 54%; }
-}
-
-@keyframes back54 {
-    0% { width: 63%; }
-    100% { width: 54%; }
-}
-
-@-webkit-keyframes back63 {
-    0% { width: 72%; }
-    100% { width: 63%; }
-}
-
-@keyframes back63 {
-    0% { width: 72%; }
-    100% { width: 63%; }
-}
-
-@-webkit-keyframes back72 {
-    0% { width: 81%; }
-    100% { width: 72%; }
-}
-
-@keyframes back72 {
-    0% { width: 81%; }
-    100% { width: 72%; }
-}
-
-@-webkit-keyframes back81 {
-    0% { width: 90%; }
-    100% { width: 81%; }
-}
-
-@keyframes back81 {
-    0% { width: 90%; }
-    100% { width: 81%; }
-}
-
-@-webkit-keyframes back90 {
-    0% { width: 90%; }
-    100% { width: 95%; }
-}
-
-@keyframes back90 {
-    0% { width: 90%; }
-    100% { width: 95%; }
-}
-
-@-webkit-keyframes back95 {
-    0% { width: 99%; }
-    100% { width: 95%; }
-}
-
-@keyframes back95 {
-    0% { width: 99%; }
-    100% { width: 95%; }
+@-webkit-keyframes back96 {
+    0% { width: 100%; }
+    100% { width: 96%; }
 }
 
 h3 {
@@ -414,9 +303,9 @@ h3 {
 	align-items: baseline;
 }
 
-.backButton {
-	/* border:hidden;*/
-	
+.backButtonBelowBox {
+	border:hidden;
+	margin-top: 50px;
 }
 
 button:focus {
