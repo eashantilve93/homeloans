@@ -23,11 +23,11 @@ WHERE
 
         
 SELECT 
-   *
+   (max_loan_term*12),(POWER(1+(advertised_rate/100),0.08333) -1)/(1-POWER(POWER(1+(advertised_rate/100),0.08333),-(max_loan_term*12)))
 FROM
-    bank;
+    product;
     
-    SELECT * FROM cus_details;
+    SELECT * FROM product;
 
 show tables;
 
