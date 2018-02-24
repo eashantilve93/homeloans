@@ -24,11 +24,15 @@
 
 #viewResultsButton {
 	border-radius: 5px;
-    background: #28d3a7;
+    background: #F47442;
     color: white;
     height: 40px;
     width: 15%;
     font-size: 17px;
+}
+
+#viewResultsButton:hover {
+	background: #Ff5421;
 }
 
 .progress {
@@ -36,7 +40,7 @@
 }
 
 .progress-bar-success {
-   	background-color:#dd1021;
+   	background-color:#F47442;
 }
 .container-fluid  {
     padding-bottom: 200px;
@@ -283,7 +287,7 @@ h3 {
 }
 
 .btn-primary:hover {
-	background: #dd1021;
+	background: #Ff5421;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -324,7 +328,7 @@ button:focus {
 }
 
 .mainButton {
-	background: #dd1021;
+	background: #F47442;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;
@@ -337,7 +341,7 @@ button:focus {
 }
 
 .button {
-	background: #dd1021;
+	background: #F47442;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 18px;
@@ -350,23 +354,23 @@ button:focus {
 }
 
 .button_small:hover {
-	background: #2D7760;
+	background: #Ff5421;
 }
 
 .mainButton:hover {
 	color: #fff;
 	border-color: #24be96;
-	background: #28d3a7;
+	background: #ff5421;
 }
 
 .button:hover {
-	background: #2D7760;
+	background: #Ff5421;
 }
 
 .selButton {
 	border-width: 1px;
 	border-style: solid;
-	border-color: #dd1021;
+	border-color: #F47442;
 	background: #FFF;
 	color: #dd1021;
 	border-radius: 4px;
@@ -376,6 +380,10 @@ button:focus {
 	width: 90%;
 	padding: 1rem 1.8rem;
 	border-radius: .4rem;
+}
+
+.selButton:hover {
+	background: #Ff5421;
 }
 
 .tick {
@@ -523,7 +531,7 @@ a:active {
 	justify-content: center;
 	align-items: center;
 	line-height: 1.6rem;
-	color: #28d3a7;
+	color: #F47442;
 	border-radius: .3rem;
 	background: #f9f9f9;
 }
@@ -809,7 +817,7 @@ a {
 }
 
 .btn.btn-link {
-	color: #28d3a7;
+	color: #Ff5421;
 	border-color: transparent;
 	background: transparent;
 }
@@ -830,14 +838,17 @@ a {
 	vertical-align: middle;
 	white-space: nowrap;
 	text-decoration: none;
-	color: #28d3a7;
-	border: .1rem solid #28d3a7;
+	color: #Ff5421;
+	border: .1rem solid #Ff5421;
 	border-radius: .3rem;
 	outline: 0;
 	background: transparent;
 	-webkit-appearance: none;
 }
 
+.btn:hover {
+	color: #Ff5421;	
+}
 .ID15h {
 	display: none;
 }
@@ -1014,7 +1025,7 @@ and
 }
 
 .alignButtons  .button_small {
-	background: #dd1021;
+	background: #F47442;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -1026,10 +1037,14 @@ and
 	padding: 1rem 1.8rem;
 }
 
+.alignButtons .button_small:hover {
+	background: #Ff5421;
+}
+
 .selButton {
 	border-width: 1px;
 	border-style: solid;
-	border-color: #dd1021;
+	border-color: #F47442;
 	background: #FFF;
 	color: #dd1021;
 	border-radius: 4px;
@@ -1039,6 +1054,10 @@ and
 	max-width: 30rem;
 	padding: 1rem 1.8rem;
 	border-radius: .4rem;
+}
+
+.selButton:hover {
+	background: #Ff5421;
 }
 
 .alignButtons {
@@ -1057,7 +1076,7 @@ and
 }
 
 .button {
-	background: #dd1021;
+	background: #F47442;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;
@@ -1084,7 +1103,7 @@ h3 {
 }
 
 .mainButton {
-	background: #dd1021;
+	background: #F47442;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 20px;

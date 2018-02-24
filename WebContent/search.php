@@ -61,7 +61,7 @@
                 <div class="page container-fluid productPage">
                     <?php
 $email = $_GET["email"];
-$loan = $_GET["loan"];
+$orderBy = $_GET["orderBy"];
 
 $dbhost = $_SERVER['RDS_HOSTNAME'];
 $dbport = $_SERVER['RDS_PORT'];
@@ -108,9 +108,9 @@ WHERE
 		AND (b.first_home_buyers = 'false'
 		OR (b.first_home_buyers = 'true' AND a.first_home_buyers = 'true'))
 		AND ((a.is_refinance_available = 'true' AND b.refinance_home = 'true')
-		OR b.refinance_home = 'false')";
+		OR b.refinance_home = 'false') ";
 	
-$sql = "SELECT * " . $halfQuery;
+$sql = "SELECT *,(POWER(1+(advertised_rate/100),0.08333) -1)/(1-POWER(POWER(1+(advertised_rate/100),0.08333),-(max_loan_term*12))) as monthly_factor " . $halfQuery . $orderBy;
 
 $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 
@@ -216,38 +216,44 @@ $loan = number_format((float)$purchasePrice - (float)$deposit);
 
                         <div class="lenderColumn">Lender</div>
                         <div class="comparisonRateColumn">
-                            <span>Comparison rate<sup>1</sup></span><span class="iconField" style="cursor: pointer;"><img
+                            <span>Comparison rate<sup>1</sup></span><span class="iconField" onclick="comparisonRateSort();" style="cursor: pointer;"><img
 												onload="this.__gwtLastUnhandledEvent=&quot;load&quot;;"
-												src="https://unohomeloans.com.au/home-loans/clear.cache.gif"
-												style="width: 16px; height: 16px; background: url(https://unohomeloans.com.au/home-loans/E88523BFCEE66BB8CA22ECB17362E8B6.cache.png) no-repeat 0px 0px;"
+												id="comparisonRateSort"
+												src="../image/clear.cache.gif"
+												style="width: 16px; height: 16px; background: url(../image/sort.png) no-repeat 0px 0px;"
 												border="0"></span>
                         </div>
                         <div class="paymentsColumn">
                             <span>Monthly payments</span><span class="iconField" style="cursor: pointer;"><img
 												onload="this.__gwtLastUnhandledEvent=&quot;load&quot;;"
-												src="https://unohomeloans.com.au/home-loans/clear.cache.gif"
-												style="width: 16px; height: 16px; background: url(https://unohomeloans.com.au/home-loans/E88523BFCEE66BB8CA22ECB17362E8B6.cache.png) no-repeat 0px 0px;"
+												id="monthlyPaymentSort"
+												onclick="monthlyPaymentSort();"
+												src="../image/clear.cache.gif"
+												style="width: 16px; height: 16px; background: url(../image/sort.png) no-repeat 0px 0px;"
 												border="0"></span>
                         </div>
                         <div class="interestRateColumn">
-                            <span>Interest rate<sup>2</sup></span> <span class="iconField" style="cursor: pointer;"> <img
+                            <span>Interest rate<sup>2</sup></span> <span class="iconField" style="cursor: pointer;" onclick="interestRateSort();"> <img
 												onload="this.__gwtLastUnhandledEvent=&quot;load&quot;;"
-												src="https://unohomeloans.com.au/home-loans/clear.cache.gif"
-												style="width: 16px; height: 16px; background: url(https://unohomeloans.com.au/home-loans/E88523BFCEE66BB8CA22ECB17362E8B6.cache.png) no-repeat -32px 0px;"
+												id="interestRateSort"
+												src="../image/clear.cache.gif"
+												style="width: 16px; height: 16px; background: url(../image/sort.png) no-repeat 0px 0px;"
 												border="0"></span>
                         </div>
                         <div class="ongoingFeesColumn">
-                            <span>Ongoing fees</span> <span class="iconField" style="cursor: pointer;"> <img
+                            <span>Ongoing fees</span> <span class="iconField" style="cursor: pointer;" onclick="ongoingFeesSort();"> <img
 												onload="this.__gwtLastUnhandledEvent=&quot;load&quot;;"
-												src="https://unohomeloans.com.au/home-loans/clear.cache.gif"
-												style="width: 16px; height: 16px; background: url(https://unohomeloans.com.au/home-loans/E88523BFCEE66BB8CA22ECB17362E8B6.cache.png) no-repeat -32px 0px;"
+												src="../image/clear.cache.gif"
+												id="ongoingFeesSort"
+												style="width: 16px; height: 16px; background: url(../image/sort.png) no-repeat 0px 0px;"
 												border="0"></span>
                         </div>
                         <div class="upfrontFeesColumn">
-                            <span>Upfront fees</span> <span class="iconField" style="cursor: pointer;"> <img
+                            <span>Upfront fees</span> <span class="iconField" style="cursor: pointer;" onclick="upfrontFeesSort();"> <img
 												onload="this.__gwtLastUnhandledEvent=&quot;load&quot;;"
-												src="https://unohomeloans.com.au/home-loans/clear.cache.gif"
-												style="width: 16px; height: 16px; background: url(https://unohomeloans.com.au/home-loans/E88523BFCEE66BB8CA22ECB17362E8B6.cache.png) no-repeat -32px 0px;"
+												src="../image/clear.cache.gif" 
+												id="upfrontFeesSort"
+												style="width: 16px; height: 16px; background: url(../image/sort.png) no-repeat 0px 0px;"
 												border="0"></span>
                         </div>
                     </div>
@@ -309,7 +315,7 @@ foreach ($pdo->query($sql) as $row) {
 		$redrawFeatureTick = ('true' == $row['has_redraw_facility']) ? 'icon-tick' : 'icon-cross'; 
 		$extra_repayFeature = ('true' == $row['allows_extra_repay']) ? 'featureTrue' : 'featureFalse'; 
 		$extra_repayFeatureTick = ('true' == $row['allows_extra_repay']) ? 'icon-tick' : 'icon-cross'; 
-		
+		$monthlyFactor = $row['monthly_factor'];
 		$ongoing_fee = $row['ongoing_fee'];
 		$ongoing_fee_frequency = $row['ongoing_fee_frequency'];
 if ($ongoing_fee_frequency == "Annually") {
@@ -320,6 +326,10 @@ if ($ongoing_fee_frequency == "Annually") {
     $monthly_ongoing_fee=$ongoing_fee;
 }	
 $logo="logos/" . $row['bank_name'] . ".png";
+
+$monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_factor']);
+
+
 ?>
 
                         <div class="other">
@@ -350,7 +360,7 @@ $logo="logos/" . $row['bank_name'] . ".png";
                                 <h3 class="comparisonRateColumn">
                                     <?php print $row['comparison_rate'] . "%"; ?>
                                 </h3>
-                                <h3 class="paymentsColumn">NULL</h3>
+                                <h3 class="paymentsColumn"> <?php print "$" .  number_format($monthlyPayments,2); ?></h3>
                                 <div class="interestRateColumn">
                                     <h3>
                                         <?php print $row['advertised_rate'] . "%"; ?>
@@ -687,6 +697,7 @@ $logo="logos/" . $row['bank_name'] . ".png";
 
     <script type="text/javascript">
         var email = <?php echo json_encode($email); ?>;
+        var orderBy = "" + <?php echo json_encode($orderBy); ?>;
         var loan = <?php echo json_encode($loan); ?>;
         var refinance = <?php echo json_encode($refinance); ?>;
         var repayFreq = <?php echo json_encode($repayFreq); ?>;
@@ -708,6 +719,51 @@ $logo="logos/" . $row['bank_name'] . ".png";
         var fixedI = document.getElementById("gwt-uid-12");
         var bothI = document.getElementById("gwt-uid-13");
 
+        if (orderBy.includes("comparison_rate")) {
+            if (orderBy.includes("ASC"))
+                document.getElementById("comparisonRateSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";
+            else if (orderBy.includes("DESC"))
+                document.getElementById("comparisonRateSort").style.background = "url(../image/sort.png) no-repeat -32px 0px";
+        } else {
+            document.getElementById("comparisonRateSort").style.background = "url(../image/sort.png) no-repeat -0px 0px";
+        }
+
+        if (orderBy.includes("advertised_rate")) {
+            if (orderBy.includes("ASC"))
+                document.getElementById("interestRateSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";
+            else if (orderBy.includes("DESC"))
+                document.getElementById("interestRateSort").style.background = "url(../image/sort.png) no-repeat -32px 0px";
+        } else {
+            document.getElementById("interestRateSort").style.background = "url(../image/sort.png) no-repeat -0px 0px";
+        }
+
+        if (orderBy.includes("upfront_fee")) {
+            if (orderBy.includes("ASC"))
+                document.getElementById("upfrontFeesSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";
+            else if (orderBy.includes("DESC"))
+                document.getElementById("upfrontFeesSort").style.background = "url(../image/sort.png) no-repeat -32px 0px";
+        } else {
+            document.getElementById("upfrontFeesSort").style.background = "url(../image/sort.png) no-repeat -0px 0px";
+        }
+
+        if (orderBy.includes("ongoing_fee")) {
+            if (orderBy.includes("ASC"))
+                document.getElementById("ongoingFeesSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";
+            else if (orderBy.includes("DESC"))
+                document.getElementById("ongoingFeesSort").style.background = "url(../image/sort.png) no-repeat -32px 0px";
+        } else {
+            document.getElementById("ongoingFeesSort").style.background = "url(../image/sort.png) no-repeat -0px 0px";
+        }
+
+        if (orderBy.includes("monthly_factor")) {
+            if (orderBy.includes("ASC"))
+                document.getElementById("monthlyPaymentSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";
+            else if (orderBy.includes("DESC"))
+                document.getElementById("monthlyPaymentSort").style.background = "url(../image/sort.png) no-repeat -32px 0px";
+        } else {
+           	 document.getElementById("monthlyPaymentSort").style.background = "url(../image/sort.png) no-repeat -0px 0px";
+        }
+        
         if (refinance == "true")
             ddl.selectedIndex = 1;
         else ddl.selectedIndex = 0;
@@ -831,6 +887,39 @@ $logo="logos/" . $row['bank_name'] . ".png";
 
         function redrawToggle() {
             document.getElementById("redraw").classList.toggle('on');
+        }
+
+
+
+        function comparisonRateSort() {
+            if (orderBy.includes("comparison_rate") && orderBy.includes("ASC"))
+                window.location = "../search.php?email=" + email + "&orderBy=ORDER BY comparison_rate DESC";
+            else window.location = "../search.php?email=" + email + "&orderBy=ORDER BY comparison_rate ASC";
+
+        }
+
+        function interestRateSort() {
+            if (orderBy.includes("advertised_rate") && orderBy.includes("ASC"))
+                window.location = "../search.php?email=" + email + "&orderBy=ORDER BY advertised_rate DESC";
+            else window.location = "../search.php?email=" + email + "&orderBy=ORDER BY advertised_rate ASC";
+        }
+
+        function ongoingFeesSort() {
+            if (orderBy.includes("ongoing_fee") && orderBy.includes("ASC"))
+                window.location = "../search.php?email=" + email + "&orderBy=ORDER BY ongoing_fee DESC";
+            else window.location = "../search.php?email=" + email + "&orderBy=ORDER BY ongoing_fee ASC";
+        }
+
+        function upfrontFeesSort() {
+            if (orderBy.includes("upfront_fee") && orderBy.includes("ASC"))
+                window.location = "../search.php?email=" + email + "&orderBy=ORDER BY upfront_fee DESC";
+            else window.location = "../search.php?email=" + email + "&orderBy=ORDER BY upfront_fee ASC";
+        }
+        
+        function monthlyPaymentSort() {
+        		if (orderBy.includes("monthly_factor") && orderBy.includes("ASC"))
+                window.location = "../search.php?email=" + email + "&orderBy=ORDER BY monthly_factor DESC";
+            else window.location = "../search.php?email=" + email + "&orderBy=ORDER BY monthly_factor ASC";
         }
 
         $("#menu1").click(function() {

@@ -149,7 +149,7 @@ if ($ongoing_fee_frequency == "Annually") {
 												src="<?php print $logo;?>"
 												onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"
 												class="productDetailLogo"> &nbsp;&nbsp;&nbsp;&nbsp;
-												<h2 style="display: inline-flex; margin-top: 10px; position: absolute; top: 5px;">
+												<h2 style="display: inline-flex; margin-top: 10px; position: absolute; top: 5px;font-size: 27px;">
 													<?php print $row['product_name']; ?>
 												</h2>
 										</span>
@@ -308,12 +308,7 @@ if ($ongoing_fee_frequency == "Annually") {
 												<div class="productDetailSectionHeaderName">Upfront
 													Fees</div>
 
-
-
-
-
-												<div class="productDetailSectionHeaderDesc">Total*
-													$215</div>
+												<div class="productDetailSectionHeaderDesc"> <?php print "Total $" . $row['upfront_fee']; ?></div>
 											</div>
 										</button>
 										<div class="productDetailSectionBody" style="display: none;"
@@ -331,49 +326,6 @@ if ($ongoing_fee_frequency == "Annually") {
 													and Total Cost
 												</div>
 											</div>
-
-											<div class="col-sm-12 col-md-5 col-lg-3">
-												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyName">Establishment
-														Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard even">
-													<div class="productDetailPropertyName">Lock Rate Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyName">Settlement
-														Cheque Fee*</div>
-													<div class="productDetailPropertyValue">$15</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard even">
-													<div class="productDetailPropertyName">Settlement
-														Fee*</div>
-													<div class="productDetailPropertyValue">$200</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyName">Valuation Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard even">
-													<div class="productDetailPropertyName">Settlement
-														Administration Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyName">Title Search
-														Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
-												</div>
-											</div>
 										</div>
 									</div>
 
@@ -386,11 +338,7 @@ if ($ongoing_fee_frequency == "Annually") {
 													class="fa fa-angle-down"></i></span>
 												<div class="productDetailSectionHeaderName">Ongoing
 													Fees</div>
-
-
-
-												<div class="productDetailSectionHeaderDesc">Total* $0
-													/year</div>
+												<div class="productDetailSectionHeaderDesc"><?php echo "Total $" . ($monthly_ongoing_fee*12) . "/year"  ;  ?></div>
 											</div>
 										</button>
 										<div class="productDetailSectionBody" style="display: none;"
@@ -406,7 +354,6 @@ if ($ongoing_fee_frequency == "Annually") {
 													and Total Cost
 												</div>
 											</div>
-											<div class="col-sm-12 col-md-5 col-lg-3"></div>
 										</div>
 									</div>
 
@@ -421,7 +368,7 @@ if ($ongoing_fee_frequency == "Annually") {
 
 
 
-												<div class="productDetailSectionHeaderDesc">Total* $0</div>
+												<div class="productDetailSectionHeaderDesc"><?php echo "Total $" . $row['discharge_fee'];  ?></div>
 											</div>
 										</button>
 
@@ -439,13 +386,6 @@ if ($ongoing_fee_frequency == "Annually") {
 													from the lender.<br>
 													<br>* Only mandatory fees are included in the Total
 													and Total Cost
-												</div>
-											</div>
-											<div class="col-sm-12 col-md-5 col-lg-3">
-												<div class="productDetailPropertyCard collectionCard odd">
-													<div class="productDetailPropertyName">Discharge Fee*</div>
-													<div class="productDetailPropertyValue">$0</div>
-													<div class="productDetailPropertyDesc"></div>
 												</div>
 											</div>
 										</div>

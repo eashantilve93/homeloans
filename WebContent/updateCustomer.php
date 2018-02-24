@@ -27,7 +27,7 @@ try {
     // echo a message to say the UPDATE succeeded
     echo $stmt->rowCount() . " records UPDATED successfully";
 	 
-	header("location: search.php?email=" . $email);
+	header("location: search.php?email=" . $email . "&orderBy=ORDER BY comparison_rate ASC");
     }
 catch(PDOException $e)
     {

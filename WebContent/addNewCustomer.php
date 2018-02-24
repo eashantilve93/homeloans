@@ -21,7 +21,7 @@ try {
     $pdo->exec($sql);
     echo "New record created successfully";
 	 
-	header("location: search.php?email=" . $email);
+	header("location: search.php?email=" . $email . "&orderBy=ORDER BY comparison_rate ASC");
     }
 catch(PDOException $e)
     {
