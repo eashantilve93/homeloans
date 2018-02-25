@@ -27,7 +27,7 @@ SELECT
 FROM
     product;
     
-    SELECT * FROM product;
+    SELECT * FROM cus_details where cus_email = 'eashantilve93@gmail.com';
 
 show tables;
 

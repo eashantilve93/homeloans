@@ -31,11 +31,14 @@ if ($ongoing_fee_frequency == "Annually") {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page I</title>
+<title>Reward Homeloans</title>
+<link rel="shortcut icon" href="./favicon.ico" />
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./indexProduct.css">
 <link rel="stylesheet" href="./productCSS.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -53,48 +56,60 @@ if ($ongoing_fee_frequency == "Annually") {
 <body>
 	<div class="navLayout app" style="min-height: 600px;">
 		<div class="mobile">
-			<div class="navTopBar">
-				<div class="navTopBarPrimary">
-					<a class="button" href="javascript:;" id="openNavDraw"
-						aria-hidden="true" style="display: block; float: left;"><i
-						class="fa fa-bars" style="font-size: 24px;"></i><span></span></a>
+			 <header class="navbar BDMHI">
+		<section class="navbar-section">
+			<a href="../index.html" class="navbar-brand"> <img class="R5SZX"
+				src="../logos/Loanly.png" width="200px">
+			</a>
+		</section>
+		<div id="navRight">
+			<div class="divBig">
+				<div class="AZNmP">
+				<!--	<div class="_3gVuR _2m4Vw">
+						<i class="material-icons _1q42p">call</i>
+						<p class="_3TRls _2aTHU">
+						 	<span>1300 323 181</span>
+						</p>
+					</div>
+					<div class="_3gVuR _2m4Vw">
+						<span class="ant-badge" title="0"><i
+							class="material-icons _1q42p">chat</i></span>
+						<p class="_3TRls _2aTHU">Chat now</p>
+					</div>  
+				</div>
 
+				<div class="hide">
+					<button
+						class="material-icons btn _3OTBu _3a5so BC3sk false tether-target tether-out-of-bounds tether-out-of-bounds-left tether-element-attached-top tether-element-attached-center tether-target-attached-bottom tether-target-attached-center tether-enabled">star_border
+					</button>
+					<span
+						class="badge _24-XS tether-target tether-element-attached-top tether-target-attached-bottom tether-target-attached-left tether-enabled tether-element-attached-left"
+						data-badge="0"><button
+							class="material-icons btn _1fn9Z _3unrZ false">favorite_border</button></span>
+				</div> -->
 
-					<h1 style="float: left;"></h1>
-					<div class="appLogo" style="float: left;">
-						<img src="//cdn.unohomeloans.com.au/images/uno.svg"
-							class="gwt-Image">
-					</div>
-					<div class="topBarUserProfile" style="float: right;">
-						<a class="button signUp" href="javascript:;"><span>Sign
-								up</span></a> <a class="button logIn" href="javascript:;"><span>Login</span></a>
-						<div style="display: none;">
-							<div class="label"></div>
-							<div class="topBarUserAvatar">
-								<span class="iconField"> <img
-									src="/api/user-account/avatar/-1/new">
-								</span>
-							</div>
-							<span class="iconField"> <i class="fa fa-angle-down"></i>
-							</span>
-						</div>
-					</div>
-					<div class="advisorPanel offline" aria-hidden="true"
-						style="display: none; float: right;">
-						<span class="advisorIcon"> <img
-							src="//cdn.unohomeloans.com.au/images/headshot-carlo.jpg"
-							class="gwt-Image"></span> <span class="advisorInfo">
-							<div class="advisorStatus">
-								<span>Chat now?</span>
-								<div class="advisorTitle">Carlo is offline</div>
-							</div>
-						</span>
-					</div>
-					<span style="float: right;">133 866</span> <a class="anchor"
-						href="https://unohomeloans.com.au/how-it-works" target="_blank"
-						style="float: right;">How uno works</a>
+				<div class="_2o4o4">
+					<button class="btn btn-link _1mDPt false" id="name"></button>
 				</div>
 			</div>
+
+			<div class="ID15h false">
+				<div>
+					<div class="_2pcZR">
+						<div
+							style="top: 0.5rem; right: -1.5rem; font-weight: 400; margin: auto 0px;">
+							<a href="tel:1300323181" class="material-icons _2TvNh">call</a>
+						</div>
+						<span class="ant-badge" title="0">
+							<button id="lendi_intercom_sm" class="material-icons _2TvNh">chat
+							</button>
+						</span>
+						<button class="material-icons _2TvNh">account_circle</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
 			<div class="navContent" style="padding-top: 65px;">
 				<div class="fitPanel pageDisplay">
@@ -172,8 +187,6 @@ if ($ongoing_fee_frequency == "Annually") {
 														</h3>
 														<div class="productPropertyInfo">Variable interest
 															rate p.a.</div>
-														<div class="productPropertyFooter productDiscountInfo">Discount
-															included off standard rate of 4.45%</div>
 													</div>
 													<div class="productIcon col-xs-2 col-md-4">+</div>
 													<div class="col-xs-5 col-md-4">
@@ -208,14 +221,7 @@ if ($ongoing_fee_frequency == "Annually") {
 										</div>
 									</div>
 								</div>
-								<div class="defaultScenarioInfo">
-									<span>Product details current as at 20/12/2017. Based
-										on: Deposit $250,000, Property value $750,000, Owner Occupied,
-										Principal and interest, Purchase. </span><a class="anchor"
-										href="javascript:;">Sign up</a><span> or </span><a
-										class="anchor" href="javascript:;">Login</a><span> to
-										see your tailored rate.</span>
-								</div>
+								
 
 
 								<div class="productDetailButtonGrid">
@@ -472,8 +478,6 @@ if ($ongoing_fee_frequency == "Annually") {
 															</h3>
 															<div class="productPropertyInfo">Variable interest
 																rate p.a.</div>
-															<div class="productPropertyFooter productDiscountInfo">-0.46%
-																included off standard rate of 4.45%</div>
 														</div>
 														<div class="productIcon col-xs-2 col-md-2">+</div>
 														<div class="col-xs-5 col-md-5">

@@ -11,28 +11,6 @@
 	font-family: helvetica neue, helvetica, arial, sans-serif;
 }
 
-
-.customerTextBox {
-    height: 40px;
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: #ccc;
-    padding: 10px;
-    text-align: center;
-    font-size: 17px;
-}
-
-
-#viewResultsButton {
-	border-radius: 5px;
-    background: #F47442;
-    color: white;
-    height: 40px;
-    font-size: 17px;
-}
-
-@media ( min-width: 767px) {
-
 .customerTextBox {
     width: 25%;
     height: 40px;
@@ -52,8 +30,6 @@
     width: 15%;
     font-size: 17px;
 }
-}
-
 
 #viewResultsButton:hover {
 	background: #Ff5421;
@@ -66,9 +42,7 @@
 .progress-bar-success {
    	background-color:#F47442;
 }
-.container-fluid  {
-    padding-bottom: 200px;
-}
+
 
 @-webkit-keyframes load16 {
     0% { width: 0; }
@@ -293,7 +267,7 @@ h3 {
 }
 
 .button_small {
-	background: #F47442;
+	background: #dd1021;
 	color: #fff;
 	border-radius: 4px;
 	font-size: 1.8rem;
@@ -331,12 +305,9 @@ h3 {
 	align-items: baseline;
 }
 
-@media ( min-width : 767px) {
-
 .backButtonBelowBox {
 	border:hidden;
 	margin-top: 50px;
-}
 }
 
 button:focus {
@@ -1110,9 +1081,6 @@ and
 	font-weight: 400;
 	outline: none;
 	border: none;
-	width: 33rem;
-	height: 4.2rem;
-	padding: 1rem 1.8rem;
 }
 
 .backButton {
@@ -1197,11 +1165,6 @@ h3 {
 .homeImage2 {
 	width: 50%;
 	margin:0px;
-}
-
-.container-fluid  {
-	padding-left:0px;
-    padding-bottom: 300px;
 }
 
 .button_small {

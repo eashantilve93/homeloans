@@ -1,4 +1,4 @@
-/**
+©©/**
  * @license
  * MyFonts Webfont Build ID 3212215, 2016-05-01T21:58:36-0400
  * The fonts listed in this notice are subject to the End User License
@@ -273,7 +273,7 @@ li {
 
 a {
     text-decoration: none;
-    color: #14B4A1;
+    color: #000;
 }
 
 a:hover, a:focus {
@@ -881,9 +881,9 @@ a.simpleButton i, a.simpleButton span {
 
 .productDetailButtonGridItem.expertReviewButton {
     display: inline-block;
-    color: #14b4a1;
+    color: #F47442;
     background: #fff;
-    border: 2px solid #14b4a1;
+    border: 2px solid #F47442;
     float: right;
     min-width: 150px;
     margin: 0;
@@ -903,8 +903,8 @@ a.simpleButton i, a.simpleButton span {
     color: #919191;
 }
 .productDetailButtonGridItem.applyButton {
-    border-color: #14b4a1;
-    background-color: #14b4a1;
+    border-color: #F47442;
+    background-color: #F47442;
     color: #fff;
     text-align: center;
     min-width: 150px;
@@ -1040,7 +1040,7 @@ a.simpleButton i, a.simpleButton span {
     color: #243036;
 }
 .productDetailPropertyIcon.checked {
-    color: #14b4a1;
+    color: #F47442;
 }
 .productDetailPropertyIcon {
     font-size: 16px;
@@ -1084,7 +1084,7 @@ a.simpleButton i, a.simpleButton span {
 }
 
 .productDetailSectionHeader i.fa {
-    color: #14b4a1;
+    color: #F47442;
     margin-top: 3px;
 }
 
@@ -1373,11 +1373,11 @@ a.simpleButton i, a.simpleButton span {
     display: inline-block;
 }
 .productFeatureContainer .featureTrue {
-    color: #66d228;
+    color: #Ff5421;
     padding: 0;
 }
 .productFeatureContainer .icon-tick {
-    color: #66d228;
+    color: #Ff5421;
     font-size: 9px;
     padding-right: 4px;
 }
@@ -1478,11 +1478,17 @@ a.simpleButton i, a.simpleButton span {
 }
 
 .productPage .productRow .ctaColumn a.button {
-    background: #14b4a1;
+    background: #F47442;
     color: #fff;
     padding: 8px 15px;
     border-radius: 4px;
+    width:110px;
 }
+
+.productPage .productRow .ctaColumn a.button:hover {
+    background: #Ff5421;
+}
+
 .productPage .productRow .ctaColumn .iconField>img {
     height: 35px;
 }
@@ -1563,7 +1569,7 @@ a.simpleButton i, a.simpleButton span {
 .sDesc {
     font-family: 'avenir-medium';
     font-size: 16px;
-    color: #12b2a1;
+    color: #Ff5421;
     clear: both;
     max-width: 265px;
     white-space: nowrap;
@@ -1813,14 +1819,14 @@ input, textarea, keygen, select, button {
 input, select {
 }
 .radioBox.flat input:checked+label {
-    border: 3px solid #26a69a;
+    border: 3px solid #F47442;
 }
 
 .radioBox.flat label:nth-of-type(1) {
     width: 22px;
     height: 22px;
     display: inline-block;
-    border: 2px solid #14b4a1;
+    border: 2px solid #F47442;
     margin-right: 10px;
     border-radius: 50%;
     background-color: #fff;
@@ -1857,7 +1863,7 @@ body, button, input, textarea, select, .btn {
     display: block;
     margin: 2px;
     border-radius: 50%;
-    background-color: #26a69a;
+    background-color: #Ff5421;
     opacity: 0;
 }
 
@@ -1869,7 +1875,7 @@ body, button, input, textarea, select, .btn {
 .searchMenuContent a.button.searchMenuContentButton {
     padding: 8px 16px;
     color: #fff!important;
-    background-color: #14b2a1!important;
+    background-color: #F47442!important;
     border: 0;
     font-family: 'avenir-medium';
 }

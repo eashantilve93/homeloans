@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>Page I</title>
+    <title>Reward Homeloans</title>
+	<link rel="shortcut icon" href="./favicon.ico" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,6 +13,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/tripledes.js"></script>
     <script src="https://use.fontawesome.com/bd42e35c2d.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./indexProduct.css">
     <link rel="stylesheet" href="./productCSS.css">
 
 </head>
@@ -19,44 +21,61 @@
 <body>
     <div class="navLayout app" style="min-height: 600px;">
         <div class="mobile">
-            <div class="navTopBar">
-                <div class="navTopBarPrimary">
-                    <a class="button" href="javascript:;" id="openNavDraw" aria-hidden="true" style="display: block; float: left;"><i
-						class="fa fa-bars" style="font-size: 24px;"></i><span></span></a>
+        <header class="navbar BDMHI">
+		<section class="navbar-section">
+			<a href="../index.html" class="navbar-brand"> <img class="R5SZX"
+				src="../logos/Loanly.png" width="200px">
+			</a>
+		</section>
+		<div id="navRight">
+			<div class="divBig">
+				<div class="AZNmP">
+				<!--	<div class="_3gVuR _2m4Vw">
+						<i class="material-icons _1q42p">call</i>
+						<p class="_3TRls _2aTHU">
+						 	<span>1300 323 181</span>
+						</p>
+					</div>
+					<div class="_3gVuR _2m4Vw">
+						<span class="ant-badge" title="0"><i
+							class="material-icons _1q42p">chat</i></span>
+						<p class="_3TRls _2aTHU">Chat now</p>
+					</div>  
+				</div>
 
+				<div class="hide">
+					<button
+						class="material-icons btn _3OTBu _3a5so BC3sk false tether-target tether-out-of-bounds tether-out-of-bounds-left tether-element-attached-top tether-element-attached-center tether-target-attached-bottom tether-target-attached-center tether-enabled">star_border
+					</button>
+					<span
+						class="badge _24-XS tether-target tether-element-attached-top tether-target-attached-bottom tether-target-attached-left tether-enabled tether-element-attached-left"
+						data-badge="0"><button
+							class="material-icons btn _1fn9Z _3unrZ false">favorite_border</button></span>
+				</div> -->
 
-                    <h1 style="float: left;"></h1>
-                    <div class="appLogo" style="float: left;">
-                        <img src="//cdn.unohomeloans.com.au/images/uno.svg" class="gwt-Image">
-                    </div>
-                    <div class="topBarUserProfile" style="float: right;">
-                        <a class="button signUp" href="javascript:;"><span>Sign
-								up</span></a> <a class="button logIn" href="javascript:;"><span>Login</span></a>
-                        <div style="display: none;">
-                            <div class="label"></div>
-                            <div class="topBarUserAvatar">
-                                <span class="iconField"> <img
-									src="/api/user-account/avatar/-1/new">
-								</span>
-                            </div>
-                            <span class="iconField"> <i class="fa fa-angle-down"></i>
-							</span>
-                        </div>
-                    </div>
-                    <div class="advisorPanel offline" aria-hidden="true" style="display: show; float: right;">
-                        <span class="advisorIcon"> <img
-							src="//cdn.unohomeloans.com.au/images/headshot-carlo.jpg"
-							class="gwt-Image"></span> <span class="advisorInfo">
-							<div class="advisorStatus">
-								<span>Chat now?</span>
-                        <div class="advisorTitle">Carlo is offline</div>
-                    </div>
-                    </span>
-                </div>
-                <span style="float: right;">133 866</span> <a class="anchor" href="https://unohomeloans.com.au/how-it-works" target="_blank" style="float: right;">How uno works</a>
-            </div>
-        </div>
-        <div class="navContent pageContainer" style="padding-top: 65px;">
+				<div class="_2o4o4">
+					<button class="btn btn-link _1mDPt false" id="name"></button>
+				</div>
+			</div>
+
+			<div class="ID15h false">
+				<div>
+					<div class="_2pcZR">
+						<div
+							style="top: 0.5rem; right: -1.5rem; font-weight: 400; margin: auto 0px;">
+							<a href="tel:1300323181" class="material-icons _2TvNh">call</a>
+						</div>
+						<span class="ant-badge" title="0">
+							<button id="lendi_intercom_sm" class="material-icons _2TvNh">chat
+							</button>
+						</span>
+						<button class="material-icons _2TvNh">account_circle</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+        <div class="navContent pageContainer" style="padding-top: 25px;">
             <div class="fitPanel pageDisplay">
                 <div class="page container-fluid productPage">
                     <?php
@@ -114,12 +133,13 @@ $sql = "SELECT *,(POWER(1+(advertised_rate/100),0.08333) -1)/(1-POWER(POWER(1+(a
 
 $sqlCount = "SELECT count(1) as rowCount " . $halfQuery;
 
- foreach ($pdo->query($sqlCount) as $row) {
-$count = $row['rowCount'];
+foreach ($pdo->query($sqlCount) as $row) {
+	$count = $row['rowCount'];
 }
 
 $sqlCusDetails = "SELECT * FROM cus_details WHERE cus_email='" . $email . "'";
 foreach ($pdo->query($sqlCusDetails) as $row) {
+ $name = $row['cus_name'];
  $refinance = $row['refinance_home'];
  $purchasePrice = $row['purchase_price'];
  $deposit = $row['deposit'];
@@ -147,9 +167,6 @@ $loan = number_format((float)$purchasePrice - (float)$deposit);
 								<div class="row row-inline titleBar">
 									<div class="mainSection col-xs-12">
 										<div>
-											<span class="breadCrumb"><a class="anchor"
-												href="javascript:;">Dashboard</a><span>/</span><span>Search
-													results</span></span>
                                 <h2>
                                     We found
                                     <?php print $count;?> matching home loans
@@ -257,55 +274,6 @@ $loan = number_format((float)$purchasePrice - (float)$deposit);
 												border="0"></span>
                         </div>
                     </div>
-
-                    <div class="mobileRow">
-                        <div class="productRow bestMatchProduct collectionCard even">
-                            <div class="bestMatchLabel">BEST MATCH</div>
-                            <div class="popularLender nTooltip">
-                                POPULAR LENDER
-                                <div class="nTooltipText">
-                                    Popularity is based on:
-                                    <ul>
-                                        <li>- Number of times home loans from this lender were added to Compare list</li>
-                                        <li>- Number of applications submitted for home loans from this lender</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="productSummary">
-                                <span class="lenderLogo"><img width="40"
-													src="https://cdn.unohomeloans.com.au/lenders/logo/HLL.svg"
-													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
-                                <div class="interestRateColumn">
-                                    <h3>
-                                        <?php print $row['advertised_rate'] . "%"; ?>
-                                    </h3>
-                                    <div class="productDiscount"></div>
-                                </div>
-                                <h3 class="comparisonRateColumn">
-                                    <?php print $row['comparison_rate'] . "%"; ?>
-                                </h3>
-                                <h3 class="paymentsColumn">NULL</h3>
-
-                            </div>
-                            <div class="borrowingPowerIndicator">
-                                <div class="levelBar">
-                                    <div class="levelHigh"></div>
-                                </div>
-                                <div class="levelBarInfo">
-                                    <span class="levelHigh">High</span> borrowing power
-                                </div>
-                            </div>
-                            <div class="productSummary">
-                                <div class="productName">
-                                    <span><strong> <?php print $row['product_name'];?>
-													</strong></span><span> - <?php print $row['product_name'];?></span><span>
-														- Variable Rate</span>
-                                </div>
-                                <a class="button" href="./product.php?id=<?php echo $row['product_id']; ?>"><span>Apply
-														now</span></a>
-                            </div>
-                        </div>
-                    </div>
                     <?php
 
 foreach ($pdo->query($sql) as $row) {
@@ -327,10 +295,41 @@ if ($ongoing_fee_frequency == "Annually") {
 }	
 $logo="logos/" . $row['bank_name'] . ".png";
 
-$monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_factor']);
-
+if ($loanInterestOnly == "false") {
+	$monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_factor']);
+} else {
+	$monthlyPayments =floatval($row['monthly_factor']);
+}
 
 ?>
+ 		<div class="mobileRow">
+                        <div class="productRow bestMatchProduct collectionCard even">
+                            <div class="productSummary">
+                                <span class="lenderLogo"><img width="40"
+													src="<?php print $logo;?>"
+													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
+                                <div class="interestRateColumn">
+                                    <h3>
+                                        <?php print $row['advertised_rate'] . "%"; ?>
+                                    </h3>
+                                    <div class="productDiscount"></div>
+                                </div>
+                                <h3 class="comparisonRateColumn">
+                                    <?php print $row['comparison_rate'] . "%"; ?>
+                                </h3>
+                                <h3 class="paymentsColumn"><?php print "$" .  number_format($monthlyPayments,2); ?></h3>
+
+                            </div>
+                            <div class="productSummary">
+                                <div class="productName">
+                                    <span><strong> <?php print $row['bank_name'] . " - " . $row['product_name'];?>
+													</strong></span>
+                                </div>
+                                <a class="button" href="./product.php?id=<?php echo $row['product_id']; ?>"><span>Apply
+														now</span></a>
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="other">
                             <div class="productRow bestMatchProduct collectionCard even">
@@ -339,7 +338,7 @@ $monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_
 													src="<?php print $logo;?>"
 													onerror="this.onerror=null;this.src='https://cdn.unohomeloans.com.au/lenders/logo/DEFAULT.svg'"></span>
                                     <div class="productName">
-                                        <a class="button" href="./product.php?id=<?php echo $row['product_id'];?>"><span>
+                                        <a href="./product.php?id=<?php echo $row['product_id'];?>"><span>
 															<?php print $row['bank_name'] . " - " . $row['product_name'];?>
 													</span></a>
                                         <div class="productFeatureContainer">
@@ -638,9 +637,7 @@ $monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_
                                 </div>
                                 <div class="simpleFormRow vertical">
                                     <span class="simpleFormRowTitle"><span>Features
-															I want</span><span class="simpleFormRowSubTitle"><a
-															href="https://unohomeloans.com.au/help/product-features-explained"
-															target="_blank">Unsure about features?</a></span></span>
+															I want</span></span>
                                     <div class="simpleFormMultiButtonsField simpleFormRowField" tabindex="0">
                                         <a class="button simpleFormButtonSwitch" id="offset" onclick="offsetToggle()"><span>Offset</span></a><a class="button simpleFormButtonSwitch" id="extra_repay" onclick="extra_repayToggle()"><span>Extra
 																repayment</span></a><a class="button simpleFormButtonSwitch" id="redraw" onclick="redrawToggle()"><span>Redraw</span></a>
@@ -696,6 +693,7 @@ $monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_
 
 
     <script type="text/javascript">
+    		var name = <?php echo json_encode($name); ?>;
         var email = <?php echo json_encode($email); ?>;
         var orderBy = "" + <?php echo json_encode($orderBy); ?>;
         var loan = <?php echo json_encode($loan); ?>;
@@ -718,7 +716,7 @@ $monthlyPayments =floatval(str_replace(",", "",$loan)) * floatval($row['monthly_
         var variableI = document.getElementById("gwt-uid-11");
         var fixedI = document.getElementById("gwt-uid-12");
         var bothI = document.getElementById("gwt-uid-13");
-
+        document.getElementById("name").innerHTML = "Hi, " + name;
         if (orderBy.includes("comparison_rate")) {
             if (orderBy.includes("ASC"))
                 document.getElementById("comparisonRateSort").style.background = "url(../image/sort.png) no-repeat -16px 0px";

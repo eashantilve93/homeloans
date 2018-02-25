@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HomeLoans</title>
-
+<title>Reward Homeloans</title>
+<link rel="shortcut icon" href="./favicon.ico" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -46,7 +46,7 @@
 						<span class="ant-badge" title="0"><i
 							class="material-icons _1q42p">chat</i></span>
 						<p class="_3TRls _2aTHU">Chat now</p>
-					</div>  -->
+					</div>  
 				</div>
 
 				<div class="hide">
@@ -62,7 +62,7 @@
 				<div class="_2o4o4">
 					<button class="btn btn-link _1mDPt false">Log In</button>
 					<button class="btn slMza false">Sign Up</button>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="ID15h false">
@@ -93,31 +93,26 @@
 
 	<nav role="navigation"
 		class="navbar navbar-default navbar-fixed-bottom">
-		<div class="container-fluid">
 
-
-			<div class="footer">
-				<ul class="nav navbar-nav">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<li><img
-						src="https://prodassets.lendi.com.au/nav_logo_grey.png"
-						width="110px"></li>
-					<!-- Collection of nav links and other content for toggling -->
-
-					<li class="footerCell" id="footerHome"><a href="#"> Home </a>
-					</li>
-					<li class="footerCell"><a href="#">Inspire </a></li>
-					<li class="footerCell"><a href="#">Property Report </a></li>
-					<li class="footerCell"><a href="#">Stamp Duty </a></li>
-					<li class="footerCell"><a href="#">About Us </a></li>
-					<li class="footerCell"><a href="#">Careers </a></li>
-					<li class="footerCell"><a href="#">Privacy Policy </a></li>
-					<li class="footerCell"><a href="#">Credit Guide </a></li>
-					<li class="footerCell"><a href="#"> FAQ </a></li>
-					<li class="footerCell"><a href="#">Contact Us </a></li>
-				</ul>
+<div class="container">
+<footer>
+	<div class="footer-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-xs-12">
+				<h4>About us</h4>
+				<p>My Tooth Fairy is Australia's first online dental portal, connecting patients and dentists. We help patients access high quality, affordable dental care so more Australians can be confident in their smile.</p>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<h4>Contact us</h4>
+				<p>
+					enquiries@rewardHomeloans.com.au</p>
 			</div>
 		</div>
+	</div>
+</div>
+</footer>
+</div>
 
 	</nav>
 
@@ -258,6 +253,9 @@
 			$scope.passOn = function (){
 				if($scope.purchasePrice == "")
 					document.getElementById("error").style.display = "block";
+				else if(parseFloat(($scope.purchasePrice).replace(/,/g,"")) > 1000000000) {
+					document.getElementById("error2").style.display = "block";
+				}
 				else {
 					localStorage.setItem(purchasePrice, $scope.purchasePrice);
 					var url = $interpolate('/homeLoan/{{purchasePrice}}')($scope);
@@ -497,6 +495,9 @@
 				$scope.passOn = function (){
 					if($scope.currentLoan == "")
 						document.getElementById("error").style.display = "block";
+					else if(parseFloat(($scope.currentLoan).replace(/,/g,"")) > 1000000000) {
+						document.getElementById("error2").style.display = "block";
+					}
 					else {
 						localStorage.setItem(currentLoan, $scope.currentLoan);
 						var url = $interpolate('/refinance/{{currentLoan}}')($scope);
@@ -540,6 +541,9 @@
 				$scope.passOn = function (){
 					if($scope.propertyWorth == "")
 						document.getElementById("error").style.display = "block";
+					else if(parseFloat(($scope.propertyWorth).replace(/,/g,"")) < parseFloat(($scope.currentLoan).replace(/,/g,""))) {
+						document.getElementById("error2").style.display = "block";
+					}
 					else {
 						localStorage.setItem(propertyWorth, $scope.propertyWorth);
 						var url = $interpolate('/refinance/{{currentLoan}}/{{propertyWorth}}')($scope);
